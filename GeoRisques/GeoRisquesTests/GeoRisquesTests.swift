@@ -1,10 +1,3 @@
-//
-//  GeoRisquesTests.swift
-//  GeoRisquesTests
-//
-//  Created by Vinicius Rodrigues on 04/04/25.
-//
-
 import Testing
 @testable import GeoRisques
 

@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  GeoRisques
-//
-//  Created by Vinicius Rodrigues on 04/04/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
