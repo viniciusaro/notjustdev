@@ -25,7 +25,7 @@ final class GeoRisquesStore {
     
     enum Tab: Int {
         case risques
-        case checklist
+        case emergencyKit
     }
     
     struct RootState {
