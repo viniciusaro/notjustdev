@@ -1,3 +1,5 @@
+import Foundation
+
 struct Location {
     let latitude: Double
     let longitude: Double
@@ -23,4 +25,13 @@ struct Risque: Hashable {
             }
         }
     }
+}
+
+
+struct EmergencyKitInformation: Identifiable, Equatable {
+    let id: UUID = UUID()
+    var title: String
+    var description: String
+    var image: String
+    var tag: Int
 }

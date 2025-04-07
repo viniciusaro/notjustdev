@@ -7,15 +7,21 @@ final class EmergencyKitStore {
     var memberCount: [String: Int] = ["Adultes": 0, "Bébés": 0, "Enfants": 0, "Animaux": 0]
     private let userDefaultKey = "savedMemberCount"
 
+    let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
+    var infoIndex: Int = 0
+    var navigateToFamilyMembers = false
+
     init() {
         load()
     }
 
-    func increment(_ member: String) {
+    //MARK: - Family Members
+
+    func incrementMember(_ member: String) {
         memberCount[member, default: 0] += 1
     }
 
-    func decrement(_ member: String) {
+    func decrementMember(_ member: String) {
         if memberCount[member, default: 0] > 0 {
             memberCount[member]! -= 1
         }
@@ -36,6 +42,4 @@ final class EmergencyKitStore {
         }
         print("Load: \(memberCount)")
     }
-
-
 }

@@ -6,11 +6,12 @@ struct FamilyMembers: View {
     var body: some View {
         VStack() {
             Text("Membres de la famille")
-                .font(.title)
+                .font(.title2)
                 .bold()
 
             Text("Créez votre kit d’urgence en fonction du nombre de membres de votre famille")
-                .font(.body)
+                .font(.subheadline)
+                .padding(.bottom, 24)
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(store.memberTypes, id: \.self) { member in
@@ -29,8 +30,8 @@ struct FamilyMembers: View {
 
             if let selectedMember = store.selectedMember {
                 CounterView(
-                    onIncrement: { store.increment(selectedMember) },
-                    onDecrement: { store.decrement(selectedMember) }
+                    onIncrement: { store.incrementMember(selectedMember) },
+                    onDecrement: { store.decrementMember(selectedMember) }
                 )
             }
 
@@ -42,6 +43,7 @@ struct FamilyMembers: View {
                 }
             }
         }
+        .padding(.top, 16)
         .padding(.horizontal)
     }
 }
@@ -85,7 +87,7 @@ struct CounterView: View {
             }
         }
         .padding()
-        .background(Color(UIColor.systemGray6))
+        .background(Color(.systemGray6))
         .cornerRadius(12)
         .padding(.top, 30)
     }

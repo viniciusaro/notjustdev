@@ -8,7 +8,7 @@ struct EmergencyKitTests {
         
         #expect(store.memberCount["Adultes", default: 0] == 0)
 
-        store.increment("Adultes")
+        store.incrementMember("Adultes")
         #expect(store.memberCount["Adultes", default: 0] == 1)
     }
 
@@ -18,10 +18,10 @@ struct EmergencyKitTests {
 
         store.memberCount["Enfants"] = 2
 
-        store.decrement("Enfants")
+        store.decrementMember("Enfants")
         #expect(store.memberCount["Enfants"] == 1)
 
-        store.decrement("Enfants")
+        store.decrementMember("Enfants")
         #expect(store.memberCount["Enfants"] == 0)
     }
 

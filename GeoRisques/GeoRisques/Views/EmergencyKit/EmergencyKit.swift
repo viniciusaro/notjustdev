@@ -1,55 +1,87 @@
 import SwiftUI
 
 struct EmergencyKit: View {
+    @Environment(EmergencyKitStore.self) var store
+    private let dotAppearance = UIPageControl.appearance()
+
     var body: some View {
-        NavigationView {
-            VStack(spacing: 24) {
-                VStack(alignment: .center , spacing: 16) {
-                    Text("Mon kit d’urgence 72h")
-                        .font(.largeTitle)
-                        .bold()
-                    Text("Préparez-vous à toute éventualité")
-                        .font(.headline)
-                        .bold()
-                }
-                .padding(.top, 48)
+        @Bindable var store = store
+        ZStack {
+            TabView(selection: $store.infoIndex) {
+                ForEach(store.kitInformation) { info in
+                    VStack {
+                        Spacer()
+                        InfoCardView(kitInformation: info)
+                        Spacer()
 
-                Spacer()
-
-                VStack(spacing: 16) {
-                    Text("En cas de crise, les consignes des autorités peuvent être de quitter immédiatement votre domicile, ou de rester chez vous jusqu’à l’arrivée des secours. Dans les deux cas, il est recommandé d’avoir préparé un sac contenant de quoi vivre pendant 3 jours en autonomie.")
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(.gray)
-                    Text("Voici la liste des objets et équipements essentiels à mettre dans ce kit d’urgence, qui doit rester facilement accessible. Constituez-le sans attendre et vérifier régulièrement son contenu, c’est important.")
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(.gray)
-
-                    Spacer()
-
-                    NavigationLink {
-                        FamilyMembers()
-                    } label: {
-                        Text("Préparer le kit d’urgence")
-                            .font(.headline)
-                            .frame(width: 240)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(40)
+                        if info == store.kitInformation.last {
+                            StartEmergencyKitButton(onTap: {
+                                store.navigateToFamilyMembers.toggle()
+                            })
+                        }
+                        Spacer()
                     }
-                    .padding(.bottom, 24)
+                    .tag(info.tag)
                 }
             }
-            .padding(.horizontal, 16)
+            .tabViewStyle(.page)
+            .indexViewStyle(.page(backgroundDisplayMode: .interactive))
+
+            if store.navigateToFamilyMembers {
+                FamilyMembers()
+                    .background(.white)
+                    .transition(.opacity)
+                    .zIndex(1)
+            }
+        } 
+        .animation(.easeOut, value: store.navigateToFamilyMembers)
+        .animation(.easeInOut, value: store.infoIndex)
+        .onAppear {
+            dotAppearance.currentPageIndicatorTintColor = .blue
+            dotAppearance.pageIndicatorTintColor = .systemGray6
         }
     }
 }
 
+struct InfoCardView: View {
+    let kitInformation: EmergencyKitInformation
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Image(kitInformation.image)
+                .resizable()
+                .scaledToFit()
+                .padding(32)
+
+            Text(kitInformation.title)
+                .font(.title2)
+                .bold()
+
+            Text(kitInformation.description)
+                .font(.subheadline)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 24)
+        }
+        .padding()
+    }
+}
 
 
+struct StartEmergencyKitButton: View {
+    let onTap: () -> Void
 
-
-
+    var body: some View {
+        Button("Préparer le kit d'urgence") {
+            onTap()
+        }
+        .fontWeight(.bold)
+        .frame(width: 250)
+        .padding()
+        .background(Color.blue)
+        .foregroundColor(.white)
+        .cornerRadius(50)
+    }
+}
 
 
 
