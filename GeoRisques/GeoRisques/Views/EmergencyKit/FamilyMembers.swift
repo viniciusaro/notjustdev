@@ -58,8 +58,8 @@ struct CreatCheckListButton: View {
                 .fontWeight(.bold)
                 .frame(width: 200)
                 .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
+                .background(.accent)
+                .foregroundColor(.dark)
                 .cornerRadius(50)
         }
         .padding(.bottom, 24)
@@ -76,6 +76,7 @@ struct CounterView: View {
             Button(action: onDecrement) {
                 Image(systemName: "minus")
                     .font(.title)
+                    .foregroundStyle(.accent)
                     .frame(width: 50, height: 40)
             }
 
@@ -84,6 +85,7 @@ struct CounterView: View {
             Button(action: onIncrement) {
                 Image(systemName: "plus")
                     .font(.title)
+                    .foregroundStyle(.accent)
                     .frame(width: 50, height: 40)
             }
         }

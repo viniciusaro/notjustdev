@@ -37,7 +37,7 @@ struct EmergencyKit: View {
         .animation(.easeOut, value: store.navigateToFamilyMembers)
         .animation(.easeInOut, value: store.infoIndex)
         .onAppear {
-            UIPageControl.appearance().currentPageIndicatorTintColor = .blue
+            UIPageControl.appearance().currentPageIndicatorTintColor = .accent
             UIPageControl.appearance().pageIndicatorTintColor = .systemGray6
         }
     }
@@ -74,8 +74,8 @@ struct StartEmergencyKitButton: View {
         .fontWeight(.bold)
         .frame(width: 250)
         .padding()
-        .background(Color.blue)
-        .foregroundColor(.white)
+        .background(.accent)
+        .foregroundColor(.dark)
         .cornerRadius(50)
     }
 }
