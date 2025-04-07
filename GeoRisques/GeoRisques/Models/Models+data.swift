@@ -15,6 +15,8 @@ extension Risque {
 }
 
 
+//MARK: - Emergency Kit
+
 extension EmergencyKitInformation {
     static let infos: [EmergencyKitInformation] = [
         EmergencyKitInformation(

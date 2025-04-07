@@ -5,23 +5,24 @@ struct FamilyMembers: View {
 
     var body: some View {
         VStack() {
-            Text("Membres de la famille")
-                .font(.title2)
-                .bold()
+            VStack(spacing: 16) {
+                Text("Membres de la famille")
+                    .font(.title)
+                Text("Créez votre kit d’urgence en fonction du nombre de membres de votre famille")
+                    .font(.subheadline)
 
-            Text("Créez votre kit d’urgence en fonction du nombre de membres de votre famille")
-                .font(.subheadline)
-                .padding(.bottom, 24)
+            }
+            .padding(.bottom, 24)
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(store.memberTypes, id: \.self) { member in
                     MemberView(
-                        label: member,
-                        count: store.memberCount[member] ?? 0,
-                        isSelected: store.selectedMember == member,
+                        label: member.rawValue,
+                        count: store.memberCount[member.rawValue] ?? 0,
+                        isSelected: store.selectedMember == member.rawValue,
                         onTap: {
                             withAnimation {
-                                store.selectedMember = (store.selectedMember == member ? nil : member)
+                                store.selectedMember = (store.selectedMember == member.rawValue ? nil : member.rawValue)
                             }
                         }
                     )
@@ -39,7 +40,7 @@ struct FamilyMembers: View {
 
             if store.memberCount.values.contains(where: { $0 > 0 }) {
                 CreatCheckListButton {
-                    store.save()
+                    store.saveFamilyMemberCount()
                 }
             }
         }

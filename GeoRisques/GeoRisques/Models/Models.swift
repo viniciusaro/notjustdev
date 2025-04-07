@@ -27,6 +27,14 @@ struct Risque: Hashable {
     }
 }
 
+//MARK: - Emergency Kit
+
+enum MemberType: String, CaseIterable, Codable {
+    case adult = "Adultes"
+    case baby = "Bébés"
+    case child = "Enfants"
+    case pet = "Animaux"
+}
 
 struct EmergencyKitInformation: Identifiable, Equatable {
     let id: UUID = UUID()
@@ -35,3 +43,5 @@ struct EmergencyKitInformation: Identifiable, Equatable {
     var image: String
     var tag: Int
 }
+
+

@@ -2,22 +2,22 @@ import SwiftUI
 
 struct EmergencyKit: View {
     @Environment(EmergencyKitStore.self) var store
-    private let dotAppearance = UIPageControl.appearance()
 
     var body: some View {
         @Bindable var store = store
+
         ZStack {
             TabView(selection: $store.infoIndex) {
                 ForEach(store.kitInformation) { info in
                     VStack {
                         Spacer()
-                        InfoCardView(kitInformation: info)
+                        InfoCardView(kit: info)
                         Spacer()
 
                         if info == store.kitInformation.last {
-                            StartEmergencyKitButton(onTap: {
+                            StartEmergencyKitButton {
                                 store.navigateToFamilyMembers.toggle()
-                            })
+                            }
                         }
                         Spacer()
                     }
@@ -29,7 +29,7 @@ struct EmergencyKit: View {
 
             if store.navigateToFamilyMembers {
                 FamilyMembers()
-                    .background(.white)
+                    .background(Color(.systemBackground))
                     .transition(.opacity)
                     .zIndex(1)
             }
@@ -37,27 +37,26 @@ struct EmergencyKit: View {
         .animation(.easeOut, value: store.navigateToFamilyMembers)
         .animation(.easeInOut, value: store.infoIndex)
         .onAppear {
-            dotAppearance.currentPageIndicatorTintColor = .blue
-            dotAppearance.pageIndicatorTintColor = .systemGray6
+            UIPageControl.appearance().currentPageIndicatorTintColor = .blue
+            UIPageControl.appearance().pageIndicatorTintColor = .systemGray6
         }
     }
 }
 
 struct InfoCardView: View {
-    let kitInformation: EmergencyKitInformation
+    let kit: EmergencyKitInformation
 
     var body: some View {
         VStack(spacing: 16) {
-            Image(kitInformation.image)
+            Image(kit.image)
                 .resizable()
                 .scaledToFit()
                 .padding(32)
 
-            Text(kitInformation.title)
+            Text(kit.title)
                 .font(.title2)
-                .bold()
 
-            Text(kitInformation.description)
+            Text(kit.description)
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 24)
@@ -71,9 +70,7 @@ struct StartEmergencyKitButton: View {
     let onTap: () -> Void
 
     var body: some View {
-        Button("Préparer le kit d'urgence") {
-            onTap()
-        }
+        Button("Préparer le kit d'urgence", action: onTap)
         .fontWeight(.bold)
         .frame(width: 250)
         .padding()
