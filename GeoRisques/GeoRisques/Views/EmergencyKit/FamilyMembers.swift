@@ -13,24 +13,24 @@ struct FamilyMembers: View {
                 .font(.body)
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                ForEach(store.memberTypes, id: \.self) { label in
+                ForEach(store.memberTypes, id: \.self) { member in
                     MemberView(
-                        label: label,
-                        count: store.memberCount[label] ?? 0,
-                        isSelected: store.selectedMember == label,
+                        label: member,
+                        count: store.memberCount[member] ?? 0,
+                        isSelected: store.selectedMember == member,
                         onTap: {
                             withAnimation {
-                                store.selectedMember = (store.selectedMember == label ? nil : label)
+                                store.selectedMember = (store.selectedMember == member ? nil : member)
                             }
                         }
                     )
                 }
             }
 
-            if let selectedLabel = store.selectedMember {
+            if let selectedMember = store.selectedMember {
                 CounterView(
-                    onIncrement: { store.increment(selectedLabel) },
-                    onDecrement: { store.decrement(selectedLabel) }
+                    onIncrement: { store.increment(selectedMember) },
+                    onDecrement: { store.decrement(selectedMember) }
                 )
             }
 
@@ -42,15 +42,9 @@ struct FamilyMembers: View {
                 }
             }
         }
-        .padding(.top)
         .padding(.horizontal)
     }
 }
-
-#Preview {
-    FamilyMembers()
-}
-
 
 struct CreatCheckListButton: View {
     let onTap: () -> Void

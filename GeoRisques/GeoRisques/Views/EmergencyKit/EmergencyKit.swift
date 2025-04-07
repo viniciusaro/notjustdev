@@ -37,14 +37,15 @@ struct EmergencyKit: View {
                             .background(Color.blue)
                             .cornerRadius(40)
                     }
-
-                    Spacer()
+                    .padding(.bottom, 24)
                 }
             }
             .padding(.horizontal, 16)
         }
     }
 }
+
+
 
 
 
