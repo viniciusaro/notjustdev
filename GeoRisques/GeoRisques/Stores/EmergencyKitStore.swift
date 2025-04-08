@@ -16,14 +16,8 @@ final class EmergencyKitStore {
     var infoIndex: Int = 0
     var navigateToFamilyMembers = false
 
-    var memberIsTapped: Bool = false
-
     init() {
         loadSavedFamilyMembers()
-    }
-
-    func tapMember(_ member: String) {
-        memberIsTapped = true
     }
 
     func incrementMember(_ member: String) {

@@ -5,11 +5,10 @@ struct EmergencyKitTests {
 
     @Test func testIncrementCount() async throws {
         let store = EmergencyKitStore()
-        
-        #expect(store.memberCount["Adultes", default: 0] == 0)
 
+        store.memberCount["Adultes"] = 0
         store.incrementMember("Adultes")
-        #expect(store.memberCount["Adultes", default: 0] == 1)
+        #expect(store.memberCount["Adultes"] == 1)
     }
 
 

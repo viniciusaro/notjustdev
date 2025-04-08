@@ -15,7 +15,6 @@ struct FamilyMembers: View {
                         isSelected: store.selectedMember == member.rawValue,
                         onTap: {
                             withAnimation {
-                                store.tapMember(member.rawValue)
                                 store.selectedMember = (store.selectedMember == member.rawValue ? nil : member.rawValue)
                             }
                         }
