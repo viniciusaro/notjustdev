@@ -2,6 +2,8 @@ import Foundation
 
 @Observable
 final class EmergencyKitStore {
+    private let client = MemberFamilyClientLive()
+
     var selectedMember: String? = nil
     let memberTypes = MemberType.allCases
     var memberCount: [String: Int] = [
@@ -10,14 +12,13 @@ final class EmergencyKitStore {
         "Enfants": 0,
         "Animaux": 0
     ]
-    private let userDefaultKey = "savedFamilyMembers"
 
     let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
     var infoIndex: Int = 0
     var navigateToFamilyMembers = false
 
     init() {
-        loadSavedFamilyMembers()
+        loadFamilyMember()
     }
 
     func incrementMember(_ member: String) {
@@ -31,18 +32,10 @@ final class EmergencyKitStore {
     }
 
     func saveFamilyMember() {
-        if let data = try? JSONEncoder().encode(memberCount) {
-            UserDefaults.standard.set(data, forKey: userDefaultKey)
-        }
-        print("Saved: \(memberCount)")
+        client.saveMember(memberCount)
     }
 
-    
-    func loadSavedFamilyMembers() {
-        if let data = UserDefaults.standard.data(forKey: userDefaultKey),
-           let saved = try? JSONDecoder().decode([String: Int].self, from: data) {
-            memberCount = saved
-        }
-        print("Load: \(memberCount)")
+    func loadFamilyMember() {
+        memberCount = client.loadMember()
     }
 }
