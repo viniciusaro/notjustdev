@@ -6,22 +6,22 @@ struct EmergencyKitTests {
     @Test func testIncrementCount() async throws {
         let store = EmergencyKitStore()
 
-        store.memberCount["Adultes"] = 0
-        store.incrementMember("Adultes")
-        #expect(store.memberCount["Adultes"] == 1)
+        store.memberCount[MemberType.adult] = 0
+        store.incrementMember(MemberType.adult)
+        #expect(store.memberCount[MemberType.adult] == 1)
     }
 
 
     @Test func testDecrementCount() async throws {
         let store = EmergencyKitStore()
 
-        store.memberCount["Enfants"] = 2
+        store.memberCount[MemberType.baby] = 2
 
-        store.decrementMember("Enfants")
-        #expect(store.memberCount["Enfants"] == 1)
+        store.decrementMember(MemberType.baby)
+        #expect(store.memberCount[MemberType.baby] == 1)
 
-        store.decrementMember("Enfants")
-        #expect(store.memberCount["Enfants"] == 0)
+        store.decrementMember(MemberType.baby)
+        #expect(store.memberCount[MemberType.baby] == 0)
     }
 
 }

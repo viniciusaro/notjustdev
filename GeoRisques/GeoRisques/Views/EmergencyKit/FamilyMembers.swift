@@ -11,11 +11,11 @@ struct FamilyMembers: View {
                 ForEach(store.memberTypes, id: \.self) { member in
                     MemberView(
                         label: member.rawValue,
-                        count: store.memberCount[member.rawValue] ?? 0,
-                        isSelected: store.selectedMember == member.rawValue,
+                        count: store.memberCount[member] ?? 0,
+                        isSelected: store.selectedMember == member,
                         onTap: {
                             withAnimation {
-                                store.selectedMember = (store.selectedMember == member.rawValue ? nil : member.rawValue)
+                                store.selectedMember = (store.selectedMember == member ? nil : member)
                             }
                         }
                     )
