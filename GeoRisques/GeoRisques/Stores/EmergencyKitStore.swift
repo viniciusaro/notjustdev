@@ -4,15 +4,26 @@ import Foundation
 final class EmergencyKitStore {
     var selectedMember: String? = nil
     let memberTypes = MemberType.allCases
-    var memberCount: [String: Int] = ["Adultes": 0, "Bébés": 0, "Enfants": 0, "Animaux": 0]
+    var memberCount: [String: Int] = [
+        "Adultes": 0,
+        "Bébés": 0,
+        "Enfants": 0,
+        "Animaux": 0
+    ]
     private let userDefaultKey = "savedFamilyMembers"
 
     let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
     var infoIndex: Int = 0
     var navigateToFamilyMembers = false
 
+    var memberIsTapped: Bool = false
+
     init() {
-        loadFamilyMembers()
+        loadSavedFamilyMembers()
+    }
+
+    func tapMember(_ member: String) {
+        memberIsTapped = true
     }
 
     func incrementMember(_ member: String) {
@@ -25,7 +36,7 @@ final class EmergencyKitStore {
         }
     }
 
-    func saveFamilyMemberCount() {
+    func saveFamilyMember() {
         if let data = try? JSONEncoder().encode(memberCount) {
             UserDefaults.standard.set(data, forKey: userDefaultKey)
         }
@@ -33,7 +44,7 @@ final class EmergencyKitStore {
     }
 
     
-    func loadFamilyMembers() {
+    func loadSavedFamilyMembers() {
         if let data = UserDefaults.standard.data(forKey: userDefaultKey),
            let saved = try? JSONDecoder().decode([String: Int].self, from: data) {
             memberCount = saved

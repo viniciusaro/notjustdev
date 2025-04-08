@@ -15,11 +15,12 @@ struct EmergencyKit: View {
                         Spacer()
 
                         if info == store.kitInformation.last {
-                            StartEmergencyKitButton {
+                            ButtonView(text: "Générer la liste") {
                                 store.navigateToFamilyMembers.toggle()
                             }
+                            .padding(.horizontal, 16)
+                            .padding(.bottom, 48)
                         }
-                        Spacer()
                     }
                     .tag(info.tag)
                 }
@@ -59,26 +60,10 @@ struct InfoCardView: View {
             Text(kit.description)
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 16)
         }
         .padding()
     }
 }
-
-
-struct StartEmergencyKitButton: View {
-    let onTap: () -> Void
-
-    var body: some View {
-        Button("Préparer le kit d'urgence", action: onTap)
-        .fontWeight(.bold)
-        .frame(width: 250)
-        .padding()
-        .background(.accent)
-        .foregroundColor(.dark)
-        .cornerRadius(50)
-    }
-}
-
 
 

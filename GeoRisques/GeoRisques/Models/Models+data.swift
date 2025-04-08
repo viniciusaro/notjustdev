@@ -28,7 +28,7 @@ extension EmergencyKitInformation {
 
         EmergencyKitInformation(
             title: "Les besoins de votre famille",
-            description: " Identifiez les besoins de chaque membre de votre famille (adultes, enfants, animaux). Une fois cela fait, vous serez prêt à déterminer exactement ce qui doit être inclus dans votre kit.",
+            description: " Identifiez les besoins de chaque membre de votre famille (adultes, enfants, bébés et animaux). Une fois cela fait, vous serez prêt à déterminer exactement ce qui doit être inclus dans votre kit.",
             image: "preparer",
             tag: 1
         ),

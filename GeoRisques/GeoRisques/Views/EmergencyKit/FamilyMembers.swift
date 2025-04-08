@@ -5,14 +5,7 @@ struct FamilyMembers: View {
 
     var body: some View {
         VStack() {
-            VStack(spacing: 16) {
-                Text("Membres de la famille")
-                    .font(.title)
-                Text("Créez votre kit d’urgence en fonction du nombre de membres de votre famille")
-                    .font(.subheadline)
-
-            }
-            .padding(.bottom, 24)
+            TitleFamilyMember()
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                 ForEach(store.memberTypes, id: \.self) { member in
@@ -22,6 +15,7 @@ struct FamilyMembers: View {
                         isSelected: store.selectedMember == member.rawValue,
                         onTap: {
                             withAnimation {
+                                store.tapMember(member.rawValue)
                                 store.selectedMember = (store.selectedMember == member.rawValue ? nil : member.rawValue)
                             }
                         }
@@ -39,30 +33,14 @@ struct FamilyMembers: View {
             Spacer()
 
             if store.memberCount.values.contains(where: { $0 > 0 }) {
-                CreatCheckListButton {
-                    store.saveFamilyMemberCount()
+                ButtonView(text: "Préparer le kit d'urgence") {
+                    store.saveFamilyMember()
                 }
+                .padding(.bottom, 16)
             }
         }
         .padding(.top, 16)
         .padding(.horizontal)
-    }
-}
-
-struct CreatCheckListButton: View {
-    let onTap: () -> Void
-
-    var body: some View {
-        Button(action: onTap) {
-            Text("Générer la liste")
-                .fontWeight(.bold)
-                .frame(width: 200)
-                .padding()
-                .background(.accent)
-                .foregroundColor(.dark)
-                .cornerRadius(50)
-        }
-        .padding(.bottom, 24)
     }
 }
 
@@ -95,3 +73,18 @@ struct CounterView: View {
         .padding(.top, 30)
     }
 }
+
+
+struct TitleFamilyMember: View {
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Membres de la famille")
+                .font(.title)
+            Text("Créez votre kit d’urgence en fonction du nombre de membres de votre famille")
+                .font(.subheadline)
+
+        }
+        .padding(.bottom, 24)
+    }
+}
+
