@@ -2,7 +2,7 @@ import SwiftUI
 
 struct RootView: View {
     @Environment(GeoRisquesStore.self) var store
-    
+
     var body: some View {
         @Bindable var store = store
         TabView(
@@ -10,14 +10,14 @@ struct RootView: View {
         ) {
             RisquesView()
                 .tabItem {
-                    Label("Risques", systemImage: "list.bullet")
+                    Label("Risques", systemImage: "light.beacon.max.fill")
                 }
                 .tag(GeoRisquesStore.Tab.risques)
-            ChecklistView()
+            EmergencyKit()
                 .tabItem {
-                    Label("Checklist", systemImage: "square.and.arrow.up")
+                    Label("Kit d'Urgence", systemImage: "backpack.fill")
                 }
-                .tag(GeoRisquesStore.Tab.checklist)
+                .tag(GeoRisquesStore.Tab.emergencyKit)
         }
     }
 }

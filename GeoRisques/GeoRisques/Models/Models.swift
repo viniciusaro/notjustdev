@@ -1,3 +1,5 @@
+import Foundation
+
 struct Location {
     let latitude: Double
     let longitude: Double
@@ -24,3 +26,22 @@ struct Risque: Hashable {
         }
     }
 }
+
+//MARK: - Emergency Kit
+
+enum MemberType: String, CaseIterable, Codable {
+    case adult = "Adultes"
+    case baby = "Bébés"
+    case child = "Enfants"
+    case pet = "Animaux"
+}
+
+struct EmergencyKitInformation: Identifiable, Equatable {
+    let id: UUID = UUID()
+    var title: String
+    var description: String
+    var image: String
+    var tag: Int
+}
+
+
