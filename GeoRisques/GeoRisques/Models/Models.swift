@@ -1,12 +1,21 @@
 import Foundation
 
-struct Location {
+struct Location: Equatable {
     let latitude: Double
     let longitude: Double
+    let delta: Double
+    
+    init(latitude: Double, longitude: Double, delta: Double = 0.05) {
+        self.latitude = latitude
+        self.longitude = longitude
+        self.delta = delta
+    }
 }
 
 struct Risque: Hashable {
     let name: String
+    let description: String
+    let reference: URL
     let kind: Kind
     
     enum Kind {

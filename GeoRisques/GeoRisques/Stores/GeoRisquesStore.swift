@@ -3,24 +3,24 @@ import SwiftUI
 import Observation
 
 #if DEBUG
-var risquesClient = FixedRisquesClient(risques: Risque.naturalDisasters)
+var risquesClient = FixedRisquesClient(risques: Risque.all)
 var locationClient = FixedLocationClient(location: .grenoble)
 #else
-let risquesClient = LiveRisquestClient()
+let risquesClient = LiveRisquesClient()
 let locationClient = LiveLocationClient()
 #endif
 
 @Observable
 final class GeoRisquesStore {
     var rootState: RootState
-    var risquestState: RisquestState
+    var risquesState: RisquesState
     
     init(
         rootState: RootState = RootState(),
-        risquestState: RisquestState = RisquestState()
+        risquesState: RisquesState = RisquesState()
     ) {
         self.rootState = rootState
-        self.risquestState = risquestState
+        self.risquesState = risquesState
     }
     
     enum Tab: Int {
@@ -36,47 +36,89 @@ final class GeoRisquesStore {
         }
     }
     
-    struct RisquestState {
+    struct RisquesState {
         var risques: [Risque] = []
         var error: Error?
-        var position: MapCameraPosition = .automatic
+        var location: Location = .zero
+        var selectedRisque: RisqueDetailState?
         
-        var location: Location {
-            return Location(
-                latitude: position.region?.center.latitude ?? 0,
-                longitude: position.region?.center.longitude ?? 0
-            )
-        }
-    }
-    
-    func onRisquesDidLoad() {
-        Task {
-            do {
-                let location = try await locationClient.location()
-                self.risquestState.position = MapCameraPosition.region(
+        var position: MapCameraPosition {
+            get {
+                return MapCameraPosition.region(
                     MKCoordinateRegion(
                         center: CLLocationCoordinate2D(
                             latitude: location.latitude,
                             longitude: location.longitude
                         ),
                         span: MKCoordinateSpan(
-                            latitudeDelta: 0.05,
-                            longitudeDelta: 0.05
+                            latitudeDelta: location.delta,
+                            longitudeDelta: location.delta
                         )
                     )
                 )
-                self.risquestState.risques = try await risquesClient.risques(at: location)
-            } catch {
-                self.risquestState.error = error
+            }
+            set {
+                // Although this is a Binding, MapCameraPosition
+                // does not allow reading location
+                // information correctly.
+                //
+                // The correct way is by adding the [onMapCameraChange]
+                // modifier to the view and then reading
+                // the location manually.
             }
         }
     }
     
+    struct RisqueDetailState: Hashable {
+        let risque: Risque
+    }
+    
+    func onRisquesDidLoad() {
+        Task {
+            await reloadLocation()
+            await reloadRisques()
+        }
+    }
+    
     func onRisqueButtonTapped(_ risque: Risque) {
-        
+        self.risquesState.selectedRisque = .init(risque: risque)
     }
     
     func onLocationButtonTapped() {
-        
+        Task {
+            await reloadLocation()
+            await reloadRisques()
+        }
+    }
+    
+    func onMapCameraChange(_ region: MKCoordinateRegion) {
+        self.risquesState.location = Location(
+            latitude: region.center.latitude,
+            longitude: region.center.longitude,
+            delta: region.span.latitudeDelta
+        )
+        Task {
+            await reloadRisques()
+        }
+    }
+    
+    private func reloadLocation() async {
+        do {
+            let location = try await locationClient.location()
+            withAnimation {
+                self.risquesState.location = location
+            }
+        } catch {
+            self.risquesState.error = error
+        }
+    }
+    
+    private func reloadRisques() async {
+        do {
+            let location = self.risquesState.location
+            self.risquesState.risques = try await risquesClient.risques(at: location)
+        } catch {
+            self.risquesState.error = error
+        }
     }
 }
