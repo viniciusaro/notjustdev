@@ -122,3 +122,43 @@ extension EmergencyKitInformation {
 
     ]
 }
+
+
+extension KitEssentialItem {
+    static let items: [KitEssentialItem] = [
+        KitEssentialItem(
+            type: .water,
+        ),
+        KitEssentialItem(
+            type: .food,
+        ),
+        KitEssentialItem(
+            type: .radio,
+        ),
+        KitEssentialItem(
+            type: .flashlight,
+        ),
+        ]
+}
+
+extension KitBabyItem {
+    static let items: [KitBabyItem] = [
+        KitBabyItem(
+            type: .food,
+        ),
+        KitBabyItem(
+            type: .diapers,
+        ),
+    ]
+}
+
+extension KitPetItem {
+    static let items: [KitPetItem] = [
+        KitPetItem(
+            type: .food,
+        ),
+        KitPetItem(
+            type: .blanket,
+        ),
+    ]
+}

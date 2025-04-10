@@ -53,4 +53,111 @@ struct EmergencyKitInformation: Identifiable, Equatable {
     var tag: Int
 }
 
+//MARK: - Emergency Kit Checklist
+
+struct KitEssentialItem: Identifiable, Codable, Equatable, Hashable {
+    var id: UUID = UUID()
+    let type: KitEssentialItemType
+}
+
+struct KitBabyItem: Identifiable, Codable, Equatable, Hashable {
+    var id: UUID = UUID()
+    let type: KitBabyItemType
+}
+
+struct KitPetItem: Identifiable, Codable, Equatable, Hashable {
+    var id: UUID = UUID()
+    let type: KitPetItemType
+}
+
+enum KitEssentialItemType: String, CaseIterable, Codable {
+    case water = "Eau potable en bouteille"
+    case food = "Nourriture non périssable"
+    case radio = "Radio"
+    case flashlight = "Lampe de poche"
+    case batery = "Piles"
+    case matches = "Bougies et allumettes"
+    case firstAid = "Trousse de premiers secours"
+    case warmClothes = "Vêtements chauds"
+    case emergencyBlanket = "Couvertures de survie"
+    case whistle = "Sifflet"
+    case handSanitizer = "Gel hydroalcoolique"
+    case mask = "Masque"
+    case toiletPaper = "Papier toilette"
+    case hygiene = "Produits d'hygiène"
+    case chargers = "Chargeurs de téléphone"
+    case game = "Jeux"
+    case emergencyContacts = "Contacts d'urgence"
+    case localMap = "Carte locale"
+    case doubleKey = "Clé double"
+    case cash = "Argent liquide"
+    case importantDocuments = "Documents importants"
+
+    var imageName: String {
+        switch self {
+        case .water: return "lampe"
+        case .batery: return "lampe"
+        case .cash: return "lampe"
+        case .chargers: return "lampe"
+        case .doubleKey: return "lampe"
+        case .emergencyBlanket: return "lampe"
+        case .emergencyContacts: return "lampe"
+        case .firstAid: return "lampe"
+        case .flashlight: return "lampe"
+        case .food: return "lampe"
+        case .game: return "lampe"
+        case .handSanitizer: return "lampe"
+        case .hygiene: return "lampe"
+        case .importantDocuments: return "lampe"
+        case .localMap: return "lampe"
+        case .mask: return "lampe"
+        case .matches: return "lampe"
+        case .whistle: return "lampe"
+        case .radio: return "lampe"
+        case .warmClothes: return "lampe"
+        case .toiletPaper: return "lampe"
+        }
+    }
+}
+
+enum KitBabyItemType: String, CaseIterable, Codable {
+    case food = "Nourriture pour les bébés"
+    case diapers = "Couches"
+    case wipes = "Lingettes"
+    case bottle = "Biberon"
+    case pacifier = "Sucette"
+    case blanket = "Couverture "
+    case toys = "Jouets pour les bébés"
+
+    var imageName: String {
+        switch self {
+        case .food: return "lampe"
+        case .diapers: return "lampe"
+        case .wipes: return "lampe"
+        case .bottle: return "lampe"
+        case .pacifier: return "lampe"
+        case .blanket: return "lampe"
+        case .toys: return "lampe"
+        }
+    }
+}
+
+
+enum KitPetItemType: String, CaseIterable, Codable {
+    case food = "Nourriture pour les animaux"
+    case bowl = "Gamelle"
+    case leash = "Laisse"
+    case blanket = "Couverture"
+    case toys = "Jouets pour les animaux"
+
+    var imageName: String {
+        switch self {
+        case .blanket: return "lampe"
+        case .food: return "lampe"
+        case .bowl: return "lampe"
+        case .leash: return "lampe"
+        case .toys: return "lampe"
+        }
+    }
+}
 

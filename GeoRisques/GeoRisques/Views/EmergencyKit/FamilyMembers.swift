@@ -4,42 +4,52 @@ struct FamilyMembers: View {
     @Environment(EmergencyKitStore.self) var store
 
     var body: some View {
-        VStack() {
-            TitleFamilyMember()
+        @Bindable var store = store
 
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                ForEach(store.memberTypes, id: \.self) { member in
-                    MemberView(
-                        label: member.rawValue,
-                        count: store.memberCount[member] ?? 0,
-                        isSelected: store.selectedMember == member,
-                        onTap: {
-                            withAnimation {
-                                store.selectedMember = (store.selectedMember == member ? nil : member)
+        NavigationStack {
+            VStack() {
+                TitleFamilyMember()
+
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+                    ForEach(store.memberTypes, id: \.self) { member in
+                        MemberView(
+                            label: member.rawValue,
+                            count: store.memberCount[member] ?? 0,
+                            isSelected: store.selectedMember == member,
+                            onTap: {
+                                withAnimation {
+                                    store.selectedMember = (store.selectedMember == member ? nil : member)
+                                }
                             }
-                        }
+                        )
+                    }
+                }
+
+                if let selectedMember = store.selectedMember {
+                    CounterView(
+                        onIncrement: { store.incrementMember(selectedMember) },
+                        onDecrement: { store.decrementMember(selectedMember) }
                     )
                 }
-            }
 
-            if let selectedMember = store.selectedMember {
-                CounterView(
-                    onIncrement: { store.incrementMember(selectedMember) },
-                    onDecrement: { store.decrementMember(selectedMember) }
-                )
-            }
+                Spacer()
 
-            Spacer()
-
-            if store.memberCount.values.contains(where: { $0 > 0 }) {
-                ButtonView(text: "Préparer le kit d'urgence") {
-                    store.saveFamilyMember()
+                if store.memberCount.values.contains(where: { $0 > 0 }) {
+                    ButtonView(text: "Préparer le kit d'urgence") {
+                        store.saveFamilyMember()
+                        store.navigateToKitChecklist = true
+                    }
+                    .padding(.bottom, 16)
                 }
-                .padding(.bottom, 16)
             }
+            .padding(.top, 16)
+            .padding(.horizontal)
+            .navigationDestination(
+                isPresented: $store.navigateToKitChecklist,
+                destination: {
+                    KitChecklist()
+                })
         }
-        .padding(.top, 16)
-        .padding(.horizontal)
     }
 }
 
@@ -85,5 +95,13 @@ struct TitleFamilyMember: View {
         }
         .padding(.bottom, 24)
     }
+}
+
+
+#Preview {
+    let emergencyKitStore = EmergencyKitStore()
+
+    FamilyMembers()
+        .environment(emergencyKitStore)
 }
 
