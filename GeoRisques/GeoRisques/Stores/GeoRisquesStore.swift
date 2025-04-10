@@ -2,25 +2,23 @@ import MapKit
 import SwiftUI
 import Observation
 
-#if DEBUG
-var risquesClient = FixedRisquesClient(risques: Risque.all)
-var locationClient = FixedLocationClient(location: .grenoble)
-#else
-let risquesClient = LiveRisquesClient()
-let locationClient = LiveLocationClient()
-#endif
-
 @Observable
 final class GeoRisquesStore {
     var rootState: RootState
     var risquesState: RisquesState
+    let locationClient: LocationClient
+    let risquesClient: RisquesClient
     
     init(
         rootState: RootState = RootState(),
-        risquesState: RisquesState = RisquesState()
+        risquesState: RisquesState = RisquesState(),
+        locationClient: LocationClient = FixedLocationClient(location: .grenoble),
+        risquesClient: RisquesClient = FixedRisquesClient(risques: Risque.all),
     ) {
         self.rootState = rootState
         self.risquesState = risquesState
+        self.locationClient = locationClient
+        self.risquesClient = risquesClient
     }
     
     enum Tab: Int {
@@ -69,7 +67,7 @@ final class GeoRisquesStore {
         }
     }
     
-    struct RisqueDetailState: Hashable {
+    struct RisqueDetailState: Equatable, Hashable {
         let risque: Risque
     }
     
