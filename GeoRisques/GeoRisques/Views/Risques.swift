@@ -27,9 +27,6 @@ struct RisquesMapView: View {
         
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
             Map(position: $store.risquesState.position)
-                .onMapCameraChange { context in
-                    store.onMapCameraChange(context.region)
-                }
             Button {
                 store.onLocationButtonTapped()
             } label: {
@@ -59,23 +56,39 @@ struct RisquesListView: View {
                 .font(.footnote)
         }
         .padding()
-        List(store.risquesState.risques, id: \.self) { risque in
-            Button {
-                store.onRisqueButtonTapped(risque)
-            } label: {
-                HStack {
-                    Text(risque.name)
-                    Spacer()
+        VStack(alignment: .center) {
+            if let locationError = store.risquesState.locationError {
+                switch locationError {
+                case .unauthorized:
+                    List {
+                        // TODO: add button to send user to settings.
+                        Text("Location services are not authorized.")
+                    }
+                    .listStyle(.automatic)
+                case .unavailable:
+                    List {
+                        Text("Location services are unavailable.")
+                    }
+                    .listStyle(.automatic)
+                }
+            } else if store.risquesState.risquesError != nil {
+                List {
+                    Text("No risques found")
+                }
+                .listStyle(.automatic)
+            } else {
+                List(store.risquesState.risques, id: \.self) { risque in
                     HStack {
-                        Image(systemName: risque.kind.image)
-                        Image(systemName: "chevron.right")
+                        Link(risque.name, destination: risque.reference)
+                        Spacer()
+                        HStack {
+                            Image(systemName: risque.kind.image)
+                            Image(systemName: "chevron.right")
+                        }
                     }
                 }
+                .listStyle(.plain)
             }
-        }
-        .listStyle(.plain)
-        .navigationDestination(item: $store.risquesState.selectedRisque) { state in
-            RisqueDetailView(state: state)
         }
     }
 }

@@ -36,8 +36,9 @@ final class GeoRisquesStore {
     
     struct RisquesState {
         var risques: [Risque] = []
-        var error: Error?
+        var risquesError: RisquesClientError?
         var location: Location = .zero
+        var locationError: LocationClientError?
         var selectedRisque: RisqueDetailState?
         
         var position: MapCameraPosition {
@@ -89,17 +90,6 @@ final class GeoRisquesStore {
         }
     }
     
-    func onMapCameraChange(_ region: MKCoordinateRegion) {
-        self.risquesState.location = Location(
-            latitude: region.center.latitude,
-            longitude: region.center.longitude,
-            delta: region.span.latitudeDelta
-        )
-        Task {
-            await reloadRisques()
-        }
-    }
-    
     private func reloadLocation() async {
         do {
             let location = try await locationClient.location()
@@ -107,16 +97,19 @@ final class GeoRisquesStore {
                 self.risquesState.location = location
             }
         } catch {
-            self.risquesState.error = error
+            // exit application if cast fails
+            self.risquesState.locationError = (error as! LocationClientError)
         }
     }
     
     private func reloadRisques() async {
         do {
             let location = self.risquesState.location
+            self.risquesState.risquesError = nil
             self.risquesState.risques = try await risquesClient.risques(at: location)
         } catch {
-            self.risquesState.error = error
+            // exit application if cast fails
+            self.risquesState.risquesError = (error as! RisquesClientError)
         }
     }
 }

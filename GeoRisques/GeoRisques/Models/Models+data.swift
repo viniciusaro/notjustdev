@@ -35,6 +35,13 @@ extension Risque {
         kind: .natural
     )
     
+    static let smallEarthquake = Risque(
+        name: "Earthquakes",
+        description: "short description",
+        reference: reference,
+        kind: .natural
+    )
+    
     static let earthquakes = Risque(
         name: "Earthquakes",
         description: lipsumDescription,
