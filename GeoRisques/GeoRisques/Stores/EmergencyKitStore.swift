@@ -3,8 +3,6 @@ import Foundation
 @Observable
 final class EmergencyKitStore {
     private let FamilyMemberClient = FamilyMemberClientLive()
-    private let KitChecklistClient = KitChecklistClientLive()
-
 
     /// EmergencyKit Data
     let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
@@ -24,14 +22,37 @@ final class EmergencyKitStore {
     var navigateToKitChecklist: Bool = false
 
     /// KitChecklist logics
-    var selectedEssentialItems = KitChecklistClientLive().selectedEssentialItems
-    var selectedBabyItems = KitChecklistClientLive().selectedBabyItems
-    var selectedPetItems = KitChecklistClientLive().selectedPetItems
+    private let selectedEssentialItemsKey = "essentialItemsKey"
+    var selectedEssentialItems: Set<KitEssentialItemType> = [] {
+        didSet {
+            saveEssentialSelectedItems()
+        }
+    }
+
+    private let selectedBabyItemsKey = "selectedBabyItemsKey"
+    var selectedBabyItems: Set<KitBabyItemType> = [] {
+        didSet {
+            saveBabySelectedItems()
+        }
+    }
+
+    private let selectedPetItemsKey = "selectedPetItemsKey"
+    var selectedPetItems: Set<KitPetItemType> = [] {
+        didSet {
+            savePetSelectedItems()
+        }
+    }
+
+
+
 
     init() {
         loadFamilyMember()
-        loadSelectedItems()
+        loadEssentialSelectedItems()
+        loadBabySelectedItems()
+        loadPetSelectedItems()
     }
+
 
     /// FamilyMembers logics
     func incrementMember(_ member: MemberType) {
@@ -70,7 +91,36 @@ final class EmergencyKitStore {
         return KitPetItemType.allCases
     }
 
-    private func loadSelectedItems() {
-        KitChecklistClient.saveKitChecklist()
+    //-----------Essential Kit------------
+    private func loadEssentialSelectedItems() {
+        guard let kit = UserDefaults.standard.stringArray(forKey: selectedEssentialItemsKey) else { return }
+        selectedEssentialItems = Set(kit.compactMap { KitEssentialItemType(rawValue: $0) })
+    }
+
+    private func saveEssentialSelectedItems() {
+        let raw = selectedEssentialItems.map(\.rawValue)
+        UserDefaults.standard.set(raw, forKey: selectedEssentialItemsKey)
+    }
+
+    //-----------Baby Kit------------
+    private func loadBabySelectedItems() {
+        guard let kit = UserDefaults.standard.stringArray(forKey: selectedBabyItemsKey) else { return }
+        selectedBabyItems = Set(kit.compactMap { KitBabyItemType(rawValue: $0) })
+    }
+
+    private func saveBabySelectedItems() {
+        let kit = selectedBabyItems.map(\.rawValue)
+        UserDefaults.standard.set(kit, forKey: selectedBabyItemsKey)
+    }
+
+    //-----------Baby Kit------------
+    private func loadPetSelectedItems() {
+        guard let kit = UserDefaults.standard.stringArray(forKey: selectedPetItemsKey) else { return }
+        selectedPetItems = Set(kit.compactMap { KitPetItemType(rawValue: $0) })
+    }
+
+    private func savePetSelectedItems() {
+        let kit = selectedPetItems.map(\.rawValue)
+        UserDefaults.standard.set(kit, forKey: selectedPetItemsKey)
     }
 }
