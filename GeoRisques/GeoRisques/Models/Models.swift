@@ -55,22 +55,7 @@ struct EmergencyKitInformation: Identifiable, Equatable {
 
 //MARK: - Emergency Kit Checklist
 
-struct KitEssentialItem: Identifiable, Codable, Equatable, Hashable {
-    var id: UUID = UUID()
-    let type: KitEssentialItemType
-}
-
-struct KitBabyItem: Identifiable, Codable, Equatable, Hashable {
-    var id: UUID = UUID()
-    let type: KitBabyItemType
-}
-
-struct KitPetItem: Identifiable, Codable, Equatable, Hashable {
-    var id: UUID = UUID()
-    let type: KitPetItemType
-}
-
-enum KitEssentialItemType: String, CaseIterable, Codable {
+enum KitEssentialItemType: String, CaseIterable, Codable, Identifiable {
     case water = "Eau potable en bouteille"
     case food = "Nourriture non périssable"
     case radio = "Radio"
@@ -92,6 +77,8 @@ enum KitEssentialItemType: String, CaseIterable, Codable {
     case doubleKey = "Clé double"
     case cash = "Argent liquide"
     case importantDocuments = "Documents importants"
+
+    var id: String { self.rawValue }
 
     var imageName: String {
         switch self {
@@ -120,7 +107,7 @@ enum KitEssentialItemType: String, CaseIterable, Codable {
     }
 }
 
-enum KitBabyItemType: String, CaseIterable, Codable {
+enum KitBabyItemType: String, CaseIterable, Codable, Identifiable {
     case food = "Nourriture pour les bébés"
     case diapers = "Couches"
     case wipes = "Lingettes"
@@ -128,6 +115,8 @@ enum KitBabyItemType: String, CaseIterable, Codable {
     case pacifier = "Sucette"
     case blanket = "Couverture "
     case toys = "Jouets pour les bébés"
+
+    var id: String { self.rawValue }
 
     var imageName: String {
         switch self {
@@ -143,13 +132,15 @@ enum KitBabyItemType: String, CaseIterable, Codable {
 }
 
 
-enum KitPetItemType: String, CaseIterable, Codable {
+enum KitPetItemType: String, CaseIterable, Codable, Identifiable {
     case food = "Nourriture pour les animaux"
     case bowl = "Gamelle"
     case leash = "Laisse"
     case blanket = "Couverture"
     case toys = "Jouets pour les animaux"
 
+    var id: String { self.rawValue }
+    
     var imageName: String {
         switch self {
         case .blanket: return "lampe"

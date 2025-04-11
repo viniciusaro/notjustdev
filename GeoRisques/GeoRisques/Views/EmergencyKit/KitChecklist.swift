@@ -30,16 +30,15 @@ struct KitChecklist: View {
 struct KitEssentiaView: View {
     @Environment(EmergencyKitStore.self) var store
     let twoColumns = [GridItem(.flexible()), GridItem(.flexible())]
-
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Section(header:Text("Les articles essentiels").textCase(.uppercase).font(.title2).bold()
-            ){
+            Section(header: Text("Les articles essentiels").textCase(.uppercase).font(.title2).bold()) {
                 LazyVGrid(columns: twoColumns) {
                     ForEach(store.createKitEssential()) { item in
                         KitItemView(
-                            image: item.type.imageName,
-                            title: item.type.rawValue,
+                            image: item.imageName,
+                            title: item.rawValue,
                             isSelected: store.selectedEssentialItems.contains(item),
                             onTap: {
                                 withAnimation {
@@ -68,8 +67,8 @@ struct KitBabyView: View {
             ){ LazyVGrid(columns: twoColumns) {
                 ForEach(store.createKitBaby()) { item in
                     KitItemView(
-                        image: item.type.imageName,
-                        title: item.type.rawValue,
+                        image: item.imageName,
+                        title: item.rawValue,
                         isSelected: store.selectedBabyItems.contains(item),
                         onTap: {
                             withAnimation {
@@ -100,8 +99,8 @@ struct KitPetView: View {
                 LazyVGrid(columns: twoColumns) {
                     ForEach(store.createKitPet()) { item in
                         KitItemView(
-                            image: item.type.imageName,
-                            title: item.type.rawValue,
+                            image: item.imageName,
+                            title: item.rawValue,
                             isSelected: store.selectedPetItems.contains(item),
                             onTap: {
                                 withAnimation {

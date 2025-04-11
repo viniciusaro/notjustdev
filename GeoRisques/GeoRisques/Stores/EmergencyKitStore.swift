@@ -2,9 +2,17 @@ import Foundation
 
 @Observable
 final class EmergencyKitStore {
-    private let client = FamilyMemberClientLive()
-    private let essentialItemsKey = "selectedEssentialItems"
+    private let FamilyMemberClient = FamilyMemberClientLive()
+    private let KitChecklistClient = KitChecklistClientLive()
 
+
+    /// EmergencyKit Data
+    let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
+    var infoIndex: Int = 0
+    var navigateToFamilyMembers = false
+
+
+    /// FamilyMembers Data
     var selectedMember: MemberType? = nil
     let memberTypes = MemberType.allCases
     var memberCount: [MemberType: Int] = [
@@ -13,22 +21,19 @@ final class EmergencyKitStore {
         .child: 0,
         .pet: 0
     ]
-
-    let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
-    var infoIndex: Int = 0
-    var navigateToFamilyMembers = false
-
     var navigateToKitChecklist: Bool = false
 
-    var selectedEssentialItems: Set<KitEssentialItem> = []
-    var selectedBabyItems: Set<KitBabyItem> = []
-    var selectedPetItems: Set<KitPetItem> = []
-
+    /// KitChecklist logics
+    var selectedEssentialItems = KitChecklistClientLive().selectedEssentialItems
+    var selectedBabyItems = KitChecklistClientLive().selectedBabyItems
+    var selectedPetItems = KitChecklistClientLive().selectedPetItems
 
     init() {
         loadFamilyMember()
+        loadSelectedItems()
     }
 
+    /// FamilyMembers logics
     func incrementMember(_ member: MemberType) {
         memberCount[member, default: 0] += 1
     }
@@ -40,40 +45,32 @@ final class EmergencyKitStore {
     }
 
     func saveFamilyMember() {
-        client.saveMember(memberCount)
+        FamilyMemberClient.saveMember(memberCount)
     }
 
-    func loadFamilyMember() {
-        memberCount = client.loadMember()
+    private func loadFamilyMember() {
+        memberCount = FamilyMemberClient.loadMember()
     }
 
-    func createKitEssential() -> [KitEssentialItem] {
-        var kit: [KitEssentialItem] = []
-        if memberCount[.adult] != 0 {
-            for item in KitEssentialItemType.allCases {
-                kit.append(KitEssentialItem(type: item))
-            }
-        }
-        return kit
+
+
+    /// KitChecklist logics
+    func createKitEssential() -> [KitEssentialItemType] {
+        guard memberCount[.adult, default: 0] > 0 else { return [] }
+        return KitEssentialItemType.allCases
     }
 
-    func createKitBaby() -> [KitBabyItem] {
-        var kit: [KitBabyItem] = []
-        if memberCount[.baby] != 0 {
-            for item in KitBabyItemType.allCases {
-                kit.append(KitBabyItem(type: item))
-            }
-        }
-        return kit
+    func createKitBaby() -> [KitBabyItemType] {
+        guard memberCount[.baby, default: 0] > 0 else { return [] }
+        return KitBabyItemType.allCases
     }
 
-    func createKitPet() -> [KitPetItem] {
-        var kit: [KitPetItem] = []
-        if memberCount[.pet] != 0 {
-            for item in KitPetItemType.allCases {
-                kit.append(KitPetItem(type: item))
-            }
-        }
-        return kit
+    func createKitPet() -> [KitPetItemType] {
+        guard memberCount[.pet, default: 0] > 0 else { return [] }
+        return KitPetItemType.allCases
+    }
+
+    private func loadSelectedItems() {
+        KitChecklistClient.saveKitChecklist()
     }
 }
