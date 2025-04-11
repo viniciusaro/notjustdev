@@ -55,7 +55,7 @@ struct EmergencyKitInformation: Identifiable, Equatable {
 
 //MARK: - Emergency Kit Checklist
 
-enum KitEssentialItemType: String, CaseIterable, Codable, Identifiable {
+enum KitEssentialType: String, CaseIterable, Codable, Identifiable {
     case water = "Eau potable en bouteille"
     case food = "Nourriture non périssable"
     case radio = "Radio"
@@ -107,7 +107,7 @@ enum KitEssentialItemType: String, CaseIterable, Codable, Identifiable {
     }
 }
 
-enum KitBabyItemType: String, CaseIterable, Codable, Identifiable {
+enum KitBabyType: String, CaseIterable, Codable, Identifiable {
     case food = "Nourriture pour les bébés"
     case diapers = "Couches"
     case wipes = "Lingettes"
@@ -132,7 +132,7 @@ enum KitBabyItemType: String, CaseIterable, Codable, Identifiable {
 }
 
 
-enum KitPetItemType: String, CaseIterable, Codable, Identifiable {
+enum KitPetType: String, CaseIterable, Codable, Identifiable {
     case food = "Nourriture pour les animaux"
     case bowl = "Gamelle"
     case leash = "Laisse"

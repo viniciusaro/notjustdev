@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct KitItemView: View {
+struct ChecklistItem: View {
     @Environment(EmergencyKitStore.self) var store
     @Environment(\.colorScheme) var colorScheme
 
@@ -13,7 +13,7 @@ struct KitItemView: View {
         Button(action: onTap) {
             RoundedRectangle(cornerRadius: 20)
                 .fill(isSelected ? .accent : (colorScheme == .light ? Color(.systemGray6) : .white))
-                .frame(height: 150)
+                .frame(height: 140)
                 .overlay(
                     VStack(alignment:.leading) {
                         HStack {
@@ -25,7 +25,7 @@ struct KitItemView: View {
                         }
                         .frame(height: 40)
                         .padding(.bottom, 12)
-
+                        
                         Text("\(title)")
                             .fixedSize(horizontal: false, vertical: true)
                             .font(.subheadline)
@@ -47,8 +47,8 @@ struct ItemCheckbox: View {
         Button(action: {
 
         }) {
-            Image(systemName: isChecked ? "checkmark.circle.fill" : "circle")
-                .font(.title3)
+            Image(systemName: isChecked ? "checkmark.circle" : "circle")
+                .font(.subheadline)
                 .foregroundColor(isChecked ? .dark : (colorScheme == .light ? Color(.systemGray6) : .white))
                 .imageScale(.large)
                 .accessibilityLabel(isChecked ? "Décocher" : "Cocher")
@@ -60,24 +60,19 @@ struct ItemCheckbox: View {
     let emergencyKitStore = EmergencyKitStore()
 
     HStack {
-        KitItemView(
+        ChecklistItem(
             image: "lampe",
             title: "Eau potable en bouteille",
             isSelected: false,
             onTap: {
             },
         )
-        KitItemView(
+        ChecklistItem(
             image: "lampe",
-            title: "Lampe de poche",
+            title: "Eau potable en bouteille",
             isSelected: true,
-            onTap: {},
-        )
-        KitItemView(
-            image: "lampe",
-            title: "Corde",
-            isSelected: true,
-            onTap: {},
+            onTap: {
+            },
         )
     }
     .environment(emergencyKitStore)

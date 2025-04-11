@@ -33,3 +33,9 @@ struct MemberView: View {
 }
 
 
+#Preview {
+    let emergencyKitStore = EmergencyKitStore()
+
+    MemberView(label: "Adult", count: 3, isSelected: false, onTap: {})
+        .environment(emergencyKitStore)
+}

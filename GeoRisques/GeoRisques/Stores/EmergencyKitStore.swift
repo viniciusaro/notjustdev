@@ -4,7 +4,7 @@ import Foundation
 final class EmergencyKitStore {
     private let FamilyMemberClient = FamilyMemberClientLive()
 
-    /// EmergencyKit Data
+    /// EmergencyKitIntro Data
     let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
     var infoIndex: Int = 0
     var navigateToFamilyMembers = false
@@ -19,31 +19,29 @@ final class EmergencyKitStore {
         .child: 0,
         .pet: 0
     ]
-    var navigateToKitChecklist: Bool = false
 
-    /// KitChecklist logics
+
+    /// Checklist Data
     private let selectedEssentialItemsKey = "essentialItemsKey"
-    var selectedEssentialItems: Set<KitEssentialItemType> = [] {
+    var selectedEssentialItems: Set<KitEssentialType> = [] {
         didSet {
             saveEssentialSelectedItems()
         }
     }
 
     private let selectedBabyItemsKey = "selectedBabyItemsKey"
-    var selectedBabyItems: Set<KitBabyItemType> = [] {
+    var selectedBabyItems: Set<KitBabyType> = [] {
         didSet {
             saveBabySelectedItems()
         }
     }
 
     private let selectedPetItemsKey = "selectedPetItemsKey"
-    var selectedPetItems: Set<KitPetItemType> = [] {
+    var selectedPetItems: Set<KitPetType> = [] {
         didSet {
             savePetSelectedItems()
         }
     }
-
-
 
 
     init() {
@@ -55,6 +53,10 @@ final class EmergencyKitStore {
 
 
     /// FamilyMembers logics
+    func isKitButtonActive() -> Bool {
+        let isTrue = memberCount.values.contains(where: { $0 > 0 }) && memberCount[.adult] ?? 0 != 0
+        return isTrue
+    }
     func incrementMember(_ member: MemberType) {
         memberCount[member, default: 0] += 1
     }
@@ -75,26 +77,26 @@ final class EmergencyKitStore {
 
 
 
-    /// KitChecklist logics
-    func createKitEssential() -> [KitEssentialItemType] {
+    /// Checklist logics
+    func createKitEssential() -> [KitEssentialType] {
         guard memberCount[.adult, default: 0] > 0 else { return [] }
-        return KitEssentialItemType.allCases
+        return KitEssentialType.allCases
     }
 
-    func createKitBaby() -> [KitBabyItemType] {
+    func createKitBaby() -> [KitBabyType] {
         guard memberCount[.baby, default: 0] > 0 else { return [] }
-        return KitBabyItemType.allCases
+        return KitBabyType.allCases
     }
 
-    func createKitPet() -> [KitPetItemType] {
+    func createKitPet() -> [KitPetType] {
         guard memberCount[.pet, default: 0] > 0 else { return [] }
-        return KitPetItemType.allCases
+        return KitPetType.allCases
     }
 
     //-----------Essential Kit------------
     private func loadEssentialSelectedItems() {
         guard let kit = UserDefaults.standard.stringArray(forKey: selectedEssentialItemsKey) else { return }
-        selectedEssentialItems = Set(kit.compactMap { KitEssentialItemType(rawValue: $0) })
+        selectedEssentialItems = Set(kit.compactMap { KitEssentialType(rawValue: $0) })
     }
 
     private func saveEssentialSelectedItems() {
@@ -105,7 +107,7 @@ final class EmergencyKitStore {
     //-----------Baby Kit------------
     private func loadBabySelectedItems() {
         guard let kit = UserDefaults.standard.stringArray(forKey: selectedBabyItemsKey) else { return }
-        selectedBabyItems = Set(kit.compactMap { KitBabyItemType(rawValue: $0) })
+        selectedBabyItems = Set(kit.compactMap { KitBabyType(rawValue: $0) })
     }
 
     private func saveBabySelectedItems() {
@@ -116,7 +118,7 @@ final class EmergencyKitStore {
     //-----------Baby Kit------------
     private func loadPetSelectedItems() {
         guard let kit = UserDefaults.standard.stringArray(forKey: selectedPetItemsKey) else { return }
-        selectedPetItems = Set(kit.compactMap { KitPetItemType(rawValue: $0) })
+        selectedPetItems = Set(kit.compactMap { KitPetType(rawValue: $0) })
     }
 
     private func savePetSelectedItems() {

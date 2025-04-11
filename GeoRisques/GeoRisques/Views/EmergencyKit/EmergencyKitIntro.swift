@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct EmergencyKit: View {
+struct EmergencyKitIntro: View {
     @Environment(EmergencyKitStore.self) var store
 
     var body: some View {
@@ -29,7 +29,7 @@ struct EmergencyKit: View {
             .indexViewStyle(.page(backgroundDisplayMode: .interactive))
 
             if store.navigateToFamilyMembers {
-                FamilyMembers()
+                FamilyMember()
                     .background(Color(.systemBackground))
                     .transition(.opacity)
                     .zIndex(1)
@@ -56,9 +56,10 @@ struct InfoCardView: View {
 
             Text(kit.title)
                 .font(.title2)
+                .bold()
 
             Text(kit.description)
-                .font(.subheadline)
+                .font(.body)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 16)
         }

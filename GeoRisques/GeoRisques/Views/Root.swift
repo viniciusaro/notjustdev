@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RootView: View {
     @Environment(GeoRisquesStore.self) var store
+    @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKit = false
 
     var body: some View {
         @Bindable var store = store
@@ -13,11 +14,20 @@ struct RootView: View {
                     Label("Risques", systemImage: "light.beacon.max.fill")
                 }
                 .tag(GeoRisquesStore.Tab.risques)
-            EmergencyKit()
-                .tabItem {
-                    Label("Kit d'Urgence", systemImage: "backpack.fill")
-                }
-                .tag(GeoRisquesStore.Tab.emergencyKit)
+
+            if hasSeenEmergencyKit {
+                Checklist()
+                    .tabItem {
+                        Label("Kit d'Urgence", systemImage: "backpack.fill")
+                    }
+                    .tag(GeoRisquesStore.Tab.emergencyKit)
+            } else {
+                EmergencyKitIntro()
+                    .tabItem {
+                        Label("Kit d'Urgence", systemImage: "backpack.fill")
+                    }
+                    .tag(GeoRisquesStore.Tab.emergencyKit)
+            }
         }
     }
 }
