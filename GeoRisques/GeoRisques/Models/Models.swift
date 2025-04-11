@@ -26,7 +26,7 @@ struct Risque: Hashable {
         var image: String {
             switch self {
             case .natural:
-                return "sun.max"
+                return "tree"
             case .desease:
                 return "exclamationmark.triangle"
             case .technological:

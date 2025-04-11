@@ -1,3 +1,7 @@
+enum RisquesClientError: Error {
+    case notFound
+}
+
 protocol RisquesClient {
     func risques(at location: Location) async throws -> [Risque]
 }

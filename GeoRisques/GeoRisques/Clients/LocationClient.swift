@@ -1,3 +1,8 @@
+enum LocationClientError: Error {
+    case unauthorized
+    case unavailable
+}
+
 protocol LocationClient {
     func location() async throws -> Location
 }

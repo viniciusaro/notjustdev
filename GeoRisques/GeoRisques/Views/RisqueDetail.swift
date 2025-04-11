@@ -19,6 +19,7 @@ struct RisqueDetailView: View {
             ScrollView {
                 Text(state.risque.description)
                     .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             Spacer()
         }
@@ -28,5 +29,9 @@ struct RisqueDetailView: View {
 }
 
 #Preview {
-    RisqueDetailView(state: GeoRisquesStore.RisqueDetailState(risque: .earthquakes))
+    RisqueDetailView(
+        state: GeoRisquesStore.RisqueDetailState(
+            risque: .smallEarthquake
+        )
+    )
 }
