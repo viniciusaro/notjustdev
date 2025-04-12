@@ -4,24 +4,26 @@ struct Checklist: View {
     @Environment(EmergencyKitStore.self) var store
 
     var body: some View {
-        ScrollView {
-            VStack {
-                ChecklistKitTitle()
+        NavigationStack() {
+            ZStack {
+                ShowChecklist()
+            }
+            .navigationTitle("Kit d’urgence 72h")
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    NavigationLink {
+                        FamilyMember()
+                    } label: {
+                        Text("Famille")
+                            .font(.body)
+                        Image(systemName: "chevron.right")
+                    }
 
-                EssentialKit()
-                    .padding([.top, .bottom], 24)
-                if store.memberCount[.baby] ?? 0 != 0 {
-                    BabyKit()
-                        .padding(.bottom, 24)
-                }
-                if store.memberCount[.pet] ?? 0 != 0 {
-                    PetKit()
-                        .padding(.bottom, 24)
                 }
             }
+            .scrollIndicators(.hidden)
+            .padding(.horizontal, 16)
         }
-        .scrollIndicators(.hidden)
-        .padding(.horizontal, 16)
     }
 }
 
@@ -33,18 +35,26 @@ struct Checklist: View {
         .environment(emergencyKitStore)
 }
 
-struct ChecklistKitTitle: View {
-    var body: some View {
-        VStack(spacing: 16) {
-            Text("Kit d’urgence 72h")
-                .font(.title)
-                .bold()
 
+struct ShowChecklist: View {
+    @Environment(EmergencyKitStore.self) var store
+
+    var body: some View {
+        ScrollView {
             Text("Selectioner les articles que vous avez pour votre kit d’urgence")
                 .font(.body)
+                .padding(.bottom, 24)
+            EssentialKit()
+                .padding([.top, .bottom], 24)
+            if store.memberCount[.baby] ?? 0 != 0 {
+                BabyKit()
+                    .padding(.bottom, 24)
+            }
+            if store.memberCount[.pet] ?? 0 != 0 {
+                PetKit()
+                    .padding(.bottom, 24)
+            }
         }
-        .padding(.bottom, 16)
-        .padding(.top, 8)
     }
 }
 

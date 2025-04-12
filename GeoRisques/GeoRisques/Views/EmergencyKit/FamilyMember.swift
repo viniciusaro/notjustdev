@@ -9,7 +9,7 @@ struct FamilyMember: View {
 
         NavigationStack {
                 VStack() {
-                    TitleFamilyMember()
+//                    TitleFamilyMember()
 
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
                         ForEach(store.memberTypes, id: \.self) { member in
@@ -43,6 +43,7 @@ struct FamilyMember: View {
                     .padding(.bottom, 16)
 
                 }
+                .navigationTitle("Membres de la famille")
                 .padding(.top, 16)
                 .padding(.horizontal)
         }
