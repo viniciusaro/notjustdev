@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 extension Location {
     static let zero = Location(
@@ -100,32 +101,107 @@ extension Risque {
 extension EmergencyKitInformation {
     static let infos: [EmergencyKitInformation] = [
         EmergencyKitInformation(
-            title: "Mon kit d’urgence 72h",
-            description: "En cas de crise, les autorités peuvent vous demander de quitter immédiatement votre domicile ou de rester chez vous jusqu'à l'arrivée des secours. Il est recommandé d'avoir préparé un sac contenant de quoi vivre pendant 3 jours en autonomie.",
+            title: LocalizedStringKey("intro_kit_title"),
+            description: LocalizedStringKey("intro_kit_subtitle"),
             image: "emergencyKit",
             tag: 0
         ),
 
         EmergencyKitInformation(
-            title: "Les besoins de votre famille",
-            description: " Identifiez les besoins de chaque membre de votre famille (adultes, enfants, bébés et animaux). Une fois cela fait, vous serez prêt à déterminer exactement ce qui doit être inclus dans votre kit.",
+            title: LocalizedStringKey("prepare_kit_title"),
+            description: LocalizedStringKey("prepare_kit_subtitle"),
             image: "preparer",
             tag: 1
         ),
 
         EmergencyKitInformation(
-            title: "Collecter tous les objets essentiels",
-            description: "En fonction de votre checklist, commencez à collecter tous les objets essentiels pour passer 72h en autonomie.",
+            title: LocalizedStringKey("equip_kit_title"),
+            description: LocalizedStringKey("prepare_kit_subtitle"),
             image: "equiper",
             tag: 2
         ),
 
         EmergencyKitInformation(
-            title: "Vérifiez le contenu de votre kit",
-            description: "Tous les 6 mois pour vous assurer que rien n'est périmé et que les besoins de votre famille n'ont pas changé.",
+            title: LocalizedStringKey("check_kit_title"),
+            description: LocalizedStringKey("check_kit_subtitle"),
             image: "verifier",
             tag: 3
         ),
-
     ]
+}
+
+extension MemberType {
+    var localizedName: LocalizedStringKey {
+        switch self {
+        case .adult: return "Adultes"
+        case .baby: return "Bébés"
+        case .child: return "Enfants"
+        case .pet: return "Animaux"
+        }
+    }
+}
+
+extension KitEssentialType {
+    var localizedName: LocalizedStringKey {
+        let key: String
+
+        switch self {
+        case .water: key = "kitEssentialType.water"
+        case .food: key = "kitEssentialType.food"
+        case .canOpener: key = "kitEssentialType.canOpener"
+        case .radio: key = "kitEssentialType.radio"
+        case .flashlight: key = "kitEssentialType.flashlight"
+        case .batery: key = "kitEssentialType.batery"
+        case .matches: key = "kitEssentialType.matches"
+        case .firstAid: key = "kitEssentialType.firstAid"
+        case .warmClothes: key = "kitEssentialType.warmClothes"
+        case .emergencyBlanket: key = "kitEssentialType.emergencyBlanket"
+        case .whistle: key = "kitEssentialType.whistle"
+        case .mask: key = "kitEssentialType.mask"
+        case .toiletPaper: key = "kitEssentialType.toiletPaper"
+        case .chargers: key = "kitEssentialType.chargers"
+        case .game: key = "kitEssentialType.game"
+        case .emergencyContacts: key = "kitEssentialType.emergencyContacts"
+        case .localMap: key = "kitEssentialType.localMap"
+        case .doubleKey: key = "kitEssentialType.doubleKey"
+        case .cash: key = "kitEssentialType.cash"
+        case .importantDocuments: key = "kitEssentialType.importantDocuments"
+        }
+
+        return LocalizedStringKey(key)
+    }
+}
+
+extension KitBabyType {
+    var localizedName: LocalizedStringKey {
+        let key: String
+
+        switch self {
+        case .food: key = "kitBabyType.food"
+        case .diapers: key = "kitBabyType.diapers"
+        case .wipes: key = "kitBabyType.wipes"
+        case .babyBottle: key = "kitBabyType.babyBottle"
+        case .pacifier: key = "kitBabyType.pacifier"
+        case .babyBlanket: key = "kitBabyType.babyBlanket"
+        case .babyToy: key = "kitBabyType.babyToy"
+        }
+
+        return LocalizedStringKey(key)
+    }
+}
+
+extension KitPetType {
+    var localizedName: LocalizedStringKey {
+        let key: String
+
+        switch self {
+        case .blanket: key = "kitPetType.petBlanket"
+        case .food: key = "kitPetType.petFood"
+        case .bowl: key = "kitPetType.bowl"
+        case .leash: key = "kitPetType.leash"
+        case .petToy: key = "kitPetType.petToy"
+        }
+
+        return LocalizedStringKey(key)
+    }
 }

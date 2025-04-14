@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ButtonView: View {
-    let text: String
+    let text: LocalizedStringKey
     let onTap: () -> Void
 
     var body: some View {

@@ -20,7 +20,7 @@ struct FamilyMember: View {
                 
                 Spacer()
                 
-                OpenKitButtonView(text: "Préparer le kit d'urgence") {
+                OpenKitButtonView(text: LocalizedStringKey("start_kit_button")) {
                     if store.isKitButtonActive() {
                         store.saveFamilyMember()
                         store.navigateToChecklist = true
@@ -30,7 +30,7 @@ struct FamilyMember: View {
                 .padding(.bottom, 16)
             }
             
-            .navigationTitle("Membres de la famille")
+            .navigationTitle(LocalizedStringKey("members_title"))
             .padding(.top, 16)
             .padding(.horizontal,16)
             .navigationDestination(isPresented: $store.navigateToChecklist) {
@@ -53,10 +53,12 @@ struct ShowFamilyMemberView:View {
     @Environment(EmergencyKitStore.self) var store
 
     var body: some View {
+        Text(LocalizedStringKey("members_subtitle"))
+            .font(.body)
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
             ForEach(store.memberTypes, id: \.self) { member in
                 MemberView(
-                    label: member.rawValue,
+                    label: member.localizedName,
                     count: store.memberCount[member] ?? 0,
                     isSelected: store.selectedMember == member,
                     onTap: {
@@ -72,7 +74,7 @@ struct ShowFamilyMemberView:View {
 
 struct OpenKitButtonView: View {
     @Environment(EmergencyKitStore.self) var store
-    let text: String
+    let text: LocalizedStringKey
     let onTap: () -> Void
 
 
@@ -118,21 +120,6 @@ struct CounterView: View {
         .background(Color(.systemGray6))
         .cornerRadius(12)
         .padding(.top, 30)
-    }
-}
-
-
-struct TitleFamilyMember: View {
-    var body: some View {
-        VStack(spacing: 16) {
-            Text("Membres de la famille")
-                .font(.title)
-                .bold()
-            Text("Créez votre kit d’urgence en fonction du nombre de membres de votre famille")
-                .font(.body)
-
-        }
-        .padding(.bottom, 24)
     }
 }
 

@@ -17,7 +17,7 @@ struct EmergencyKitIntro: View {
                         Spacer()
 
                         if info == store.kitInformation.last {
-                            ButtonView(text: "Générer la liste") {
+                            ButtonView(text: LocalizedStringKey("intro_continue_button")) {
                                 store.navigateToFamilyMembers.toggle()
                             }
                             .padding(.horizontal, 16)

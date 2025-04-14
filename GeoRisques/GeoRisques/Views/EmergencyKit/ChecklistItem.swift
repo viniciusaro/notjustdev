@@ -5,7 +5,7 @@ struct ChecklistItem: View {
     @Environment(\.colorScheme) var colorScheme
 
     let image: String
-    let title: String
+    let title: Text
     var isSelected: Bool
     let onTap: () -> Void
 
@@ -26,7 +26,7 @@ struct ChecklistItem: View {
                         .frame(height: 50)
                         .padding(.bottom, 12)
                         
-                        Text("\(title)")
+                       title
                             .fixedSize(horizontal: false, vertical: true)
                             .font(.subheadline)
                             .multilineTextAlignment(.leading)
@@ -56,24 +56,25 @@ struct ItemCheckbox: View {
     }
 }
 
-#Preview {
-    let emergencyKitStore = EmergencyKitStore()
+//#Preview {
+//    let emergencyKitStore = EmergencyKitStore()
 
-    HStack {
-        ChecklistItem(
-            image: "leash",
-            title: "Eau potable en bouteille",
-            isSelected: false,
-            onTap: {
-            },
-        )
-        ChecklistItem(
-            image: "petToy",
-            title: "Eau potable en bouteille",
-            isSelected: true,
-            onTap: {
-            },
-        )
-    }
-    .environment(emergencyKitStore)
-}
+    //    HStack {
+    //        ChecklistItem(
+    //            image: "leash",
+    //            title: "Eau potable en bouteille",
+    //            isSelected: false,
+    //            onTap: {
+    //            },
+    //        )
+    //        ChecklistItem(
+    //            image: "petToy",
+    //            title: "Eau potable en bouteille",
+    //            isSelected: true,
+    //            onTap: {
+    //            },
+    //        )
+    //    }
+    //    .environment(emergencyKitStore)
+    //}
+//}

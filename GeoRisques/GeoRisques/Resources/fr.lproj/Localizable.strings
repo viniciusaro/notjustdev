@@ -1,0 +1,85 @@
+/* Root */
+"risk_tab" = "Risques";
+"kit_tab" = "Kit d'Urgence";
+
+/* Risques */
+"risk_title" = "Risques";
+"unauthorized" = "Les services de localisation ne sont pas autorisés.";
+"unavailable" = "Les services de localisation ne sont pas disponibles";
+"not_found" = "Aucun risque trouvé";
+
+/* Risque Detail*/
+"detail_detail" = "Info détaillées";
+
+/* Emergency Kit Intro */
+"intro_continue_button" = "Continuer";
+
+"intro_kit_title" = "Mon kit d’urgence 72h";
+"intro_kit_subtitle" = "En cas de crise, les autorités peuvent vous demander de quitter immédiatement votre domicile ou de rester chez vous jusqu'à l'arrivée des secours. Il est recommandé d'avoir préparé un sac contenant de quoi vivre pendant 3 jours en autonomie.";
+
+"prepare_kit_title" = "Les besoins de votre famille";
+"prepare_kit_subtitle" = "Identifiez les besoins de chaque membre de votre famille. Une fois cela fait, vous serez prêt à déterminer exactement ce qui doit être inclus dans votre kit.";
+
+"equip_kit_title" = "Collecter tous les objets essentiels";
+"equip_kit_subtitle" = "En fonction de votre checklist, commencez à collecter tous les objets essentiels pour passer 72h en autonomie.";
+
+"check_kit_title" = "Vérifiez le contenu de votre kit";
+"check_kit_subtitle" = "Tous les 6 mois pour vous assurer que rien n'est périmé et que les besoins de votre famille n'ont pas changé.";
+
+/* Family Member */
+"start_kit_button" = "Préparer le kit d'urgence";
+"members_title" = "Membres de la famille";
+"members_subtitle" = "Créez votre kit d’urgence en fonction du nombre de membres de votre famille";
+
+"Adultes" = "Adultes";
+"Bébés" = "Bébés";
+"Enfants" = "Enfants";
+"Animaux" = "Animaux";
+
+/* Checklist */
+"checklist_title" = "Kit d’urgence 72h";
+"open_family_button" = "Famille";
+"essential_kit_title" = "Les articles essentiels";
+"baby_kit_title" = "Pour les bébés";
+"pet_kit_title" = "Pour les animaux";
+"kit_subtitle" = "Sélectionner les articles que vous avez pour votre kit d’urgence";
+
+
+/* Essential Kit Types */
+"kitEssentialType.water" = "Eau potable en bouteille";
+"kitEssentialType.food" = "Nourriture non périssable";
+"kitEssentialType.canOpener" = "Ouvre-boîte";
+"kitEssentialType.radio" = "Radio à piles";
+"kitEssentialType.flashlight" = "Lampe de poche à piles";
+"kitEssentialType.batery" = "Piles";
+"kitEssentialType.matches" = "Bougies et allumettes";
+"kitEssentialType.firstAid" = "Trousse de premiers secours";
+"kitEssentialType.warmClothes" = "Vêtements chauds";
+"kitEssentialType.emergencyBlanket" = "Couvertures de survie";
+"kitEssentialType.whistle" = "Sifflet";
+"kitEssentialType.mask" = "Masque";
+"kitEssentialType.toiletPaper" = "Papier toilette";
+"kitEssentialType.chargers" = "Chargeurs de téléphone";
+"kitEssentialType.game" = "Jeux";
+"kitEssentialType.emergencyContacts" = "Contacts d'urgence";
+"kitEssentialType.localMap" = "Carte locale";
+"kitEssentialType.doubleKey" = "Clé double";
+"kitEssentialType.cash" = "Argent liquide";
+"kitEssentialType.importantDocuments" = "Documents importants";
+
+/* Baby Kit Types */
+"kitBabyType.food" = "Nourriture pour les bébés";
+"kitBabyType.diapers" = "Couches";
+"kitBabyType.wipes" = "Lingettes";
+"kitBabyType.babyBottle" = "Biberon";
+"kitBabyType.pacifier" = "Sucette";
+"kitBabyType.babyBlanket" = "Couverture";
+"kitBabyType.babyToy" = "Jouets pour bébés";
+
+/* Pet Kit Types */
+"kitPetType.petBlanket" = "Couverture";
+"kitPetType.petFood" = "Nourriture pour les animaux";
+"kitPetType.bowl" = "Gamelle";
+"kitPetType.leash" = "Laisse";
+"kitPetType.petToy" = "Jouets pour les animaux";
+
