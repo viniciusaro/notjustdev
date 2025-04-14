@@ -2,50 +2,70 @@ import SwiftUI
 
 struct FamilyMember: View {
     @Environment(EmergencyKitStore.self) var store
-    @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKit = false
+    @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKitIntro = false
 
     var body: some View {
         @Bindable var store = store
 
-        NavigationStack {
-                VStack() {
-//                    TitleFamilyMember()
-
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
-                        ForEach(store.memberTypes, id: \.self) { member in
-                            MemberView(
-                                label: member.rawValue,
-                                count: store.memberCount[member] ?? 0,
-                                isSelected: store.selectedMember == member,
-                                onTap: {
-                                    withAnimation {
-                                        store.selectedMember = (store.selectedMember == member ? nil : member)
-                                    }
-                                }
-                            )
-                        }
-                    }
-
-                    if let selectedMember = store.selectedMember {
-                        CounterView(
-                            onIncrement: { store.incrementMember(selectedMember) },
-                            onDecrement: { store.decrementMember(selectedMember) }
-                        )
-                    }
-
-                    Spacer()
-                    OpenKitButtonView(text: "Préparer le kit d'urgence") {
-                        if store.isKitButtonActive() {
-                            store.saveFamilyMember()
-                            hasSeenEmergencyKit = true
-                        }
-                    }
-                    .padding(.bottom, 16)
-
+        NavigationStack() {
+            VStack() {
+                ShowFamilyMemberView()
+                
+                if let selectedMember = store.selectedMember {
+                    CounterView(
+                        onIncrement: { store.incrementMember(selectedMember) },
+                        onDecrement: { store.decrementMember(selectedMember) }
+                    )
                 }
-                .navigationTitle("Membres de la famille")
-                .padding(.top, 16)
-                .padding(.horizontal)
+                
+                Spacer()
+                
+                OpenKitButtonView(text: "Préparer le kit d'urgence") {
+                    if store.isKitButtonActive() {
+                        store.saveFamilyMember()
+                        store.navigateToChecklist = true
+                        hasSeenEmergencyKitIntro = true
+                    }
+                }
+                .padding(.bottom, 16)
+            }
+            
+            .navigationTitle("Membres de la famille")
+            .padding(.top, 16)
+            .padding(.horizontal,16)
+            .navigationDestination(isPresented: $store.navigateToChecklist) {
+                Checklist()
+                    .navigationBarBackButtonHidden(true)
+            }
+        }
+    }
+}
+
+
+#Preview {
+    let emergencyKitStore = EmergencyKitStore()
+
+    FamilyMember()
+        .environment(emergencyKitStore)
+}
+
+struct ShowFamilyMemberView:View {
+    @Environment(EmergencyKitStore.self) var store
+
+    var body: some View {
+        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
+            ForEach(store.memberTypes, id: \.self) { member in
+                MemberView(
+                    label: member.rawValue,
+                    count: store.memberCount[member] ?? 0,
+                    isSelected: store.selectedMember == member,
+                    onTap: {
+                        withAnimation {
+                            store.selectedMember = (store.selectedMember == member ? nil : member)
+                        }
+                    }
+                )
+            }
         }
     }
 }
@@ -116,11 +136,4 @@ struct TitleFamilyMember: View {
     }
 }
 
-
-#Preview {
-    let emergencyKitStore = EmergencyKitStore()
-
-    FamilyMember()
-        .environment(emergencyKitStore)
-}
 

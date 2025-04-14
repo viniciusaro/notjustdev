@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 @Observable
 final class EmergencyKitStore {
@@ -23,6 +24,7 @@ final class EmergencyKitStore {
 
     /// Checklist Data
     private let selectedEssentialItemsKey = "essentialItemsKey"
+    var navigateToChecklist: Bool = false
     var selectedEssentialItems: Set<KitEssentialType> = [] {
         didSet {
             saveEssentialSelectedItems()
@@ -43,7 +45,6 @@ final class EmergencyKitStore {
         }
     }
 
-
     init() {
         loadFamilyMember()
         loadEssentialSelectedItems()
@@ -57,6 +58,7 @@ final class EmergencyKitStore {
         let isTrue = memberCount.values.contains(where: { $0 > 0 }) && memberCount[.adult] ?? 0 != 0
         return isTrue
     }
+
     func incrementMember(_ member: MemberType) {
         memberCount[member, default: 0] += 1
     }
@@ -93,7 +95,7 @@ final class EmergencyKitStore {
         return KitPetType.allCases
     }
 
-    //-----------Essential Kit------------
+    //Essential Kit
     private func loadEssentialSelectedItems() {
         guard let kit = UserDefaults.standard.stringArray(forKey: selectedEssentialItemsKey) else { return }
         selectedEssentialItems = Set(kit.compactMap { KitEssentialType(rawValue: $0) })
@@ -104,7 +106,7 @@ final class EmergencyKitStore {
         UserDefaults.standard.set(raw, forKey: selectedEssentialItemsKey)
     }
 
-    //-----------Baby Kit------------
+    //Baby Kit
     private func loadBabySelectedItems() {
         guard let kit = UserDefaults.standard.stringArray(forKey: selectedBabyItemsKey) else { return }
         selectedBabyItems = Set(kit.compactMap { KitBabyType(rawValue: $0) })
@@ -115,7 +117,7 @@ final class EmergencyKitStore {
         UserDefaults.standard.set(kit, forKey: selectedBabyItemsKey)
     }
 
-    //-----------Baby Kit------------
+    //Pet Kit
     private func loadPetSelectedItems() {
         guard let kit = UserDefaults.standard.stringArray(forKey: selectedPetItemsKey) else { return }
         selectedPetItems = Set(kit.compactMap { KitPetType(rawValue: $0) })

@@ -13,7 +13,7 @@ struct ChecklistItem: View {
         Button(action: onTap) {
             RoundedRectangle(cornerRadius: 20)
                 .fill(isSelected ? .accent : (colorScheme == .light ? Color(.systemGray6) : .white))
-                .frame(height: 140)
+                .frame(height: 150)
                 .overlay(
                     VStack(alignment:.leading) {
                         HStack {
@@ -23,7 +23,7 @@ struct ChecklistItem: View {
                             Spacer()
                             ItemCheckbox(isChecked: isSelected)
                         }
-                        .frame(height: 40)
+                        .frame(height: 50)
                         .padding(.bottom, 12)
                         
                         Text("\(title)")
@@ -61,14 +61,14 @@ struct ItemCheckbox: View {
 
     HStack {
         ChecklistItem(
-            image: "lampe",
+            image: "leash",
             title: "Eau potable en bouteille",
             isSelected: false,
             onTap: {
             },
         )
         ChecklistItem(
-            image: "lampe",
+            image: "petToy",
             title: "Eau potable en bouteille",
             isSelected: true,
             onTap: {

@@ -2,16 +2,18 @@ import SwiftUI
 
 struct EmergencyKitIntro: View {
     @Environment(EmergencyKitStore.self) var store
+    @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKitIntro = false
 
     var body: some View {
         @Bindable var store = store
-
         ZStack {
             TabView(selection: $store.infoIndex) {
                 ForEach(store.kitInformation) { info in
                     VStack {
                         Spacer()
+
                         InfoCardView(kit: info)
+
                         Spacer()
 
                         if info == store.kitInformation.last {
@@ -44,6 +46,14 @@ struct EmergencyKitIntro: View {
     }
 }
 
+#Preview {
+    let emergencyKitStore = EmergencyKitStore()
+
+    EmergencyKitIntro()
+        .environment(emergencyKitStore)
+}
+
+
 struct InfoCardView: View {
     let kit: EmergencyKitInformation
 
@@ -55,7 +65,8 @@ struct InfoCardView: View {
                 .padding(32)
 
             Text(kit.title)
-                .font(.title2)
+                .font(.title)
+                .multilineTextAlignment(.center)
                 .bold()
 
             Text(kit.description)

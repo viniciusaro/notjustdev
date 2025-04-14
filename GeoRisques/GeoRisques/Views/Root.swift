@@ -6,25 +6,26 @@ struct RootView: View {
 
     var body: some View {
         @Bindable var store = store
+
         TabView(
             selection: $store.rootState.selectedTab
         ) {
             RisquesView()
                 .tabItem {
-                    Label("Risques", systemImage: "light.beacon.max.fill")
+                    Label("Risques", systemImage: "light.beacon.max")
                 }
                 .tag(GeoRisquesStore.Tab.risques)
 
             if hasSeenEmergencyKit {
                 Checklist()
                     .tabItem {
-                        Label("Kit d'Urgence", systemImage: "backpack.fill")
+                        Label("Kit d'Urgence", systemImage: "backpack")
                     }
                     .tag(GeoRisquesStore.Tab.emergencyKit)
             } else {
                 EmergencyKitIntro()
                     .tabItem {
-                        Label("Kit d'Urgence", systemImage: "backpack.fill")
+                        Label("Kit d'Urgence", systemImage: "backpack")
                     }
                     .tag(GeoRisquesStore.Tab.emergencyKit)
             }

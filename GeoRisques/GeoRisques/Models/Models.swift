@@ -58,18 +58,17 @@ struct EmergencyKitInformation: Identifiable, Equatable {
 enum KitEssentialType: String, CaseIterable, Codable, Identifiable {
     case water = "Eau potable en bouteille"
     case food = "Nourriture non périssable"
-    case radio = "Radio"
-    case flashlight = "Lampe de poche"
+    case canOpener = "Ouvre-boîte"
+    case radio = "Radio à piles"
+    case flashlight = "Lampe de poche à piles"
     case batery = "Piles"
     case matches = "Bougies et allumettes"
     case firstAid = "Trousse de premiers secours"
     case warmClothes = "Vêtements chauds"
     case emergencyBlanket = "Couvertures de survie"
     case whistle = "Sifflet"
-    case handSanitizer = "Gel hydroalcoolique"
     case mask = "Masque"
     case toiletPaper = "Papier toilette"
-    case hygiene = "Produits d'hygiène"
     case chargers = "Chargeurs de téléphone"
     case game = "Jeux"
     case emergencyContacts = "Contacts d'urgence"
@@ -82,27 +81,26 @@ enum KitEssentialType: String, CaseIterable, Codable, Identifiable {
 
     var imageName: String {
         switch self {
-        case .water: return "lampe"
-        case .batery: return "lampe"
-        case .cash: return "lampe"
-        case .chargers: return "lampe"
-        case .doubleKey: return "lampe"
-        case .emergencyBlanket: return "lampe"
-        case .emergencyContacts: return "lampe"
-        case .firstAid: return "lampe"
-        case .flashlight: return "lampe"
-        case .food: return "lampe"
-        case .game: return "lampe"
-        case .handSanitizer: return "lampe"
-        case .hygiene: return "lampe"
-        case .importantDocuments: return "lampe"
-        case .localMap: return "lampe"
-        case .mask: return "lampe"
-        case .matches: return "lampe"
-        case .whistle: return "lampe"
-        case .radio: return "lampe"
-        case .warmClothes: return "lampe"
-        case .toiletPaper: return "lampe"
+        case .water: return "water"
+        case .batery: return "batery"
+        case .cash: return "cash"
+        case .chargers: return "charges"
+        case .doubleKey: return "doubleKey"
+        case .emergencyBlanket: return "emergencyBlanket"
+        case .emergencyContacts: return "emergencyContacts"
+        case .firstAid: return "firstAid"
+        case .flashlight: return "flashlight"
+        case .food: return "food"
+        case .game: return "game"
+        case .importantDocuments: return "importantDocuments"
+        case .localMap: return "localMap"
+        case .mask: return "mask"
+        case .matches: return "matches"
+        case .whistle: return "whistle"
+        case .radio: return "radio"
+        case .warmClothes: return "warmClothes"
+        case .toiletPaper: return "toiletPaper"
+        case .canOpener: return "canOpener"
         }
     }
 }
@@ -111,22 +109,22 @@ enum KitBabyType: String, CaseIterable, Codable, Identifiable {
     case food = "Nourriture pour les bébés"
     case diapers = "Couches"
     case wipes = "Lingettes"
-    case bottle = "Biberon"
+    case babyBottle = "Biberon"
     case pacifier = "Sucette"
-    case blanket = "Couverture "
-    case toys = "Jouets pour les bébés"
+    case babyBlanket = "Couverture "
+    case babyToy = "Jouets pour les bébés"
 
     var id: String { self.rawValue }
 
     var imageName: String {
         switch self {
-        case .food: return "lampe"
-        case .diapers: return "lampe"
-        case .wipes: return "lampe"
-        case .bottle: return "lampe"
-        case .pacifier: return "lampe"
-        case .blanket: return "lampe"
-        case .toys: return "lampe"
+        case .food: return "babyFood"
+        case .diapers: return "diapers"
+        case .wipes: return "wipes"
+        case .babyBottle: return "babyBottle"
+        case .pacifier: return "pacifier"
+        case .babyBlanket: return "babyBlanket"
+        case .babyToy: return "babyToy"
         }
     }
 }
@@ -137,17 +135,17 @@ enum KitPetType: String, CaseIterable, Codable, Identifiable {
     case bowl = "Gamelle"
     case leash = "Laisse"
     case blanket = "Couverture"
-    case toys = "Jouets pour les animaux"
+    case petToy = "Jouets pour les animaux"
 
     var id: String { self.rawValue }
     
     var imageName: String {
         switch self {
-        case .blanket: return "lampe"
-        case .food: return "lampe"
-        case .bowl: return "lampe"
-        case .leash: return "lampe"
-        case .toys: return "lampe"
+        case .blanket: return "petBlanket"
+        case .food: return "petFood"
+        case .bowl: return "bowl"
+        case .leash: return "leash"
+        case .petToy: return "petToy"
         }
     }
 }

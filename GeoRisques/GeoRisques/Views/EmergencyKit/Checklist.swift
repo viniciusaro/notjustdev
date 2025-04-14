@@ -4,11 +4,14 @@ struct Checklist: View {
     @Environment(EmergencyKitStore.self) var store
 
     var body: some View {
+        @Bindable var store = store
+
         NavigationStack() {
-            ZStack {
+            VStack {
                 ShowChecklist()
             }
             .navigationTitle("Kit d’urgence 72h")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     NavigationLink {
@@ -18,15 +21,16 @@ struct Checklist: View {
                             .font(.body)
                         Image(systemName: "chevron.right")
                     }
-
                 }
             }
             .scrollIndicators(.hidden)
             .padding(.horizontal, 16)
         }
+        .onAppear {
+            store.navigateToChecklist = false
+        }
     }
 }
-
 
 #Preview {
     let emergencyKitStore = EmergencyKitStore()
@@ -35,15 +39,11 @@ struct Checklist: View {
         .environment(emergencyKitStore)
 }
 
-
 struct ShowChecklist: View {
     @Environment(EmergencyKitStore.self) var store
 
     var body: some View {
         ScrollView {
-            Text("Selectioner les articles que vous avez pour votre kit d’urgence")
-                .font(.body)
-                .padding(.bottom, 24)
             EssentialKit()
                 .padding([.top, .bottom], 24)
             if store.memberCount[.baby] ?? 0 != 0 {
@@ -58,16 +58,14 @@ struct ShowChecklist: View {
     }
 }
 
-
 struct EssentialKit: View {
     @Environment(EmergencyKitStore.self) var store
     let twoColumns = [GridItem(.flexible()), GridItem(.flexible())]
 
-
-
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Les articles essentiels").font(.title2).bold().padding(.bottom, 16)
+            Text("Les articles essentiels").font(.title2).bold().padding(.bottom, 4)
+            Text("Selectioner les articles que vous avez pour votre kit d’urgence").padding(.bottom, 24)
             LazyVGrid(columns: twoColumns) {
                 ForEach(store.createKitEssential()) { item in
                     ChecklistItem(
@@ -96,7 +94,8 @@ struct BabyKit: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Pour les bébés").font(.title2).bold().padding(.bottom, 16)
+            Text("Pour les bébés").font(.title2).bold().padding(.bottom, 4)
+            Text("Selectioner les articles que vous avez pour votre kit d’urgence").padding(.bottom, 24)
             LazyVGrid(columns: twoColumns) {
                 ForEach(store.createKitBaby()) { item in
                     ChecklistItem(
@@ -126,7 +125,8 @@ struct PetKit: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Pour les animaux").font(.title2).bold().padding(.bottom, 16)
+            Text("Pour les animaux").font(.title2).bold().padding(.bottom, 4)
+            Text("Selectioner les articles que vous avez pour votre kit d’urgence").padding(.bottom, 24)
             LazyVGrid(columns: twoColumns) {
                 ForEach(store.createKitPet()) { item in
                     ChecklistItem(
@@ -148,4 +148,5 @@ struct PetKit: View {
         }
     }
 }
+
 
