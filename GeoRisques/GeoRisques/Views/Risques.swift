@@ -27,6 +27,9 @@ struct RisquesMapView: View {
         
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
             Map(position: $store.risquesState.position)
+                .onMapCameraChange { context in
+                    store.onMapCameraCanged(context)
+                }
             Button {
                 store.onLocationButtonTapped()
             } label: {
@@ -52,7 +55,7 @@ struct RisquesListView: View {
             Text("Risques")
                 .font(.title2)
             Spacer()
-            Text("(\(store.risquesState.location.latitude), \(store.risquesState.location.longitude))")
+            Text(store.risquesState.risquesDescription)
                 .font(.footnote)
         }
         .padding()
