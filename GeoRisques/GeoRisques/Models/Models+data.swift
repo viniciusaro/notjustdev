@@ -20,7 +20,7 @@ extension Location {
 }
 
 extension Risque {
-    static let all = deseases + naturalDisasters
+    static let all = diseases + naturalDisasters
     
     static let naturalDisasters = [
         earthquakes,
@@ -64,7 +64,7 @@ extension Risque {
         kind: .natural
     )
     
-    static let deseases = [
+    static let diseases = [
         dengue,
         yellowFever
     ]
@@ -73,14 +73,14 @@ extension Risque {
         name: "Dengue Fever",
         description: lipsumDescription,
         reference: reference,
-        kind: .desease
+        kind: .disease
     )
     
     static let yellowFever = Risque(
         name: "Yellow Fever",
         description: lipsumDescription,
         reference: reference,
-        kind: .desease
+        kind: .disease
     )
     
     static let lipsumDescription = """

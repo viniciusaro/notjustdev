@@ -23,7 +23,7 @@ final class LiveRisquesClient: RisquesClient {
                 name: name,
                 description: $0["libelle_risque_long"] as! String,
                 reference: URL(string: "https://www.georisques.gouv.fr/minformer-sur-un-risque/\(nameParam)")!,
-                kind: .natural
+                kind: .risk
             )
         }
         

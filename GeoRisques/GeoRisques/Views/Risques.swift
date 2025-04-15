@@ -33,6 +33,7 @@ struct RisquesMapView: View {
                 Image(systemName: "location.fill")
                     .resizable()
                     .frame(width: 22, height: 22)
+                    .foregroundStyle(.accent)
                     .padding(16)
                     .background(colorScheme == .dark ? .black : .white)
                     .cornerRadius(100)
@@ -51,8 +52,9 @@ struct RisquesListView: View {
         HStack(alignment: .firstTextBaseline) {
             Text(LocalizedStringKey("risk_title"))
                 .font(.title2)
+                .bold()
             Spacer()
-            Text("(\(store.risquesState.location.latitude), \(store.risquesState.location.longitude))")
+            Text("(Lat \(store.risquesState.location.latitude), Long \(store.risquesState.location.longitude))")
                 .font(.footnote)
         }
         .padding()
@@ -77,19 +79,36 @@ struct RisquesListView: View {
                 }
                 .listStyle(.automatic)
             } else {
-                List(store.risquesState.risques, id: \.self) { risque in
-                    HStack {
-                        Link(risque.name, destination: risque.reference)
-                        Spacer()
-                        HStack {
-                            Image(systemName: risque.kind.image)
-                            Image(systemName: "chevron.right")
-                        }
-                    }
-                }
-                .listStyle(.plain)
+               ListView()
             }
         }
+    }
+}
+
+struct ListView: View {
+    @Environment(GeoRisquesStore.self) var store
+
+    var body: some View {
+        List(store.risquesState.risques, id: \.self) { risque in
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(.systemGray6))
+                .frame(minHeight: 60)
+                .overlay(
+                    HStack {
+                        Image(systemName: risque.kind.image)
+                            .font(.title2)
+                            .foregroundStyle(.accent)
+                        Link(risque.name, destination: risque.reference)
+                            .font(.headline)
+                            .bold()
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                        .padding(.horizontal, 16)
+                )
+                .listRowSeparator(.hidden)
+        }
+        .listStyle(.plain)
     }
 }
 

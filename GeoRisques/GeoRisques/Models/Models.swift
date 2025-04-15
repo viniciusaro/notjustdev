@@ -20,18 +20,21 @@ struct Risque: Hashable {
     let kind: Kind
     
     enum Kind {
+        case risk
         case natural
-        case desease
+        case disease
         case technological
         
         var image: String {
             switch self {
+            case .risk:
+                return "light.beacon.max"
             case .natural:
-                return "tree"
-            case .desease:
-                return "exclamationmark.triangle"
+                return "leaf"
+            case .disease:
+                return "allergens"
             case .technological:
-                return "wrench"
+                return "exclamationmark.triangle"
             }
         }
     }
@@ -53,8 +56,6 @@ struct EmergencyKitInformation: Identifiable, Equatable {
     var image: String
     var tag: Int
 }
-
-//MARK: - Emergency Kit Checklist
 
 enum KitEssentialType: String, CaseIterable, Codable, Identifiable {
     case water = "Eau potable en bouteille"
@@ -129,7 +130,6 @@ enum KitBabyType: String, CaseIterable, Codable, Identifiable {
         }
     }
 }
-
 
 enum KitPetType: String, CaseIterable, Codable, Identifiable {
     case food = "Nourriture pour les animaux"

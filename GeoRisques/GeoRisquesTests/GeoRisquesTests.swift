@@ -6,13 +6,13 @@ struct GeoRisquesTests {
     func viewDidLoad() async throws {
         let store = GeoRisquesStore(
             locationClient: FixedLocationClient(location: .france),
-            risquesClient: FixedRisquesClient(risques: Risque.deseases),
+            risquesClient: FixedRisquesClient(risques: Risque.diseases),
         )
         store.onRisquesDidLoad()
         
         await megaYield()
         #expect(store.risquesState.location == .france)
-        #expect(store.risquesState.risques == Risque.deseases)
+        #expect(store.risquesState.risques == Risque.diseases)
     }
     
     @Test("on location button tap, moves map to current location and reload risks")
