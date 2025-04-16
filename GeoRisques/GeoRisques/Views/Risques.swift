@@ -108,7 +108,7 @@ struct ListView: View {
     @Environment(GeoRisquesStore.self) var store
 
     var body: some View {
-        List(store.risquesState.risques, id: \.self) { risque in
+        List(store.risquesState.risques, id: \.self) { risque in 
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color(.systemGray6))
                 .frame(minHeight: 60)
