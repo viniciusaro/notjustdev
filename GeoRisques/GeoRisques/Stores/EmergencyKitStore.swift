@@ -3,7 +3,7 @@ import SwiftUI
 
 @Observable
 final class EmergencyKitStore {
-    private let FamilyMemberClient = FamilyMemberClientLive()
+    private let familyMemberClient = FamilyMemberClientLive()
 
     /// EmergencyKitIntro Data
     let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
@@ -70,11 +70,11 @@ final class EmergencyKitStore {
     }
 
     func saveFamilyMember() {
-        FamilyMemberClient.saveMember(memberCount)
+        familyMemberClient.saveMember(memberCount)
     }
 
     private func loadFamilyMember() {
-        memberCount = FamilyMemberClient.loadMember()
+        memberCount = familyMemberClient.loadMember()
     }
 
 

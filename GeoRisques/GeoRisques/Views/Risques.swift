@@ -18,6 +18,12 @@ struct RisquesView: View {
     }
 }
 
+#Preview {
+    RisquesView()
+        .environment(GeoRisquesStore())
+        .environment(EmergencyKitStore())
+}
+
 struct RisquesMapView: View {
     @Environment(GeoRisquesStore.self) var store
     @Environment(\.colorScheme) var colorScheme
@@ -27,6 +33,9 @@ struct RisquesMapView: View {
         
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
             Map(position: $store.risquesState.position)
+                .onMapCameraChange { context in
+                    store.onMapCameraCanged(context)
+                }
             Button {
                 store.onLocationButtonTapped()
             } label: {
@@ -61,11 +70,10 @@ struct RisquesListView: View {
                 .opacity(0.8)
                 .frame(width: 230, height: 24)
                 .overlay(
-                        Text("\(store.risquesState.location.latitude),\(store.risquesState.location.longitude)")
+                        Text(store.risquesState.risquesDescription)
                             .foregroundStyle(.black)
                             .font(.footnote)
                 )
-
         }
         .padding()
 
@@ -131,8 +139,4 @@ struct ListView: View {
     }
 }
 
-#Preview {
-    RisquesView()
-        .environment(GeoRisquesStore())
-        .environment(EmergencyKitStore())
-}
+
