@@ -17,22 +17,71 @@ struct Risque: Hashable {
     let name: String
     let description: String
     let reference: URL
-    let kind: Kind
-    
-    enum Kind {
-        case natural
-        case desease
-        case technological
-        
-        var image: String {
-            switch self {
-            case .natural:
-                return "tree"
-            case .desease:
-                return "exclamationmark.triangle"
-            case .technological:
-                return "wrench"
-            }
+    let kind: RiskType
+}
+
+enum RiskType: Int, CaseIterable, Codable {
+    case ruissellementEtCouleeDeBoue = 130
+    case mouvementDeTerrain = 134
+    case inondation = 140
+    case eboulementOuChuteDePierres = 143
+    case glissementDeTerrain = 147
+    case avanceeDunaire = 152
+    case tassementsDifferentiels = 157
+    case seisme = 158
+    case feuDeForet = 166
+    case phenomeneLieAlAtmosphere = 167
+    case tempeteEtGrainsVent = 169
+    case foudre = 175
+    case grele = 176
+    case neigeEtPluiesVerglacantes = 177
+    case crueDebordementLent = 180
+    case crueTorrentielle = 183
+    case ruptureDeBarrage = 213
+    case risqueIndustriel = 215
+    case transportMarchandisesDangereuses = 226
+    case radon = 229
+    case enginsDeGuerre = 231
+    case effetThermique = 236
+    case effetDeSurpression = 237
+    case effetToxique = 238
+    case effondrementsGeneralises = 252
+    case affaissementMinier = 254
+    case remonteeDeNappesNaturelles = 285
+    case submersionMarine = 286
+    case defaultRisk = 0
+
+    var imageName: String {
+        switch self {
+        case .defaultRisk: return "default_risk_icon"
+        case .ruissellementEtCouleeDeBoue: return "ruissellement_icon"
+        case .mouvementDeTerrain: return "mouvement_terrain_icon"
+        case .inondation: return "inondation_icon"
+        case .eboulementOuChuteDePierres: return "chute_pierres_icon"
+        case .glissementDeTerrain: return "glissement_icon"
+        case .seisme: return "seisme_icon"
+        case .feuDeForet: return "feu_foret_icon"
+        case .crueDebordementLent: return "crue_lente_icon"
+        case .crueTorrentielle:  return "crue_rapide_icon"
+        case .ruptureDeBarrage: return "barrage_icon"
+        case .risqueIndustriel: return "industriel_icon"
+        case .transportMarchandisesDangereuses: return "transport_dangereux_icon"
+        case .remonteeDeNappesNaturelles: return "nappes_icon"
+        case .tassementsDifferentiels: return "tassements_differentiels_icon"
+        case .effetThermique: return "effet_thermique_icon"
+        case .effetDeSurpression: return "effet_de_surpression_icon"
+        case .effetToxique: return "effet_toxique_icon"
+        case .effondrementsGeneralises: return "effondrements_generalises_icon"
+        case .affaissementMinier: return "affaissement_minier_icon"
+        case .submersionMarine: return "submersion_marine_icon"
+        case .enginsDeGuerre: return "engins_de_guerre_icon"
+        case .radon: return "radon_icon"
+        case .phenomeneLieAlAtmosphere: return "phenomene_lie_atmosphere_icon"
+        case .tempeteEtGrainsVent: return "tempete_grains_vent_icon"
+        case .avanceeDunaire: return "avancee_dunaire_icon"
+        case .foudre: return "foudre_icon"
+        case .grele: return "grele_icon"
+        case .neigeEtPluiesVerglacantes: return "neige_pluies_verglacantes_icon"
         }
     }
 }
@@ -53,8 +102,6 @@ struct EmergencyKitInformation: Identifiable, Equatable {
     var image: String
     var tag: Int
 }
-
-//MARK: - Emergency Kit Checklist
 
 enum KitEssentialType: String, CaseIterable, Codable, Identifiable {
     case water = "Eau potable en bouteille"
@@ -129,7 +176,6 @@ enum KitBabyType: String, CaseIterable, Codable, Identifiable {
         }
     }
 }
-
 
 enum KitPetType: String, CaseIterable, Codable, Identifiable {
     case food = "Nourriture pour les animaux"

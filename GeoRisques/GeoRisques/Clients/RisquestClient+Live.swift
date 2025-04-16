@@ -12,19 +12,27 @@ final class LiveRisquesClient: RisquesClient {
         
         let (data, _) = try await URLSession.shared.data(for: request)
         let json = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+
         guard let jdata = json["data"] as? [[String: Any]], !jdata.isEmpty else {
             throw RisquesClientError.notFound
         }
+
         let risquesData = jdata.first!["risques_detail"] as! [[String: Any]]
+
         let community = jdata.first?["libelle_commune"] as? String
+        
         let risques = risquesData.map {
             let name = $0["libelle_risque_long"] as! String
+            let num = Int($0["num_risque"] as! String) ?? 0
+            let riskType = RiskType(rawValue: num)
+
             let nameParam = name.lowercased().replacingOccurrences(of: " ", with: "-")
+            
             return Risque(
                 name: name,
                 description: $0["libelle_risque_long"] as! String,
                 reference: URL(string: "https://www.georisques.gouv.fr/minformer-sur-un-risque/\(nameParam)")!,
-                kind: .natural,
+                kind: riskType ?? .defaultRisk
             )
         }
         

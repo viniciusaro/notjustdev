@@ -18,6 +18,12 @@ struct RisquesView: View {
     }
 }
 
+#Preview {
+    RisquesView()
+        .environment(GeoRisquesStore())
+        .environment(EmergencyKitStore())
+}
+
 struct RisquesMapView: View {
     @Environment(GeoRisquesStore.self) var store
     @Environment(\.colorScheme) var colorScheme
@@ -36,6 +42,7 @@ struct RisquesMapView: View {
                 Image(systemName: "location.fill")
                     .resizable()
                     .frame(width: 22, height: 22)
+                    .foregroundStyle(.accent)
                     .padding(16)
                     .background(colorScheme == .dark ? .black : .white)
                     .cornerRadius(100)
@@ -47,18 +54,29 @@ struct RisquesMapView: View {
 
 struct RisquesListView: View {
     @Environment(GeoRisquesStore.self) var store
-    
+
     var body: some View {
         @Bindable var store = store
-        
-        HStack(alignment: .firstTextBaseline) {
+
+        HStack() {
             Text(LocalizedStringKey("risk_title"))
                 .font(.title2)
+                .bold()
+
             Spacer()
-            Text(store.risquesState.risquesDescription)
-                .font(.footnote)
+
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.accent)
+                .opacity(0.8)
+                .frame(width: 230, height: 24)
+                .overlay(
+                        Text(store.risquesState.risquesDescription)
+                            .foregroundStyle(.black)
+                            .font(.footnote)
+                )
         }
         .padding()
+
         VStack(alignment: .center) {
             if let locationError = store.risquesState.locationError {
                 switch locationError {
@@ -80,24 +98,45 @@ struct RisquesListView: View {
                 }
                 .listStyle(.automatic)
             } else {
-                List(store.risquesState.risques, id: \.self) { risque in
-                    HStack {
-                        Link(risque.name, destination: risque.reference)
-                        Spacer()
-                        HStack {
-                            Image(systemName: risque.kind.image)
-                            Image(systemName: "chevron.right")
-                        }
-                    }
-                }
-                .listStyle(.plain)
+               ListView()
             }
         }
     }
 }
 
-#Preview {
-    RisquesView()
-        .environment(GeoRisquesStore())
-        .environment(EmergencyKitStore())
+struct ListView: View {
+    @Environment(GeoRisquesStore.self) var store
+
+    var body: some View {
+        List(store.risquesState.risques, id: \.self) { risque in 
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color(.systemGray6))
+                .frame(minHeight: 60)
+                .overlay(
+                    HStack {
+                        Circle()
+                            .fill(.accent)
+                            .opacity(0.8)
+                            .frame(width: 50, height: 50)
+                            .overlay {
+                                Image(risque.kind.imageName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(12)
+                            }
+
+                        Link(risque.name, destination: risque.reference)
+                            .font(.headline)
+                            .bold()
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                        .padding(.horizontal, 16)
+                )
+                .listRowSeparator(.hidden)
+        }
+        .listStyle(.plain)
+    }
 }
+
+

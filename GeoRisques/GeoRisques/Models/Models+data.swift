@@ -20,69 +20,155 @@ extension Location {
 }
 
 extension Risque {
-    static let all = deseases + naturalDisasters
-    
+    static let all = naturalDisasters
+
     static let naturalDisasters = [
-        earthquakes,
-        tsunami,
-        wildfires,
-        floods
+        mouvementDeTerrain,
+        crueTorrentielle,
+        feuDeForet,
+        seisme,
+        submersionMarine,
+        tempeteEtGrainsVent,
+        avanceeDunaire,
+        foudre,
+        grele,
+        neigeEtPluiesVerglacantes,
+        effetToxique,
+        effondrementsGeneralises,
+        affaissementMinier,
+        enginsDeGuerre,
+        phenomeneLieAlAtmosphere,
+        defaultRisk,
+        effetDeSurpression,
+        risqueIndustriel,
     ]
     
-    static let tsunami = Risque(
-        name: "Tsunamis",
+    static let crueTorrentielle = Risque(
+        name: "Radon",
         description: lipsumDescription,
         reference: reference,
-        kind: .natural
+        kind: .radon
     )
-    
-    static let smallEarthquake = Risque(
-        name: "Earthquakes",
+
+    static let risqueIndustriel = Risque(
+        name: "risque Industriel",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .risqueIndustriel
+    )
+
+    static let effetDeSurpression = Risque(
+        name: "effet De Surpression",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .effetDeSurpression
+    )
+
+    static let defaultRisk = Risque(
+        name: "defaultRisk",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .defaultRisk
+    )
+
+    static let seisme = Risque(
+        name: "effet Toxique",
         description: "short description",
         reference: reference,
-        kind: .natural
+        kind: .effetToxique
     )
     
-    static let earthquakes = Risque(
-        name: "Earthquakes",
+    static let mouvementDeTerrain = Risque(
+        name: "effet Thermique",
         description: lipsumDescription,
         reference: reference,
-        kind: .natural
+        kind: .effetThermique
     )
     
-    static let wildfires = Risque(
-        name: "Wildfires",
+    static let feuDeForet = Risque(
+        name: "tassements Differentiels",
         description: lipsumDescription,
         reference: reference,
-        kind: .natural
+        kind: .tassementsDifferentiels
     )
     
-    static let floods = Risque(
-        name: "Floods",
+    static let submersionMarine = Risque(
+        name: "submersion Marine",
         description: lipsumDescription,
         reference: reference,
-        kind: .natural
+        kind: .submersionMarine
     )
-    
-    static let deseases = [
-        dengue,
-        yellowFever
-    ]
-    
-    static let dengue = Risque(
-        name: "Dengue Fever",
+
+    static let tempeteEtGrainsVent = Risque(
+        name: "tempete Et GrainsVent",
         description: lipsumDescription,
         reference: reference,
-        kind: .desease
+        kind: .tempeteEtGrainsVent
     )
-    
-    static let yellowFever = Risque(
-        name: "Yellow Fever",
+
+    static let avanceeDunaire = Risque(
+        name: "avancee Dunaire",
+        description: "short description",
+        reference: reference,
+        kind: .avanceeDunaire
+    )
+
+    static let foudre = Risque(
+        name: "foudre",
         description: lipsumDescription,
         reference: reference,
-        kind: .desease
+        kind: .foudre
     )
-    
+
+    static let grele = Risque(
+        name: "grele",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .grele
+    )
+
+    static let neigeEtPluiesVerglacantes = Risque(
+        name: "neige Et Pluies Verglacantes",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .neigeEtPluiesVerglacantes
+    )
+
+    static let effetToxique = Risque(
+        name: "effet Toxique",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .effetToxique
+    )
+
+    static let effondrementsGeneralises = Risque(
+        name: "effondrements Generalises",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .effondrementsGeneralises
+    )
+
+    static let affaissementMinier = Risque(
+        name: "affaissement Minier",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .affaissementMinier
+    )
+
+    static let enginsDeGuerre = Risque(
+        name: "engins De Guerre",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .enginsDeGuerre
+    )
+
+    static let phenomeneLieAlAtmosphere = Risque(
+        name: "phenomene Lie A lAtmosphere",
+        description: lipsumDescription,
+        reference: reference,
+        kind: .phenomeneLieAlAtmosphere
+    )
+
     static let lipsumDescription = """
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non mauris a velit imperdiet efficitur. Praesent ex augue, vehicula vel sapien scelerisque, feugiat interdum purus. Ut nec dapibus leo, vel pulvinar mauris. Nunc neque dolor, dignissim lacinia sapien eget, suscipit egestas lorem. Nulla vehicula ipsum at leo porta, sed hendrerit dui molestie. Etiam in placerat mauris, ut tincidunt ex. Integer eu sapien sodales, facilisis leo sed, laoreet lacus.
 

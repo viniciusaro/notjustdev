@@ -70,11 +70,11 @@ final class EmergencyKitStore {
     }
 
     func saveFamilyMember() {
-        FamilyMemberClient.saveMember(memberCount)
+        familyMemberClient.saveMember(memberCount)
     }
 
     private func loadFamilyMember() {
-        memberCount = FamilyMemberClient.loadMember()
+        memberCount = familyMemberClient.loadMember()
     }
 
 
