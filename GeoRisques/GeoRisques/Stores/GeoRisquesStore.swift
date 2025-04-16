@@ -13,7 +13,7 @@ final class GeoRisquesStore {
         rootState: RootState = RootState(),
         risquesState: RisquesState = RisquesState(),
         locationClient: LocationClient = FixedLocationClient(location: .grenoble),
-        risquesClient: RisquesClient = FixedRisquesClient(risques: Risque.all),
+        risquesClient: RisquesClient = FixedRisquesClient(risques: Risque.all, community: "GRENOBLE"),
     ) {
         self.rootState = rootState
         self.risquesState = risquesState
@@ -37,6 +37,7 @@ final class GeoRisquesStore {
     struct RisquesState {
         var risques: [Risque] = []
         var risquesError: RisquesClientError?
+        var risquesDescription: String = "..."
         var location: Location = .zero
         var locationError: LocationClientError?
         var selectedRisque: RisqueDetailState?
@@ -79,6 +80,21 @@ final class GeoRisquesStore {
         }
     }
     
+    func onMapCameraCanged(_ context: MapCameraUpdateContext) {
+        guard self.risquesState.location != .zero else {
+            return
+        }
+        
+        self.risquesState.location = Location(
+            latitude: context.region.center.latitude,
+            longitude: context.region.center.longitude,
+            delta: min(context.region.span.latitudeDelta, 0.05),
+        )
+        Task {
+            await reloadRisques()
+        }
+    }
+    
     func onRisqueButtonTapped(_ risque: Risque) {
         self.risquesState.selectedRisque = .init(risque: risque)
     }
@@ -106,7 +122,9 @@ final class GeoRisquesStore {
         do {
             let location = self.risquesState.location
             self.risquesState.risquesError = nil
-            self.risquesState.risques = try await risquesClient.risques(at: location)
+            let (risques, community) = try await risquesClient.risques(at: location)
+            self.risquesState.risques = risques
+            self.risquesState.risquesDescription = community ?? "(\(location.latitude), \(location.longitude))"
         } catch {
             // exit application if cast fails
             self.risquesState.risquesError = (error as! RisquesClientError)

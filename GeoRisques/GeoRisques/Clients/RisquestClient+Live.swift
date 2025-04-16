@@ -3,7 +3,7 @@ import Foundation
 final class LiveRisquesClient: RisquesClient {
     private let risquesURL = URL(string: "https://georisques.gouv.fr/api/v1/gaspar/risques")!
     
-    func risques(at location: Location) async throws -> [Risque] {
+    func risques(at location: Location) async throws -> ([Risque], String?) {
         let request = URLRequest(url: risquesURL.appending(queryItems: [
             URLQueryItem(name: "rayon", value: "1000"),
             URLQueryItem(name: "page_size", value: "20"),
@@ -16,6 +16,7 @@ final class LiveRisquesClient: RisquesClient {
             throw RisquesClientError.notFound
         }
         let risquesData = jdata.first!["risques_detail"] as! [[String: Any]]
+        let community = jdata.first?["libelle_commune"] as? String
         let risques = risquesData.map {
             let name = $0["libelle_risque_long"] as! String
             let nameParam = name.lowercased().replacingOccurrences(of: " ", with: "-")
@@ -23,10 +24,10 @@ final class LiveRisquesClient: RisquesClient {
                 name: name,
                 description: $0["libelle_risque_long"] as! String,
                 reference: URL(string: "https://www.georisques.gouv.fr/minformer-sur-un-risque/\(nameParam)")!,
-                kind: .natural
+                kind: .natural,
             )
         }
         
-        return risques
+        return (risques, community)
     }
 }
