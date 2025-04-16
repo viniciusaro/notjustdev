@@ -6,7 +6,7 @@ struct RisqueDetailView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top, spacing: 16) {
-                Image(systemName: state.risque.kind.image)
+                Image(systemName: state.risque.kind.imageName)
                     .resizable()
                     .frame(width: 48, height: 48)
                 VStack(alignment: .leading) {
@@ -28,10 +28,10 @@ struct RisqueDetailView: View {
     }
 }
 
-#Preview {
-    RisqueDetailView(
-        state: GeoRisquesStore.RisqueDetailState(
-            risque: .smallEarthquake
-        )
-    )
-}
+//#Preview {
+//    RisqueDetailView(
+//        state: GeoRisquesStore.RisqueDetailState(
+//            risque: .smallEarthquake
+//        )
+//    )
+//}

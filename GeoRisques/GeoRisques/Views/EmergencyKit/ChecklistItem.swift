@@ -13,7 +13,7 @@ struct ChecklistItem: View {
         Button(action: onTap) {
             RoundedRectangle(cornerRadius: 20)
                 .fill(isSelected ? .accent : (colorScheme == .light ? Color(.systemGray6) : .white))
-                .frame(height: 150)
+                .frame(height: 120)
                 .overlay(
                     VStack(alignment:.leading) {
                         HStack {
@@ -23,14 +23,14 @@ struct ChecklistItem: View {
                             Spacer()
                             ItemCheckbox(isChecked: isSelected)
                         }
-                        .frame(height: 50)
+                        .frame(height: 40)
                         .padding(.bottom, 12)
                         
                        title
                             .fixedSize(horizontal: false, vertical: true)
                             .font(.subheadline)
                             .multilineTextAlignment(.leading)
-                            .foregroundColor(isSelected ? .dark : .black)
+                            .foregroundColor(.black)
                             .bold()
                     }
                         .padding(16)
@@ -56,25 +56,24 @@ struct ItemCheckbox: View {
     }
 }
 
-//#Preview {
-//    let emergencyKitStore = EmergencyKitStore()
+#Preview {
+    let emergencyKitStore = EmergencyKitStore()
 
-    //    HStack {
-    //        ChecklistItem(
-    //            image: "leash",
-    //            title: "Eau potable en bouteille",
-    //            isSelected: false,
-    //            onTap: {
-    //            },
-    //        )
-    //        ChecklistItem(
-    //            image: "petToy",
-    //            title: "Eau potable en bouteille",
-    //            isSelected: true,
-    //            onTap: {
-    //            },
-    //        )
-    //    }
-    //    .environment(emergencyKitStore)
-    //}
-//}
+        HStack {
+            ChecklistItem(
+                image: "leash",
+                title: Text("Leash"),
+                isSelected: false,
+                onTap: {
+                },
+            )
+            ChecklistItem(
+                image: "petToy",
+                title: Text("Pet Toy"),
+                isSelected: true,
+                onTap: {
+                },
+            )
+        }
+        .environment(emergencyKitStore)
+}

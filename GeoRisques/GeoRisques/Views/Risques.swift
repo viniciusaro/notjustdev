@@ -45,19 +45,30 @@ struct RisquesMapView: View {
 
 struct RisquesListView: View {
     @Environment(GeoRisquesStore.self) var store
-    
+
     var body: some View {
         @Bindable var store = store
-        
-        HStack(alignment: .firstTextBaseline) {
+
+        HStack() {
             Text(LocalizedStringKey("risk_title"))
                 .font(.title2)
                 .bold()
+
             Spacer()
-            Text("(Lat \(store.risquesState.location.latitude), Long \(store.risquesState.location.longitude))")
-                .font(.footnote)
+
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.accent)
+                .opacity(0.8)
+                .frame(width: 230, height: 24)
+                .overlay(
+                        Text("\(store.risquesState.location.latitude),\(store.risquesState.location.longitude)")
+                            .foregroundStyle(.black)
+                            .font(.footnote)
+                )
+
         }
         .padding()
+
         VStack(alignment: .center) {
             if let locationError = store.risquesState.locationError {
                 switch locationError {
@@ -95,9 +106,17 @@ struct ListView: View {
                 .frame(minHeight: 60)
                 .overlay(
                     HStack {
-                        Image(systemName: risque.kind.image)
-                            .font(.title2)
-                            .foregroundStyle(.accent)
+                        Circle()
+                            .fill(.accent)
+                            .opacity(0.8)
+                            .frame(width: 50, height: 50)
+                            .overlay {
+                                Image(risque.kind.imageName)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(12)
+                            }
+
                         Link(risque.name, destination: risque.reference)
                             .font(.headline)
                             .bold()
