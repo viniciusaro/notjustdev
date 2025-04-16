@@ -12,23 +12,14 @@ struct RootView: View {
         ) {
             RisquesView()
                 .tabItem {
-                    Label("Risques", systemImage: "light.beacon.max")
+                    Label(LocalizedStringKey("risk_tab"), systemImage: "light.beacon.max")
                 }
                 .tag(GeoRisquesStore.Tab.risques)
-
-            if hasSeenEmergencyKit {
-                Checklist()
-                    .tabItem {
-                        Label("Kit d'Urgence", systemImage: "backpack")
-                    }
-                    .tag(GeoRisquesStore.Tab.emergencyKit)
-            } else {
-                EmergencyKitIntro()
-                    .tabItem {
-                        Label("Kit d'Urgence", systemImage: "backpack")
-                    }
-                    .tag(GeoRisquesStore.Tab.emergencyKit)
-            }
+            Checklist()
+                .tabItem {
+                    Label(LocalizedStringKey("kit_tab"), systemImage: "backpack")
+                }
+                .tag(GeoRisquesStore.Tab.emergencyKit)
         }
     }
 }

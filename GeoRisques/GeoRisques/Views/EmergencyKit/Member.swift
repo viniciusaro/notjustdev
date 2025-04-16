@@ -3,7 +3,7 @@ import SwiftUI
 struct MemberView: View {
     @Environment(EmergencyKitStore.self) var store
 
-    let label: String
+    let label: LocalizedStringKey
     let count: Int
     let isSelected: Bool
     let onTap: () -> Void

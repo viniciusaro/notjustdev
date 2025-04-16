@@ -2,22 +2,22 @@ import SwiftUI
 
 struct Checklist: View {
     @Environment(EmergencyKitStore.self) var store
-
+    
     var body: some View {
         @Bindable var store = store
-
+        
         NavigationStack() {
             VStack {
                 ShowChecklist()
             }
-            .navigationTitle("Kit d’urgence 72h")
+            .navigationTitle(LocalizedStringKey("checklist_title"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     NavigationLink {
                         FamilyMember()
                     } label: {
-                        Text("Famille")
+                        Text(LocalizedStringKey("open_family_button"))
                             .font(.body)
                         Image(systemName: "chevron.right")
                     }
@@ -64,13 +64,13 @@ struct EssentialKit: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Les articles essentiels").font(.title2).bold().padding(.bottom, 4)
-            Text("Selectioner les articles que vous avez pour votre kit d’urgence").padding(.bottom, 24)
+            Text(LocalizedStringKey("essential_kit_title")).font(.title2).bold().padding(.bottom, 4)
+            Text(LocalizedStringKey("kit_subtitle" )).padding(.bottom, 24)
             LazyVGrid(columns: twoColumns) {
                 ForEach(store.createKitEssential()) { item in
                     ChecklistItem(
                         image: item.imageName,
-                        title: item.rawValue,
+                        title: Text(item.localizedName),
                         isSelected: store.selectedEssentialItems.contains(item),
                         onTap: {
                             withAnimation {
@@ -94,13 +94,13 @@ struct BabyKit: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Pour les bébés").font(.title2).bold().padding(.bottom, 4)
-            Text("Selectioner les articles que vous avez pour votre kit d’urgence").padding(.bottom, 24)
+            Text(LocalizedStringKey("baby_kit_title")).font(.title2).bold().padding(.bottom, 4)
+            Text(LocalizedStringKey("kit_subtitle")).padding(.bottom, 24)
             LazyVGrid(columns: twoColumns) {
                 ForEach(store.createKitBaby()) { item in
                     ChecklistItem(
                         image: item.imageName,
-                        title: item.rawValue,
+                        title: Text(item.localizedName),
                         isSelected: store.selectedBabyItems.contains(item),
                         onTap: {
                             withAnimation {
@@ -125,13 +125,13 @@ struct PetKit: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Pour les animaux").font(.title2).bold().padding(.bottom, 4)
-            Text("Selectioner les articles que vous avez pour votre kit d’urgence").padding(.bottom, 24)
+            Text(LocalizedStringKey("pet_kit_title")).font(.title2).bold().padding(.bottom, 4)
+            Text(LocalizedStringKey("kit_subtitle")).padding(.bottom, 24)
             LazyVGrid(columns: twoColumns) {
                 ForEach(store.createKitPet()) { item in
                     ChecklistItem(
                         image: item.imageName,
-                        title: item.rawValue,
+                        title: Text(item.localizedName),
                         isSelected: store.selectedPetItems.contains(item),
                         onTap: {
                             withAnimation {

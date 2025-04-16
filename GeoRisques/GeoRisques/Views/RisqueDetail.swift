@@ -11,7 +11,7 @@ struct RisqueDetailView: View {
                     .frame(width: 48, height: 48)
                 VStack(alignment: .leading) {
                     Text(state.risque.name)
-                    Link("Info détaillées", destination: state.risque.reference)
+                    Link(LocalizedStringKey("detail_detail"), destination: state.risque.reference)
                         .italic()
                 }
             }

@@ -1,0 +1,85 @@
+/* Root */
+"risk_tab" = "Risks";
+"kit_tab" = "Emergency Kit";
+
+/* Risques */
+"risk_title" = "Risks";
+"unauthorized" = "Location services are not authorized.";
+"unavailable" = "Location services are unavailable.";
+"not_found" = "No risks found";
+
+/* Risque Detail*/
+"detail_detail" = "Detailed information";
+
+/* Emergency Kit Intro */
+"intro_continue_button" = "Continue";
+
+"intro_kit_title" = "My 72-Hour Emergency Kit";
+"intro_kit_subtitle" = "In the event of a crisis, authorities may ask you to leave your home immediately or to remain in your home until emergency services arrive. It is recommended that you prepare a bag containing enough food to survive for three days on your own.";
+
+"prepare_kit_title" = "Your family's needs";
+"prepare_kit_subtitle" = "Identify the needs of each member of your family. Once this is done, you'll be ready to determine exactly what should be included in your kit.";
+
+"equip_kit_title" = "Collect all essential items";
+"equip_kit_subtitle" = "Based on your checklist, start collecting all the essential items to spend 72 hours on your own.";
+
+"check_kit_title" = "Check the contents of your kit";
+"check_kit_subtitle" = "Every 6 months to make sure nothing has expired and your family's needs haven't changed.";
+
+/* Family Member */
+"start_kit_button" = "Prepare the emergency kit";
+"members_title" = "Family members";
+"members_subtitle" = "Create your emergency kit based on the number of members in your family";
+
+"Adultes" = "Adults";
+"Bébés" = "Babies";
+"Enfants" = "Children";
+"Animaux" = "Pets";
+
+/* Checklist */
+"checklist_title" = "72-Hour Emergency Kit";
+"open_family_button" = "Family";
+"essential_kit_title" = "Essential items";
+"baby_kit_title" = "For babies";
+"pet_kit_title" = "For animals";
+"kit_subtitle" = "Select the items you have for your emergency kit";
+
+/* Essential Kit Types */
+"kitEssentialType.water" = "Bottled drinking water";
+"kitEssentialType.food" = "Non-perishable food";
+"kitEssentialType.canOpener" = "Can opener";
+"kitEssentialType.radio" = "Battery-operated radio";
+"kitEssentialType.flashlight" = "Battery-powered flashlight";
+"kitEssentialType.batery" = "Batery";
+"kitEssentialType.matches" = "Candles and matches";
+"kitEssentialType.firstAid" = "First aid kit";
+"kitEssentialType.warmClothes" = "Warm clothes";
+"kitEssentialType.emergencyBlanket" = "Emergency Blanket";
+"kitEssentialType.whistle" = "Whistle";
+"kitEssentialType.mask" = "Masl";
+"kitEssentialType.toiletPaper" = "Toilet Paper";
+"kitEssentialType.chargers" = "Phone chargers";
+"kitEssentialType.game" = "Games";
+"kitEssentialType.emergencyContacts" = "Emergency Contacts";
+"kitEssentialType.localMap" = "Local Map";
+"kitEssentialType.doubleKey" = "Double Key";
+"kitEssentialType.cash" = "Cash";
+"kitEssentialType.importantDocuments" = "Importants Documents";
+
+/* Baby Kit Types */
+"kitBabyType.food" = "Baby food";
+"kitBabyType.diapers" = "Diapers";
+"kitBabyType.wipes" = "Wipes";
+"kitBabyType.babyBottle" = "Baby bottle";
+"kitBabyType.pacifier" = "Pacifier";
+"kitBabyType.babyBlanket" = "Baby blanket";
+"kitBabyType.babyToy" = "Baby toys";
+
+/* Pet Kit Types */
+"kitPetType.petBlanket" = "Blanket";
+"kitPetType.petFood" = "Pet food";
+"kitPetType.bowl" = "Bowl";
+"kitPetType.leash" = "Leash";
+"kitPetType.petToy" = "Pet toys";
+
+

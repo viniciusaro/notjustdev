@@ -49,7 +49,7 @@ struct RisquesListView: View {
         @Bindable var store = store
         
         HStack(alignment: .firstTextBaseline) {
-            Text("Risques")
+            Text(LocalizedStringKey("risk_title"))
                 .font(.title2)
             Spacer()
             Text("(\(store.risquesState.location.latitude), \(store.risquesState.location.longitude))")
@@ -62,18 +62,18 @@ struct RisquesListView: View {
                 case .unauthorized:
                     List {
                         // TODO: add button to send user to settings.
-                        Text("Location services are not authorized.")
+                        Text(LocalizedStringKey("unauthorized"))
                     }
                     .listStyle(.automatic)
                 case .unavailable:
                     List {
-                        Text("Location services are unavailable.")
+                        Text(LocalizedStringKey("unavailable"))
                     }
                     .listStyle(.automatic)
                 }
             } else if store.risquesState.risquesError != nil {
                 List {
-                    Text("No risques found")
+                    Text(LocalizedStringKey("not_found"))
                 }
                 .listStyle(.automatic)
             } else {

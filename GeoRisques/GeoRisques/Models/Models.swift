@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 struct Location: Equatable {
     let latitude: Double
@@ -39,16 +40,16 @@ struct Risque: Hashable {
 //MARK: - Emergency Kit
 
 enum MemberType: String, CaseIterable, Codable {
-    case adult = "Adultes"
-    case baby = "Bébés"
-    case child = "Enfants"
-    case pet = "Animaux"
+    case adult
+    case baby
+    case child
+    case pet
 }
 
 struct EmergencyKitInformation: Identifiable, Equatable {
     let id: UUID = UUID()
-    var title: String
-    var description: String
+    var title: LocalizedStringKey
+    var description: LocalizedStringKey
     var image: String
     var tag: Int
 }
