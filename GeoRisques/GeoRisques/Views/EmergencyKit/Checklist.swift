@@ -2,33 +2,24 @@ import SwiftUI
 
 struct Checklist: View {
     @Environment(EmergencyKitStore.self) var store
-    
+
     var body: some View {
         @Bindable var store = store
-        
+
         NavigationStack() {
             VStack {
+                TitleBarView(text: LocalizedStringKey("checklist_title"), label: "Famille", onTap: {
+                    store.isShowingSheet = true
+                })
+
                 ShowChecklist()
             }
-            .navigationTitle(LocalizedStringKey("checklist_title"))
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    NavigationLink {
-                        FamilyMember()
-                    } label: {
-                        Text(LocalizedStringKey("open_family_button"))
-                            .font(.body)
-                        Image(systemName: "chevron.right")
-                    }
-                }
+            .sheet(isPresented: $store.isShowingSheet) {
+                FamilyMemberSheet()
             }
-            .scrollIndicators(.hidden)
-            .padding(.horizontal, 16)
         }
-        .onAppear {
-            store.navigateToChecklist = false
-        }
+        .scrollIndicators(.hidden)
+        .padding(.horizontal, 16)
     }
 }
 
@@ -45,7 +36,7 @@ struct ShowChecklist: View {
     var body: some View {
         ScrollView {
             EssentialKit()
-                .padding([.top, .bottom], 24)
+                .padding(.bottom, 24)
             if store.memberCount[.baby] ?? 0 != 0 {
                 BabyKit()
                     .padding(.bottom, 24)
@@ -55,6 +46,53 @@ struct ShowChecklist: View {
                     .padding(.bottom, 24)
             }
         }
+    }
+}
+
+struct FamilyMemberSheet: View {
+    @Environment(EmergencyKitStore.self) var store
+
+    var body: some View {
+        VStack {
+            TitleBarView(text: LocalizedStringKey("members_title"), label: "Terminer", onTap: {
+                store.isShowingSheet = false
+                store.saveFamilyMember()
+            })
+            .padding(.top, 24)
+
+            ShowFamilyMemberView()
+
+            if let selectedMember = store.selectedMember {
+                CounterView(
+                    onIncrement: { store.incrementMember(selectedMember) },
+                    onDecrement: { store.decrementMember(selectedMember) }
+                )
+            }
+
+            Spacer()
+        }
+        .padding(.horizontal, 16)
+    }
+}
+
+struct TitleBarView: View {
+    @Environment(EmergencyKitStore.self) var store
+    let text: LocalizedStringKey
+    let label: String
+    let onTap: () -> Void
+
+    var body: some View {
+        HStack {
+            Spacer()
+            Text(text)
+                .font(.title3)
+            Spacer()
+            Button(action: onTap) {
+                Text(label)
+            }
+            .font(.body)
+        }
+        .padding(.bottom, 24)
     }
 }
 

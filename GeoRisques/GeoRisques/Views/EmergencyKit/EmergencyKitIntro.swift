@@ -2,7 +2,7 @@ import SwiftUI
 
 struct EmergencyKitIntro: View {
     @Environment(EmergencyKitStore.self) var store
-    @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKitIntro = false
+//    @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKitIntro = false
 
     var body: some View {
         @Bindable var store = store
@@ -18,7 +18,7 @@ struct EmergencyKitIntro: View {
 
                         if info == store.kitInformation.last {
                             ButtonView(text: LocalizedStringKey("intro_continue_button")) {
-                                store.navigateToFamilyMembers.toggle()
+                                store.navigateToFamilyMembers = true
                             }
                             .padding(.horizontal, 16)
                             .padding(.bottom, 48)

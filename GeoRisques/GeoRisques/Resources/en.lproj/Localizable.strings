@@ -45,7 +45,7 @@
 "kit_subtitle" = "Select the items you have for your emergency kit";
 
 /* Essential Kit Types */
-"kitEssentialType.water" = "Bottled drinking water";
+"kitEssentialType.water" = "Bottled drinking water (6l per person, 2l per animal)";
 "kitEssentialType.food" = "Non-perishable food";
 "kitEssentialType.canOpener" = "Can opener";
 "kitEssentialType.radio" = "Battery-operated radio";
@@ -54,9 +54,9 @@
 "kitEssentialType.matches" = "Candles and matches";
 "kitEssentialType.firstAid" = "First aid kit";
 "kitEssentialType.warmClothes" = "Warm clothes";
-"kitEssentialType.emergencyBlanket" = "Emergency Blanket";
-"kitEssentialType.whistle" = "Whistle";
-"kitEssentialType.mask" = "Masl";
+"kitEssentialType.emergencyBlanket" = "Emergency Blanket (1 per member)";
+"kitEssentialType.whistle" = "Whistle (1 per person)";
+"kitEssentialType.mask" = "Masl (1 per person)";
 "kitEssentialType.toiletPaper" = "Toilet Paper";
 "kitEssentialType.chargers" = "Phone chargers";
 "kitEssentialType.game" = "Games";
