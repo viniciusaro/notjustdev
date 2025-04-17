@@ -20,14 +20,16 @@ struct FamilyMember: View {
                 
                 Spacer()
                 
-                OpenKitButtonView(text: LocalizedStringKey("start_kit_button")) {
-                    if store.isKitButtonActive() {
-                        store.saveFamilyMember()
-                        store.navigateToChecklist = true
-                        hasSeenEmergencyKitIntro = true
+                if !store.isShowingSheet {
+                    OpenKitButtonView(text: LocalizedStringKey("start_kit_button")) {
+                        if store.isKitButtonActive() {
+                            store.saveFamilyMember()
+                            store.navigateToChecklist = true
+                            hasSeenEmergencyKitIntro = true
+                        }
                     }
+                    .padding(.bottom, 16)
                 }
-                .padding(.bottom, 16)
             }
             
             .navigationTitle(LocalizedStringKey("members_title"))
@@ -55,6 +57,8 @@ struct ShowFamilyMemberView:View {
     var body: some View {
         Text(LocalizedStringKey("members_subtitle"))
             .font(.body)
+            .padding(.bottom, 24)
+
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {
             ForEach(store.memberTypes, id: \.self) { member in
                 MemberView(

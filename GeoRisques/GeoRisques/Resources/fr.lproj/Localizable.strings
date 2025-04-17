@@ -46,7 +46,7 @@
 
 
 /* Essential Kit Types */
-"kitEssentialType.water" = "Eau potable en bouteille";
+"kitEssentialType.water" = "Eau potable en bouteille (6l par personne, 2l par animal)";
 "kitEssentialType.food" = "Nourriture non périssable";
 "kitEssentialType.canOpener" = "Ouvre-boîte";
 "kitEssentialType.radio" = "Radio à piles";
@@ -55,9 +55,9 @@
 "kitEssentialType.matches" = "Bougies et allumettes";
 "kitEssentialType.firstAid" = "Trousse de premiers secours";
 "kitEssentialType.warmClothes" = "Vêtements chauds";
-"kitEssentialType.emergencyBlanket" = "Couvertures de survie";
-"kitEssentialType.whistle" = "Sifflet";
-"kitEssentialType.mask" = "Masque";
+"kitEssentialType.emergencyBlanket" = "Couvertures de survie (1 par membre)";
+"kitEssentialType.whistle" = "Sifflet (1 par personne)";
+"kitEssentialType.mask" = "Masque (1 par personne)";
 "kitEssentialType.toiletPaper" = "Papier toilette";
 "kitEssentialType.chargers" = "Chargeurs de téléphone";
 "kitEssentialType.game" = "Jeux";

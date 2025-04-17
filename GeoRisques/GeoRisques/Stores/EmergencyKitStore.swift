@@ -24,7 +24,10 @@ final class EmergencyKitStore {
 
     /// Checklist Data
     private let selectedEssentialItemsKey = "essentialItemsKey"
+
     var navigateToChecklist: Bool = false
+    var isShowingSheet = false
+
     var selectedEssentialItems: Set<KitEssentialType> = [] {
         didSet {
             saveEssentialSelectedItems()
