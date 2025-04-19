@@ -32,7 +32,7 @@ final class GeoRisquesStore {
         locationClient: LocationClient = FixedLocationClient(location: .grenoble),
         risquesClient: RisquesClient = FixedRisquesClient(risques: Risque.all, community: "GRENOBLE"),
         //TODO: Before prodution put back to OpenAIClientLive()
-        openAIClient: OpenAIClient = OpenAIClientMock()
+        openAIClient: OpenAIClient = OpenAIClientLive()
     ) {
         self.rootState = rootState
         self.risquesState = risquesState
