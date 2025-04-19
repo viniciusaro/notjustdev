@@ -1,6 +1,8 @@
 /* Root */
 "risk_tab" = "Risques";
 "kit_tab" = "Kit d'Urgence";
+"instruction_tab" = "Comment Agir";
+"splach_screen" = "Connaître les risques de catastrophes près de chez vous.";
 
 /* Risques */
 "risk_title" = "Risques";
@@ -10,6 +12,8 @@
 
 /* Risque Detail*/
 "detail_detail" = "Info détaillées";
+"ai-name" = "Réponse générée par l'intelligence artificielle Deep Infra";
+"ai-response-title" = "Définition du risque et que faire?";
 
 /* Emergency Kit Intro */
 "intro_continue_button" = "Continuer";
@@ -46,7 +50,7 @@
 
 
 /* Essential Kit Types */
-"kitEssentialType.water" = "Eau potable en bouteille (6l par personne, 2l par animal)";
+"kitEssentialType.water" = "Eau en bouteille (6l personne, 2l animal)";
 "kitEssentialType.food" = "Nourriture non périssable";
 "kitEssentialType.canOpener" = "Ouvre-boîte";
 "kitEssentialType.radio" = "Radio à piles";

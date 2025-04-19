@@ -13,7 +13,8 @@ struct Location: Equatable {
     }
 }
 
-struct Risque: Hashable {
+struct Risque: Hashable, Identifiable {
+    var id: UUID = UUID()
     let name: String
     let description: String
     let reference: URL
@@ -194,6 +195,27 @@ enum KitPetType: String, CaseIterable, Codable, Identifiable {
         case .leash: return "leash"
         case .petToy: return "petToy"
         }
+    }
+}
+
+
+//MARK: - OPEN AI
+
+struct OpenAIRequest: Codable {
+    var model: String = "mistralai/Mistral-7B-Instruct-v0.1"
+    let messages: [OpenAIMessage]
+}
+
+struct OpenAIMessage: Codable {
+    let role: String
+    let content: String
+}
+
+struct OpenAIResponse: Codable {
+    let choices: [Choice]
+
+    struct Choice: Codable {
+        let message: OpenAIMessage
     }
 }
 

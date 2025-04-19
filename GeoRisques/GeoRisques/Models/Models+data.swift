@@ -291,3 +291,15 @@ extension KitPetType {
         return LocalizedStringKey(key)
     }
 }
+
+
+//MARK: - OpenAI
+
+extension OpenAIResponse {
+    static let placeholder = OpenAIResponse(
+        choices: [
+            Choice(message: OpenAIMessage(role: "role", content: "Les mesures préventives à prendre avant une inondation sont : se renseigner auprès de sa mairie sur le type d’inondation susceptible de survenir sur le territoire et sur les mesures de protection (lieux d’hébergement en cas d’évacuation, etc.) ; faire réaliser un diagnostic de vulnérabilité de sa maison ; préparer son kit d’urgence 72 heures avec les objets et articles essentiels ; prévoir les dispositifs de protection à installer : sacs de sable, barrières amovibles (batardeaux) et le matériel pour surélever les meubles ; aménager une zone refuge à l’étage, avec une ouverture permettant l’évacuation, ou identifier un lieu à proximité pour se réfugier.")
+                   ),
+        ]
+    )
+}
