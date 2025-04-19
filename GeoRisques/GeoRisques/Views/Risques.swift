@@ -75,7 +75,7 @@ struct RisquesListView: View {
                             .font(.footnote)
                 )
         }
-        .padding()
+        .padding(16)
 
         VStack(alignment: .center) {
             if let locationError = store.risquesState.locationError {
@@ -98,45 +98,9 @@ struct RisquesListView: View {
                 }
                 .listStyle(.automatic)
             } else {
-               ListView()
+                RisqueDetailView()
             }
         }
     }
 }
-
-struct ListView: View {
-    @Environment(GeoRisquesStore.self) var store
-
-    var body: some View {
-        List(store.risquesState.risques, id: \.self) { risque in 
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color(.systemGray6))
-                .frame(minHeight: 60)
-                .overlay(
-                    HStack {
-                        Circle()
-                            .fill(.accent)
-                            .opacity(0.8)
-                            .frame(width: 50, height: 50)
-                            .overlay {
-                                Image(risque.kind.imageName)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .padding(12)
-                            }
-
-                        Link(risque.name, destination: risque.reference)
-                            .font(.headline)
-                            .bold()
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
-                        .padding(.horizontal, 16)
-                )
-                .listRowSeparator(.hidden)
-        }
-        .listStyle(.plain)
-    }
-}
-
 
