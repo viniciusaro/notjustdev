@@ -2,7 +2,7 @@ import Foundation
 
 struct OpenAIClientLive: OpenAIClient {
     static let shared = OpenAIClientLive()
-    private let apiKey = SecretsManager.apiKey()
+    private let apiKey = SecretsClientLive().apiKey()
     private let endpoint = URL(string: "https://api.deepinfra.com/v1/openai/chat/completions")!
 
     func askAI(prompt: String) async throws -> String {
