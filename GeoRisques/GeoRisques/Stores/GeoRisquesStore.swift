@@ -58,9 +58,10 @@ final class GeoRisquesStore {
         var risques: [Risque] = []
         var risquesError: RisquesClientError?
         var risquesDescription: String = "..."
-        var location: Location = .zero
+        var location: Location = .france
         var locationError: LocationClientError?
         var selectedRisque: RisqueDetailState?
+        var showLocationAlert: Bool = false
         
         var position: MapCameraPosition {
             get {
@@ -71,8 +72,8 @@ final class GeoRisquesStore {
                             longitude: location.longitude
                         ),
                         span: MKCoordinateSpan(
-                            latitudeDelta: location.delta,
-                            longitudeDelta: location.delta
+                            latitudeDelta: location.latitudeDelta,
+                            longitudeDelta: location.longitudeDelta,
                         )
                     )
                 )
@@ -108,7 +109,8 @@ final class GeoRisquesStore {
         self.risquesState.location = Location(
             latitude: context.region.center.latitude,
             longitude: context.region.center.longitude,
-            delta: min(context.region.span.latitudeDelta, 0.05),
+            latitudeDelta: context.region.span.latitudeDelta,
+            longitudeDelta: context.region.span.longitudeDelta,
         )
         Task {
             await reloadRisques()
@@ -120,10 +122,18 @@ final class GeoRisquesStore {
     }
     
     func onLocationButtonTapped() {
+        if self.risquesState.locationError == .unauthorized {
+            self.risquesState.showLocationAlert = true
+        }
+        
         Task {
             await reloadLocation()
             await reloadRisques()
         }
+    }
+    
+    func onLocationAlertDismisButtonTapped() {
+        self.risquesState.showLocationAlert = false
     }
     
     private func reloadLocation() async {

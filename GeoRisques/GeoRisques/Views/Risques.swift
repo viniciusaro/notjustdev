@@ -18,9 +18,11 @@ struct RisquesView: View {
     }
 }
 
-#Preview {
-    RisquesView()
-        .environment(GeoRisquesStore())
+#Preview("Risques - Unauthorized Location") {
+    let locationClient = ErrorLocationClient(error: .unauthorized)
+    
+    return RisquesView()
+        .environment(GeoRisquesStore(locationClient: locationClient))
         .environment(EmergencyKitStore())
 }
 
@@ -49,6 +51,17 @@ struct RisquesMapView: View {
             }
             .padding()
         }
+        .alert(
+            LocalizedStringKey("location_error"),
+            isPresented: $store.risquesState.showLocationAlert
+        ) {
+                Button(LocalizedStringKey("settings")) {
+                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                }
+                Button(LocalizedStringKey("cancel"), role: .cancel) {
+                    store.onLocationAlertDismisButtonTapped()
+                }
+            }
     }
 }
 
@@ -78,21 +91,7 @@ struct RisquesListView: View {
         .padding(16)
 
         VStack(alignment: .center) {
-            if let locationError = store.risquesState.locationError {
-                switch locationError {
-                case .unauthorized:
-                    List {
-                        // TODO: add button to send user to settings.
-                        Text(LocalizedStringKey("unauthorized"))
-                    }
-                    .listStyle(.automatic)
-                case .unavailable:
-                    List {
-                        Text(LocalizedStringKey("unavailable"))
-                    }
-                    .listStyle(.automatic)
-                }
-            } else if store.risquesState.risquesError != nil {
+            if store.risquesState.risquesError != nil {
                 List {
                     Text(LocalizedStringKey("not_found"))
                 }

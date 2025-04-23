@@ -4,12 +4,19 @@ import SwiftUI
 struct Location: Equatable {
     let latitude: Double
     let longitude: Double
-    let delta: Double
+    let latitudeDelta: Double
+    let longitudeDelta: Double
     
-    init(latitude: Double, longitude: Double, delta: Double = 0.05) {
+    init(
+        latitude: Double,
+        longitude: Double,
+        latitudeDelta: Double = 0.05,
+        longitudeDelta: Double = 0.05,
+    ) {
         self.latitude = latitude
         self.longitude = longitude
-        self.delta = delta
+        self.latitudeDelta = latitudeDelta
+        self.longitudeDelta = longitudeDelta
     }
 }
 
