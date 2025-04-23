@@ -15,7 +15,8 @@ extension Location {
     static let france = Location(
         latitude: 46.2276,
         longitude: 2.2137,
-        delta: 0.5
+        latitudeDelta: 0.5,
+        longitudeDelta: 0.5
     )
 }
 

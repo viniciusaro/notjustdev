@@ -7,6 +7,9 @@
 "unauthorized" = "Location services are not authorized.";
 "unavailable" = "Location services are unavailable.";
 "not_found" = "No risks found";
+"location_error" = "To use location services, enable on your phone settings";
+"settings" = "Settings";
+"cancel" = "Cancel";
 
 /* Risque Detail*/
 "detail_detail" = "Detailed information";
