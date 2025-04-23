@@ -72,12 +72,15 @@ struct RisquesListView: View {
         @Bindable var store = store
 
         HStack() {
-            Text(LocalizedStringKey("risk_title"))
-                .font(.title2)
-                .bold()
+            VStack(alignment: .leading) {
+                Text(LocalizedStringKey("risk_title"))
+                    .font(.title2)
+                    .bold()
+                Text(LocalizedStringKey("risk_subtitle"))
+                    .font(.footnote)
+            }
 
             Spacer()
-
             RoundedRectangle(cornerRadius: 20)
                 .fill(.accent)
                 .opacity(0.8)
@@ -95,7 +98,7 @@ struct RisquesListView: View {
                 List {
                     Text(LocalizedStringKey("not_found"))
                 }
-                .listStyle(.automatic)
+                .listStyle(.plain)
             } else {
                 RisqueDetailView()
             }

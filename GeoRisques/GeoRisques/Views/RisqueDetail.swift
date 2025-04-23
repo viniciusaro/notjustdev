@@ -11,15 +11,26 @@ struct RisqueDetailView: View {
                 store.selectedRisque = risque
                 store.fetchAdvice(for: risque)
             }) {
-                ListRowView(iconName: risque.kind.imageName , risqueName: risque.name, arrowIcon: "chevron.right")
+                ListRowView(
+                    iconName: risque.kind.imageName,
+                    risqueName: risque.name,
+                    isArrowShowing: true
+                )
             }
         }
+        .listRowSpacing(12)
+        .scrollIndicators(.hidden)
         .sheet(item: $store.selectedRisque) { risque in
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    ListRowView(iconName: risque.kind.imageName , risqueName: risque.name, arrowIcon: "")
+                    ListRowView(
+                        iconName: risque.kind.imageName,
+                        risqueName: risque.name,
+                        isArrowShowing: false
+                    )
 
                     Text(LocalizedStringKey("ai-name"))
+                        .foregroundStyle(.accent)
                         .font(.footnote)
                         .bold()
 
@@ -40,7 +51,6 @@ struct RisqueDetailView: View {
             .overlay {
                 if store.isLoading {
                     RiskoLogo(rotationAngle: (store.rotateRiskoLogo ? 360 : 0))
-                        .animation(.easeInOut(duration: 2), value: store.rotateRiskoLogo)
                 }
             }
             .padding()
@@ -58,10 +68,11 @@ struct RisqueDetailView: View {
 }
 
 struct ListRowView: View {
+    @Environment(GeoRisquesStore.self) var store
     @Environment(\.colorScheme) var colorScheme
     let iconName: String
     let risqueName: String
-    let arrowIcon: String?
+    let isArrowShowing: Bool
 
     var body: some View {
         HStack {
@@ -78,8 +89,10 @@ struct ListRowView: View {
             Text(risqueName)
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
             Spacer()
-            Image(systemName: arrowIcon ?? "")
-                .padding(.horizontal, 16)
+            if isArrowShowing {
+                Image(systemName: "chevron.right" )
+                    .padding(.horizontal, 16)
+            }
         }
     }
 }

@@ -12,7 +12,6 @@ struct RiskoLogo: View {
                 .degrees(rotationAngle),
                 axis: (x: 0, y: 1, z: 0)
             )
-        
     }
 }
 

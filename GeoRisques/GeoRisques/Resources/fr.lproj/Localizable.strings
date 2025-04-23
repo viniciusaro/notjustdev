@@ -6,6 +6,7 @@
 
 /* Risques */
 "risk_title" = "Risques";
+"risk_subtitle" = "Autour de vous";
 "unauthorized" = "Les services de localisation ne sont pas autorisés.";
 "unavailable" = "Les services de localisation ne sont pas disponibles";
 "not_found" = "Aucun risque trouvé";
@@ -17,6 +18,7 @@
 "detail_detail" = "Info détaillées";
 "ai-name" = "Réponse générée par l'intelligence artificielle Deep Infra";
 "ai-response-title" = "Définition du risque et que faire?";
+"ai-error-response" = "Erreur lors de la consultation de l'IA";
 
 /* Emergency Kit Intro */
 "intro_continue_button" = "Continuer";

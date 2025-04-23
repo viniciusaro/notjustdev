@@ -14,17 +14,13 @@ struct OpenAIClientLive: OpenAIClient {
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpBody = try JSONEncoder().encode(request)
 
-        do {
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-                let errorMessage = String(data: data, encoding: .utf8) ?? "unknown error"
-                throw NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
-            }
-            let decodedResponse = try JSONDecoder().decode(OpenAIResponse.self, from: data)
-            return decodedResponse.choices.first?.message.content ?? "No response."
-        } catch {
-            throw error
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
+            let errorMessage = String(data: data, encoding: .utf8) ?? "unknown error"
+            throw NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
         }
+        let decodedResponse = try JSONDecoder().decode(OpenAIResponse.self, from: data)
+        return decodedResponse.choices.first?.message.content ?? "No response."
     }
 }
 

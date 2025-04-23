@@ -16,10 +16,12 @@ final class GeoRisquesStore {
     var isLoading = false {
         didSet {
             if isLoading {
-                rotateRiskoLogo = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    self.rotateRiskoLogo = true
+                    withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: false)) {
+                        self.rotateRiskoLogo = true
+                    }
                 }
+                rotateRiskoLogo = false
             }
         }
     }
@@ -31,7 +33,6 @@ final class GeoRisquesStore {
         risquesState: RisquesState = RisquesState(),
         locationClient: LocationClient = FixedLocationClient(location: .grenoble),
         risquesClient: RisquesClient = FixedRisquesClient(risques: Risque.all, community: "GRENOBLE"),
-        //TODO: Before prodution put back to OpenAIClientLive()
         openAIClient: OpenAIClient = OpenAIClientLive()
     ) {
         self.rootState = rootState
@@ -163,9 +164,10 @@ final class GeoRisquesStore {
 
     //MARK: - AI
     func fetchAdvice(for risque: Risque) {
+        let userLanguage = Locale.current
         isLoading = true
         response = ""
-        let prompt = "Rédigez un résumé d'un paragraphe expliquant ce qu'est le risque de \(risque.name) et décrivez par étapes ce qu'il faut faire en cas de \(risque.name), s'il vous plaît."
+        let prompt = "Rédigez un résumé d'un paragraphe expliquant ce qu'est le risque de \(risque.name) et décrivez par étapes ce qu'il faut faire en cas de \(risque.name) dans la langue \(userLanguage), s'il vous plaît."
 
         Task {
             do {
@@ -173,7 +175,7 @@ final class GeoRisquesStore {
                 response = advice
             } catch {
                 print("Error detailed: \(error.localizedDescription)")
-                response = "Erreur lors de la consultation de l'IA: \(error.localizedDescription)"
+                response = "\(LocalizedStringKey("ai-error-response"))"
             }
             isLoading = false
         }
