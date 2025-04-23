@@ -25,3 +25,15 @@ final class FixedLocationClient: LocationClient {
         return location
     }
 }
+
+final class ErrorLocationClient: LocationClient {
+    let error: LocationClientError
+    
+    init(error: LocationClientError) {
+        self.error = error
+    }
+    
+    func location() async throws -> Location {
+        throw error
+    }
+}
