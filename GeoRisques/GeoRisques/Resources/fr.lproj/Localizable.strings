@@ -4,6 +4,15 @@
 "instruction_tab" = "Comment Agir";
 "splach_screen" = "Connaître les risques de catastrophes près de chez vous.";
 
+/*Onboarding*/
+"tag0_title" = "Bienvenue dans Risko";
+"tag0_subtitle" = "Connaître les risques, c’est déjà s’y préparer.";
+"tag1_title" = "Risques géographiques en temps réel";
+"tag1_subtitle" = "Grâce aux données officielles, découvrez les types de catastrophes qui peuvent toucher votre localisation actuelle ou explorez librement la carte.";
+"tag2_title" = "Agissez avec le bon réflexe";
+"tag2_subtitle" = "Utilisez une openAI pour consulter des conseils selon le type de catastrophe.";
+"onboarding_button" = "C'est parti";
+
 /* Risques */
 "risk_title" = "Risques";
 "risk_subtitle" = "Autour de vous";

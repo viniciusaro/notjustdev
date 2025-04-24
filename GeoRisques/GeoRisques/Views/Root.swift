@@ -3,6 +3,7 @@ import SwiftUI
 struct RootView: View {
     @Environment(GeoRisquesStore.self) var store
     @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKit = false
+    @AppStorage("hasSeenOnboarding") var hasSeenOnboarding = false
     @State private var isActive = false
     @State private var rotateLogo = false
 
@@ -10,7 +11,9 @@ struct RootView: View {
     var body: some View {
         @Bindable var store = store
 
-        if isActive {
+        if !hasSeenOnboarding {
+            Onboarding()
+        } else {
             TabView(
                 selection: $store.rootState.selectedTab
             ) {
@@ -31,23 +34,6 @@ struct RootView: View {
                             Label(LocalizedStringKey("kit_tab"), systemImage: "backpack")
                         }
                         .tag(GeoRisquesStore.Tab.emergencyKit)
-                }
-            }
-        } else {
-            VStack {
-                RiskoLogo(rotationAngle: (rotateLogo ? 360 : 0))
-                    .animation(.easeInOut(duration: 1.5), value: rotateLogo)
-
-                Text(LocalizedStringKey("splach_screen"))
-                    .multilineTextAlignment(.center)
-                    .font(.title2)
-                    .bold()
-                    .frame(width: 300)
-            }
-            .onAppear {
-                rotateLogo = true
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    isActive = true
                 }
             }
         }
