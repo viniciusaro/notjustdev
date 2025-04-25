@@ -6,7 +6,7 @@
 
 /* Risques */
 "risk_title" = "Risques";
-"risk_subtitle" = "Autour de vous";
+"risk_subtitle" = "Autour de moi";
 "unauthorized" = "Les services de localisation ne sont pas autorisés.";
 "unavailable" = "Les services de localisation ne sont pas disponibles";
 "not_found" = "Aucun risque trouvé";
