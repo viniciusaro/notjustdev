@@ -2,9 +2,9 @@ import SwiftUI
 
 struct RootView: View {
     @Environment(GeoRisquesStore.self) var store
+    @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKit = false
     @State private var isActive = false
     @State private var rotateLogo = false
-    @AppStorage("hasSeenEmergencyKit") var hasSeenEmergencyKit = false
 
 
     var body: some View {
@@ -35,21 +35,14 @@ struct RootView: View {
             }
         } else {
             VStack {
-                Image("risko")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 250, height: 250)
-                    .rotation3DEffect(
-                        .degrees(rotateLogo ? 360 : 0),
-                        axis: (x: 0, y: 1, z: 0)
-                    )
+                RiskoLogo(rotationAngle: (rotateLogo ? 360 : 0))
                     .animation(.easeInOut(duration: 1.5), value: rotateLogo)
 
-                Text("Connaître les risques de catastrophes près de chez vous.")
+                Text(LocalizedStringKey("splach_screen"))
                     .multilineTextAlignment(.center)
                     .font(.title2)
                     .bold()
-                    .frame(width: 350)
+                    .frame(width: 300)
             }
             .onAppear {
                 rotateLogo = true

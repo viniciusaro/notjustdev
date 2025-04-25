@@ -8,19 +8,40 @@ final class GeoRisquesStore {
     var risquesState: RisquesState
     let locationClient: LocationClient
     let risquesClient: RisquesClient
-    
+    let openAIClient: OpenAIClient
+
+    /// RiquesDetail Data
+    var selectedRisque: Risque? = nil
+    var response: String = ""
+    var isLoading = false {
+        didSet {
+            if isLoading {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: false)) {
+                        self.rotateRiskoLogo = true
+                    }
+                }
+                rotateRiskoLogo = false
+            }
+        }
+    }
+    var rotationAngle: Double = 0
+    var rotateRiskoLogo: Bool = false
+
     init(
         rootState: RootState = RootState(),
         risquesState: RisquesState = RisquesState(),
         locationClient: LocationClient = FixedLocationClient(location: .grenoble),
         risquesClient: RisquesClient = FixedRisquesClient(risques: Risque.all, community: "GRENOBLE"),
+        openAIClient: OpenAIClient = OpenAIClientLive()
     ) {
         self.rootState = rootState
         self.risquesState = risquesState
         self.locationClient = locationClient
         self.risquesClient = risquesClient
+        self.openAIClient = openAIClient
     }
-    
+
     enum Tab: Int {
         case risques
         case emergencyKit
@@ -138,6 +159,25 @@ final class GeoRisquesStore {
         } catch {
             // exit application if cast fails
             self.risquesState.risquesError = (error as! RisquesClientError)
+        }
+    }
+
+    //MARK: - AI
+    func fetchAdvice(for risque: Risque) {
+        let userLanguage = Locale.current
+        isLoading = true
+        response = ""
+        let prompt = "Rédigez un résumé d'un paragraphe expliquant ce qu'est le risque de \(risque.name) et décrivez par étapes ce qu'il faut faire en cas de \(risque.name) dans la langue \(userLanguage), s'il vous plaît."
+
+        Task {
+            do {
+                let advice = try await openAIClient.askAI(prompt: prompt)
+                response = advice
+            } catch {
+                print("Error detailed: \(error.localizedDescription)")
+                response = "\(LocalizedStringKey("ai-error-response"))"
+            }
+            isLoading = false
         }
     }
 }

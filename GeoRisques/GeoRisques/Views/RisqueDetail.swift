@@ -1,37 +1,98 @@
 import SwiftUI
 
 struct RisqueDetailView: View {
-    let state: GeoRisquesStore.RisqueDetailState
-    
+    @Environment(GeoRisquesStore.self) var store
+
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .top, spacing: 16) {
-                Image(systemName: state.risque.kind.imageName)
-                    .resizable()
-                    .frame(width: 48, height: 48)
-                VStack(alignment: .leading) {
-                    Text(state.risque.name)
-                    Link(LocalizedStringKey("detail_detail"), destination: state.risque.reference)
-                        .italic()
+        @Bindable var store = store
+
+        List(store.risquesState.risques, id: \.self) { risque in
+            Button(action: {
+                store.selectedRisque = risque
+                store.fetchAdvice(for: risque)
+            }) {
+                ListRowView(
+                    iconName: risque.kind.imageName,
+                    risqueName: risque.name,
+                    isArrowShowing: true
+                )
+            }
+        }
+        .listRowSpacing(12)
+        .scrollIndicators(.hidden)
+        .sheet(item: $store.selectedRisque) { risque in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    ListRowView(
+                        iconName: risque.kind.imageName,
+                        risqueName: risque.name,
+                        isArrowShowing: false
+                    )
+
+                    Text(LocalizedStringKey("ai-name"))
+                        .foregroundStyle(.accent)
+                        .font(.footnote)
+                        .bold()
+
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text(LocalizedStringKey("ai-response-title"))
+                            .font(.title2)
+                            .bold()
+
+                        Text(store.response)
+                            .font(.body)
+                            .lineSpacing(3.0)
+                    }
+                    .padding(.top, 24)
+                }
+                .padding(.horizontal, 16)
+            }
+            .scrollIndicators(.hidden)
+            .overlay {
+                if store.isLoading {
+                    RiskoLogo(rotationAngle: (store.rotateRiskoLogo ? 360 : 0))
                 }
             }
-            .padding([.leading, .trailing])
-            ScrollView {
-                Text(state.risque.description)
-                    .padding(16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            Spacer()
+            .padding()
         }
-        .navigationTitle(state.risque.name)
-        .navigationBarTitleDisplayMode(.large)
+        .onViewDidLoad {
+            store.onRisquesDidLoad()
+        }
     }
 }
 
-//#Preview {
-//    RisqueDetailView(
-//        state: GeoRisquesStore.RisqueDetailState(
-//            risque: .smallEarthquake
-//        )
-//    )
-//}
+#Preview {
+    RisqueDetailView()
+        .environment(GeoRisquesStore())
+        .environment(EmergencyKitStore())
+}
+
+struct ListRowView: View {
+    @Environment(GeoRisquesStore.self) var store
+    @Environment(\.colorScheme) var colorScheme
+    let iconName: String
+    let risqueName: String
+    let isArrowShowing: Bool
+
+    var body: some View {
+        HStack {
+            Circle()
+                .fill(.accent)
+                .opacity(0.8)
+                .frame(width: 50, height: 50)
+                .overlay {
+                    Image(iconName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(12)
+                }
+            Text(risqueName)
+                .foregroundStyle(colorScheme == .dark ? .white : .black)
+            Spacer()
+            if isArrowShowing {
+                Image(systemName: "chevron.right" )
+                    .padding(.horizontal, 16)
+            }
+        }
+    }
+}
