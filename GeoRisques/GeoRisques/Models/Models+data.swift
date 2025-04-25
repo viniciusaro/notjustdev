@@ -215,6 +215,29 @@ extension EmergencyKitInformation {
             tag: 3
         ),
     ]
+
+    static let onboardingInfos: [EmergencyKitInformation] = [
+        EmergencyKitInformation(
+            title: LocalizedStringKey("tag0_title"),
+            description: LocalizedStringKey("tag0_subtitle"),
+            image: "welcome_onboarding",
+            tag: 0
+        ),
+
+        EmergencyKitInformation(
+            title: LocalizedStringKey("tag1_title"),
+            description: LocalizedStringKey("tag1_subtitle"),
+            image: "discover_onboarding",
+            tag: 1
+        ),
+
+        EmergencyKitInformation(
+            title: LocalizedStringKey("tag2_title"),
+            description: LocalizedStringKey("tag2_subtitle"),
+            image: "openAI_onboarding",
+            tag: 2
+        ),
+    ]
 }
 
 extension MemberType {

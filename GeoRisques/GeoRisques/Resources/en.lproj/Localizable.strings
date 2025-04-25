@@ -4,6 +4,15 @@
 "instruction_tab" = "How to Act";
 "splach_screen" = "Know the risks of disasters near you.";
 
+/*Onboarding*/
+"tag0_title" = "Welcome to Risko";
+"tag0_subtitle" = "Knowing the risks means being prepared for them.";
+"tag1_title" = "Real-time geographic risks";
+"tag1_subtitle" = "Using official data, discover the types of disasters that could affect your current location or freely explore the map.";
+"tag2_title" = "Act with the right reflexes";
+"tag2_subtitle" = "Using an openAI, consult advice based on the type of disaster.";
+"onboarding_button" = "Here we go!";
+
 /* Risques */
 "risk_title" = "Risks";
 "risk_subtitle" = "Around me";

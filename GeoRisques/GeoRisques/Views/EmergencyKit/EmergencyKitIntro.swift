@@ -69,7 +69,7 @@ struct InfoCardView: View {
                 .bold()
 
             Text(kit.description)
-                .font(.body)
+                .font(.headline)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 16)
         }

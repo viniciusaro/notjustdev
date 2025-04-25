@@ -5,6 +5,11 @@ import SwiftUI
 final class EmergencyKitStore {
     private let familyMemberClient = FamilyMemberClientLive()
 
+    ///Onboarding Data
+    var onboardingInformation: [EmergencyKitInformation] = EmergencyKitInformation.onboardingInfos
+    var onboardingIndex: Int = 0
+    var navigateToRisque = false
+
     /// EmergencyKitIntro Data
     let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
     var infoIndex: Int = 0
