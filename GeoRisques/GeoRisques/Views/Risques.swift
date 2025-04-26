@@ -55,50 +55,65 @@ struct RisquesMapView: View {
             LocalizedStringKey("location_error"),
             isPresented: $store.risquesState.showLocationAlert
         ) {
-                Button(LocalizedStringKey("settings")) {
-                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-                }
-                Button(LocalizedStringKey("cancel"), role: .cancel) {
-                    store.onLocationAlertDismisButtonTapped()
-                }
+            Button(LocalizedStringKey("settings")) {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }
+            Button(LocalizedStringKey("cancel"), role: .cancel) {
+                store.onLocationAlertDismisButtonTapped()
+            }
+        }
     }
 }
 
 struct RisquesListView: View {
     @Environment(GeoRisquesStore.self) var store
-
+    
     var body: some View {
         @Bindable var store = store
-
+        
         HStack() {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: -1) {
                 Text(LocalizedStringKey("risk_title"))
                     .font(.title2)
                     .bold()
                 Text(LocalizedStringKey("risk_subtitle"))
                     .font(.footnote)
+                    .bold()
+                    .foregroundStyle(.secondary)
             }
-
+            
             Spacer()
-            RoundedRectangle(cornerRadius: 20)
-                .fill(.accent)
-                .opacity(0.8)
-                .frame(width: 230, height: 24)
-                .overlay(
-                        Text(store.risquesState.risquesDescription)
-                            .foregroundStyle(.black)
-                            .font(.footnote)
+            
+            Text(store.risquesState.risquesDescription)
+                .font(.footnote)
+                .bold()
+                .padding(.horizontal, 24)
+                .padding(.vertical, 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.accent)
+                        .opacity(0.2)
                 )
+                .foregroundStyle(.accent)
         }
-        .padding(16)
-
-        VStack(alignment: .center) {
+        .padding(.horizontal, 16)
+        .padding(.vertical, 6)
+        
+        VStack() {
             if store.risquesState.risquesError != nil {
                 List {
-                    Text(LocalizedStringKey("not_found"))
+                    HStack(spacing: 16) {
+                        Image("risks_not_found")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 32, height: 32)
+                        Text(LocalizedStringKey("Impossible de trouver des risques pour la ville."))
+                            .multilineTextAlignment(.leading)
+                            .font(.subheadline)
+                            .foregroundStyle(.accent)
+                    }
+                    .padding(.vertical, 8)
                 }
-                .listStyle(.plain)
             } else {
                 RisqueDetailView()
             }

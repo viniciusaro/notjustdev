@@ -5,6 +5,28 @@ struct EmergencyKitTests {
     private let store = EmergencyKitStore()
 
     /// FamilyMembers Tests
+    @Test func AllMembersAreZero() async throws {
+        store.memberCount[MemberType.adult] = 0
+        store.memberCount[MemberType.child] = 0
+        store.memberCount[MemberType.baby] = 0
+        store.memberCount[MemberType.pet] = 0
+        
+        let result = store.allAreZero()
+        
+        #expect(result == true)
+    }
+    
+    @Test func AllMembersAreNotZero() async throws {
+        store.memberCount[MemberType.adult] = 0
+        store.memberCount[MemberType.child] = 1
+        store.memberCount[MemberType.baby] = 0
+        store.memberCount[MemberType.pet] = 0
+        
+        let result = store.allAreZero()
+        
+        #expect(result == false)
+    }
+    
     @Test func isKitButtonActiveTrue() async throws {
         store.memberCount[MemberType.adult] = 1
 

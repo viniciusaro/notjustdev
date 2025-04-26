@@ -12,7 +12,7 @@ struct ChecklistItem: View {
     var body: some View {
         Button(action: onTap) {
             RoundedRectangle(cornerRadius: 20)
-                .fill(isSelected ? .accent : (colorScheme == .light ? Color(.systemGray6) : .white))
+                .fill(isSelected ? (colorScheme == .light ? Color(.accent).opacity(0.6) : Color(.accent)) : (colorScheme == .light ? Color(.systemGray6) : .white))
                 .frame(height: 120)
                 .overlay(
                     VStack(alignment:.leading) {
@@ -49,7 +49,7 @@ struct ItemCheckbox: View {
         }) {
             Image(systemName: isChecked ? "checkmark.circle" : "circle")
                 .font(.subheadline)
-                .foregroundColor(isChecked ? .dark : (colorScheme == .light ? Color(.systemGray6) : .white))
+                .foregroundColor(isChecked ? .dark : (colorScheme == .light ? Color(.systemGray6) : .black))
                 .imageScale(.large)
                 .accessibilityLabel(isChecked ? "Décocher" : "Cocher")
         }

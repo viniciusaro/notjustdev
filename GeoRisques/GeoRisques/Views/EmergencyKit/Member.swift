@@ -2,17 +2,17 @@ import SwiftUI
 
 struct MemberView: View {
     @Environment(EmergencyKitStore.self) var store
-
+    @Environment(\.colorScheme) var colorScheme
     let label: LocalizedStringKey
     let count: Int
     let isSelected: Bool
     let onTap: () -> Void
-
+    
     var body: some View {
         Button(action: onTap) {
             RoundedRectangle(cornerRadius: 20)
                 .fill(
-                    count == 0 && !isSelected ? Color(.systemGray6) : (isSelected ? .accent : Color(.systemGray6))
+                    count == 0 && !isSelected ? (store.isShowingSheet ? Color(.systemGray5) : Color(.systemGray6)) : (isSelected ? .accent :  Color(.systemGray5))
                 )
                 .frame(height: 120)
                 .overlay(
@@ -32,10 +32,9 @@ struct MemberView: View {
     }
 }
 
-
 #Preview {
     let emergencyKitStore = EmergencyKitStore()
-
+    
     MemberView(label: "Adult", count: 3, isSelected: false, onTap: {})
         .environment(emergencyKitStore)
 }

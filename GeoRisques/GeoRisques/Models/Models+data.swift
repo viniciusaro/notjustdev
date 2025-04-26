@@ -22,7 +22,7 @@ extension Location {
 
 extension Risque {
     static let all = naturalDisasters
-
+    
     static let naturalDisasters = [
         mouvementDeTerrain,
         crueTorrentielle,
@@ -43,6 +43,8 @@ extension Risque {
         effetDeSurpression,
         risqueIndustriel,
     ]
+    
+    static let empty: [Risque] = []
     
     static let crueTorrentielle = Risque(
         name: "Radon",

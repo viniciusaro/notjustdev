@@ -99,6 +99,7 @@ struct OpenKitButtonView: View {
 
 
 struct CounterView: View {
+    @Environment(EmergencyKitStore.self) var store
     let onIncrement: () -> Void
     let onDecrement: () -> Void
 
@@ -121,7 +122,7 @@ struct CounterView: View {
             }
         }
         .padding()
-        .background(Color(.systemGray6))
+        .background((store.isShowingSheet ? Color(.systemGray5) : Color(.systemGray6)))
         .cornerRadius(12)
         .padding(.top, 30)
     }
