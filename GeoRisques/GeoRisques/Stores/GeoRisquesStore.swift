@@ -167,6 +167,10 @@ final class GeoRisquesStore {
         UIApplication.shared.open(url)
     }
     
+    func totalOfRisks() -> Int {
+        risquesState.risques.count
+    }
+    
     //MARK: - AI
     func fetchAdvice(for risque: Risque) {
         let userLanguage = Locale.current

@@ -22,7 +22,7 @@ struct RisqueDetailView: View {
         .listRowSpacing(12)
         .scrollIndicators(.hidden)
         .sheet(item: $store.selectedRisque) { risque in
-            DetailsView(risque: risque)
+            DetailView(risque: risque)
         }
         .onViewDidLoad {
             store.onRisquesDidLoad()
@@ -36,7 +36,7 @@ struct RisqueDetailView: View {
         .environment(EmergencyKitStore())
 }
 
-struct DetailsView: View {
+struct DetailView: View {
     @Environment(GeoRisquesStore.self) var store
     @Environment(\.colorScheme) var colorScheme
     let risque: Risque
@@ -49,12 +49,11 @@ struct DetailsView: View {
                     risqueName: risque.name,
                     isArrowShowing: false
                 )
-                
+                ///Link Gov
                 RoundedRectangle(cornerRadius: 20)
                     .fill(colorScheme == .light ? Color(.systemGray6) : Color(.systemGray5))
-                    .frame(height: 86)
-                    .overlay(
-                        HStack {
+                    .frame(height: 72)
+                    .overlay(HStack {
                             Button(action: {
                                 store.openExternalLink(risque.reference)
                             }) {
@@ -76,9 +75,8 @@ struct DetailsView: View {
                                 Image(systemName: "chevron.right" )
                             }
                             .padding(.horizontal, 16)
-                        }
-                    )
-                
+                        })
+                ///AI Response
                 VStack(alignment: .leading) {
                     Text(LocalizedStringKey("ai-response-title"))
                         .font(.title2)
@@ -122,7 +120,7 @@ struct ListRowView: View {
         HStack {
             Circle()
                 .foregroundStyle(colorScheme == .dark ? .accent : .accent)
-                .opacity(colorScheme == .dark ? 0.9 : 0.5)
+                .opacity(colorScheme == .dark ? 0.9 : 0.7)
                 .frame(width: 50, height: 50)
                 .overlay(
                     Image(iconName)
@@ -133,6 +131,7 @@ struct ListRowView: View {
             
             Text(risqueName)
                 .foregroundStyle(colorScheme == .dark ? .white : .black)
+                .font(.title3)
             Spacer()
             if isArrowShowing {
                 Image(systemName: "chevron.right" )

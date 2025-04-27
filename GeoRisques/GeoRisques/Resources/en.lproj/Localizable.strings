@@ -15,7 +15,7 @@
 
 /* Risques */
 "risk_title" = "Risks";
-"risk_subtitle" = "Around me";
+"risk_subtitle" = "%d Around me";
 "unauthorized" = "Location services are not authorized.";
 "unavailable" = "Location services are unavailable.";
 "not_found" = "Unable to find any risks for the city.";

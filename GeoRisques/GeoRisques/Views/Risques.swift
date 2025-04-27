@@ -76,8 +76,8 @@ struct RisquesListView: View {
                 Text(LocalizedStringKey("risk_title"))
                     .font(.title2)
                     .bold()
-                Text(LocalizedStringKey("risk_subtitle"))
-                    .font(.footnote)
+                Text(String(format: NSLocalizedString("risk_subtitle", comment: ""), store.totalOfRisks()))
+                    .font(.callout)
                     .bold()
                     .foregroundStyle(.secondary)
             }
