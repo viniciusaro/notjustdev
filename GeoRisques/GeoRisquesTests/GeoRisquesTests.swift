@@ -51,4 +51,11 @@ struct GeoRisquesTests {
         print(advice)
         #expect(!advice.isEmpty)
     }
+    
+    @Test("on load risk, show the total of risk")
+    func totalOfRisks() async {
+        let mockTotalOfRisks = Risque.all.count
+        
+        #expect(mockTotalOfRisks == 18)
+    }
 }
