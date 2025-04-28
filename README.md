@@ -1,6 +1,6 @@
 # 🇫🇷 Risko – Know the risks of disasters near you.
 
-**Risko** is an iOS mobile app designed to help French people learn about and better prepare for emergencies and disasters. Initially developed during the [NotJustDev Hackathon](https://www.notjusthack.com) , the app combines reliable public data from the French government's [Géorisques API](https://www.georisks.gouv.fr/doc-api#/) with a touch of AI [Deep Infra](https://deepinfra.com) to provide relevant information in real time.
+**Risko** is an iOS mobile application designed to help people living in French territory learn and better prepare for emergencies and disasters. Initially developed during the [NotJustDev Hackathon](https://www.notjusthack.com), the app combines reliable public data from the French government's [Géorisques API](https://www.georisks.gouv.fr/doc-api#/) with a touch of AI [Deep Infra](https://deepinfra.com) to provide relevant information in real-time.
 
 ---
 
