@@ -9,13 +9,13 @@ final class GeoRisquesStore {
     let locationClient: LocationClient
     let risquesClient: RisquesClient
     let openAIClient: OpenAIClient
-
+    
     /// RiquesDetail Data
     var selectedRisque: Risque? = nil
-    var response: String = ""
-    var isLoading = false {
+    var aiResponse: String = ""
+    var aiResponseIsLoading = false {
         didSet {
-            if isLoading {
+            if aiResponseIsLoading {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     withAnimation(.linear(duration: 1.0).repeatForever(autoreverses: false)) {
                         self.rotateRiskoLogo = true
@@ -27,7 +27,11 @@ final class GeoRisquesStore {
     }
     var rotationAngle: Double = 0
     var rotateRiskoLogo: Bool = false
-
+    
+    /// Rique Seach City Mapa Data
+    var isEditing = false
+    var searchCityText = ""
+    
     init(
         rootState: RootState = RootState(),
         risquesState: RisquesState = RisquesState(),
@@ -42,7 +46,7 @@ final class GeoRisquesStore {
         self.risquesClient = risquesClient
         self.openAIClient = openAIClient
     }
-
+    
     enum Tab: Int {
         case risques
         case emergencyKit
@@ -64,7 +68,6 @@ final class GeoRisquesStore {
         var locationError: LocationClientError?
         var selectedRisque: RisqueDetailState?
         var showLocationAlert: Bool = false
-        
         var position: MapCameraPosition {
             get {
                 return MapCameraPosition.region(
@@ -81,6 +84,7 @@ final class GeoRisquesStore {
                 )
             }
             set {
+
                 // Although this is a Binding, MapCameraPosition
                 // does not allow reading location
                 // information correctly.
@@ -88,10 +92,12 @@ final class GeoRisquesStore {
                 // The correct way is by adding the [onMapCameraChange]
                 // modifier to the view and then reading
                 // the location manually.
+                
             }
         }
     }
     
+    //TODO: Verify is this struct is being used
     struct RisqueDetailState: Equatable, Hashable {
         let risque: Risque
     }
@@ -119,6 +125,7 @@ final class GeoRisquesStore {
         }
     }
     
+    //TODO: Verify is this struct is being used
     func onRisqueButtonTapped(_ risque: Risque) {
         self.risquesState.selectedRisque = .init(risque: risque)
     }
@@ -162,7 +169,45 @@ final class GeoRisquesStore {
             self.risquesState.risquesError = (error as! RisquesClientError)
         }
     }
-
+    
+    func searchCity() {
+        var mapRegion = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(
+                latitude: 45.19358632779559,
+                longitude: 5.7153767705756655
+            ),
+            span: MKCoordinateSpan(
+                latitudeDelta: 0.05,
+                longitudeDelta: 0.05
+            )
+        )
+        
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = searchCityText
+        
+        let search = MKLocalSearch(request: request)
+           search.start { response, error in
+               if let error = error {
+                   print("Search error: \(error.localizedDescription)")
+                   return
+               }
+               
+               guard let coordinate = response?.mapItems.first?.placemark.coordinate else {
+                   print("Location not found")
+                   return
+               }
+               
+               mapRegion.center = coordinate
+               
+               self.risquesState.location = Location(
+                   latitude: mapRegion.center.latitude,
+                   longitude: mapRegion.center.longitude,
+                   latitudeDelta: mapRegion.span.latitudeDelta,
+                   longitudeDelta: mapRegion.span.longitudeDelta
+               )
+           }
+    }
+    
     func openExternalLink(_ url: URL) {
         UIApplication.shared.open(url)
     }
@@ -174,19 +219,19 @@ final class GeoRisquesStore {
     //MARK: - AI
     func fetchAdvice(for risque: Risque) {
         let userLanguage = Locale.current
-        isLoading = true
-        response = ""
+        aiResponseIsLoading = true
+        aiResponse = ""
         let prompt = "Rédigez un résumé d'un paragraphe expliquant ce qu'est le risque de \(risque.name) et décrivez par étapes ce qu'il faut faire en cas de \(risque.name) dans la langue \(userLanguage), s'il vous plaît."
-
+        
         Task {
             do {
                 let advice = try await openAIClient.askAI(prompt: prompt)
-                response = advice
+                aiResponse = advice
             } catch {
                 print("Error detailed: \(error.localizedDescription)")
-                response = "\(LocalizedStringKey("ai-error-response"))"
+                aiResponse = "\(LocalizedStringKey("ai-error-response"))"
             }
-            isLoading = false
+            aiResponseIsLoading = false
         }
     }
 }

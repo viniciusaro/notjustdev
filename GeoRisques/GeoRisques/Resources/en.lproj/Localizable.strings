@@ -20,6 +20,7 @@
 "unavailable" = "Location services are unavailable.";
 "not_found" = "Unable to find any risks for the city.";
 "location_error" = "To use location services, enable on your phone settings";
+"search_city_map" = "Search for a city";
 "settings" = "Settings";
 "cancel" = "Cancel";
 

@@ -93,7 +93,7 @@ struct DetailView: View {
                         )
                         .padding(.bottom, 16)
                     
-                    Text(store.response)
+                    Text(store.aiResponse)
                         .font(.body)
                         .lineSpacing(3.0)
                 }
@@ -101,7 +101,7 @@ struct DetailView: View {
         }
         .scrollIndicators(.hidden)
         .overlay {
-            if store.isLoading {
+            if store.aiResponseIsLoading {
                 RiskoLogo(rotationAngle: (store.rotateRiskoLogo ? 360 : 0))
             }
         }

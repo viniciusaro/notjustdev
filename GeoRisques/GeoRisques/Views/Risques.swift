@@ -38,18 +38,29 @@ struct RisquesMapView: View {
                 .onMapCameraChange { context in
                     store.onMapCameraCanged(context)
                 }
-            Button {
-                store.onLocationButtonTapped()
-            } label: {
-                Image(systemName: "location.fill")
-                    .resizable()
-                    .frame(width: 22, height: 22)
-                    .foregroundStyle(.accent)
-                    .padding(16)
-                    .background(colorScheme == .dark ? .black : .white)
-                    .cornerRadius(100)
+            
+            Spacer ()
+            
+            VStack {
+                Button {
+                    store.onLocationButtonTapped()
+                } label: {
+                    Image(systemName: "location.fill")
+                        .resizable()
+                        .frame(width: 22, height: 22)
+                        .foregroundStyle(.accent)
+                        .padding(16)
+                        .background(colorScheme == .dark ? .black : .white)
+                        .cornerRadius(100)
+                        .shadow(radius: 4)
+                }
+                .padding(.trailing, 16)
+                .padding(.bottom, 112)
             }
-            .padding()
+            
+            
+            SearchBarView()
+                .padding(.bottom, 16)
         }
         .alert(
             LocalizedStringKey("location_error"),
@@ -116,6 +127,89 @@ struct RisquesListView: View {
                 }
             } else {
                 RisqueDetailView()
+            }
+        }
+    }
+}
+
+
+struct SearchBarView: View {
+    @Environment(GeoRisquesStore.self) var store
+    @Environment(\.colorScheme) var colorScheme
+    @FocusState private var searchFieldIsFocused: Bool
+    
+    var body: some View {
+        @Bindable var store = store
+        
+        HStack {
+            if store.isEditing {
+                TextField(
+                    "",
+                    text: $store.searchCityText,
+                    prompt: Text(LocalizedStringKey("search_city_map"))
+                        .foregroundStyle(colorScheme == .dark ? (.white.opacity(0.8)) :(.black.opacity(0.4)))
+                )
+                .focused($searchFieldIsFocused)
+                .focusable(true)
+                .foregroundStyle(colorScheme == .dark ? .white : .accent)
+                .padding(.horizontal)
+                .padding([.top, .bottom], 14)
+                .background(colorScheme == .dark ? .black : .white)
+                .clipShape(RoundedRectangle(cornerRadius:16))
+                .frame(width: UIScreen.main.bounds.width/2.9 * 2, height: 22)
+                .padding()
+                .shadow(radius: 4)
+                .submitLabel(.send)
+                .autocorrectionDisabled(false)
+                .animation(.easeInOut, value: store.isEditing)
+                .transition(.move(edge: .trailing))
+                .onSubmit {
+                    withAnimation {
+                        store.searchCity()
+                        store.isEditing = false
+                        store.searchCityText = ""
+                    }
+                }
+                
+                Button(action: {
+                    withAnimation {
+                        store.isEditing = false
+                        store.searchCityText = ""
+                    }
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .frame(width: 22, height: 22)
+                        .foregroundStyle(.accent)
+                        .padding(16)
+                        .background(colorScheme == .dark ? .black : .white)
+                        .cornerRadius(100)
+                        .shadow(radius: 4)
+                }
+            } else {
+                Button(action: {
+                    withAnimation {
+                        store.isEditing = true
+                        searchFieldIsFocused = true
+                    }
+                }) {
+                    Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .frame(width: 22, height: 22)
+                        .foregroundStyle(.accent)
+                        .padding(16)
+                        .background(colorScheme == .dark ? .black : .white)
+                        .cornerRadius(100)
+                        .shadow(radius: 4)
+                }
+            }
+        }
+        .padding()
+        .onChange(of: store.isEditing) { oldValue, newValue in
+            if oldValue {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    searchFieldIsFocused = true
+                }
             }
         }
     }

@@ -20,6 +20,7 @@
 "unavailable" = "Les services de localisation ne sont pas disponibles";
 "not_found" = "Impossible de trouver des risques pour la ville.";
 "location_error" = "Pour utiliser les services de localisation, activez-les dans les paramètres de votre téléphone";
+"search_city_map" = "Rechercher une ville";
 "settings" = "Paramètres";
 "cancel" = "Annuler";
 
