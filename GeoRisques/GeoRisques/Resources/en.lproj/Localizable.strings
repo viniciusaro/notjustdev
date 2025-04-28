@@ -1,0 +1,141 @@
+/* Root */
+"risk_tab" = "Risks";
+"kit_tab" = "Emergency Kit";
+"plus_tab" = "More Infos";
+"instruction_tab" = "How to Act";
+"splach_screen" = "Know the risks of disasters near you.";
+
+/*Onboarding*/
+"tag0_title" = "Welcome to Risko";
+"tag0_subtitle" = "Knowing the risks means being prepared for them.";
+"tag1_title" = "Real-time geographic risks";
+"tag1_subtitle" = "Using official data, discover the types of disasters that could affect your current location or freely explore the map.";
+"tag2_title" = "Act with the right reflexes";
+"tag2_subtitle" = "Using an openAI, consult advice based on the type of disaster.";
+"onboarding_button" = "Here we go!";
+
+/* Risques */
+"risk_title" = "Risks";
+"risk_subtitle" = "%d Around me";
+"unauthorized" = "Location services are not authorized.";
+"unavailable" = "Location services are unavailable.";
+"not_found" = "Unable to find any risks for the city.";
+"location_error" = "To use location services, enable on your phone settings";
+"search_city_map" = "Search for a city";
+"settings" = "Settings";
+"cancel" = "Cancel";
+
+/* Risque Detail*/
+"detail_detail" = "Detailed information";
+"ai-name" = "AI-generated response that may make mistakes. Check important information.";
+"ai-response-title" = "Definition of risk and what to do?";
+"ai-error-response" = "Error while consulting AI";
+"linkExtern" = "More information on the official Géorisque website.";
+
+/* Emergency Kit Intro */
+"intro_continue_button" = "Continue";
+
+"intro_kit_title" = "My 72-Hour Emergency Kit";
+"intro_kit_subtitle" = "In the event of a crisis, authorities may ask you to leave your home immediately or to remain in your home until emergency services arrive. It is recommended that you prepare a bag containing enough food to survive for three days on your own.";
+
+"prepare_kit_title" = "Your family's needs";
+"prepare_kit_subtitle" = "Identify the needs of each member of your family. Once this is done, you'll be ready to determine exactly what should be included in your kit.";
+
+"equip_kit_title" = "Collect all essential items";
+"equip_kit_subtitle" = "Based on your checklist, start collecting all the essential items to spend 72 hours on your own.";
+
+"check_kit_title" = "Check the contents of your kit";
+"check_kit_subtitle" = "Every 6 months to make sure nothing has expired and your family's needs haven't changed.";
+
+/* Family Member */
+"start_kit_button" = "Prepare the emergency kit";
+"members_title" = "Family members";
+"members_subtitle" = "Create your emergency kit based on the number of members in your family";
+
+"Adultes" = "Adults";
+"Bébés" = "Babies";
+"Enfants" = "Children";
+"Animaux" = "Pets";
+
+/* Checklist */
+"empty_state" = "You have not added any members to your family.";
+"checklist_title" = "72-Hour Emergency Kit";
+"open_family_button" = "Family";
+"essential_kit_title" = "Essential items";
+"baby_kit_title" = "For babies";
+"pet_kit_title" = "For animals";
+"kit_subtitle" = "Select the items you have for your emergency kit";
+
+/* Essential Kit Types */
+"kitEssentialType.water" = "Bottled water (6l person, 2l animal)";
+"kitEssentialType.food" = "Non-perishable food";
+"kitEssentialType.canOpener" = "Can opener";
+"kitEssentialType.radio" = "Battery-operated radio";
+"kitEssentialType.flashlight" = "Battery-powered flashlight";
+"kitEssentialType.batery" = "Batery";
+"kitEssentialType.matches" = "Candles and matches";
+"kitEssentialType.firstAid" = "First aid kit";
+"kitEssentialType.warmClothes" = "Warm clothes";
+"kitEssentialType.emergencyBlanket" = "Emergency Blanket (1 per member)";
+"kitEssentialType.whistle" = "Whistle (1 per person)";
+"kitEssentialType.mask" = "Masl (1 per person)";
+"kitEssentialType.toiletPaper" = "Toilet Paper";
+"kitEssentialType.chargers" = "Phone chargers";
+"kitEssentialType.game" = "Games";
+"kitEssentialType.emergencyContacts" = "Emergency Contacts";
+"kitEssentialType.localMap" = "Local Map";
+"kitEssentialType.doubleKey" = "Double Key";
+"kitEssentialType.cash" = "Cash";
+"kitEssentialType.importantDocuments" = "Importants Documents";
+
+/* Baby Kit Types */
+"kitBabyType.food" = "Baby food";
+"kitBabyType.diapers" = "Diapers";
+"kitBabyType.wipes" = "Wipes";
+"kitBabyType.babyBottle" = "Baby bottle";
+"kitBabyType.pacifier" = "Pacifier";
+"kitBabyType.babyBlanket" = "Baby blanket";
+"kitBabyType.babyToy" = "Baby toys";
+
+/* Pet Kit Types */
+"kitPetType.petBlanket" = "Blanket";
+"kitPetType.petFood" = "Pet food";
+"kitPetType.bowl" = "Bowl";
+"kitPetType.leash" = "Leash";
+"kitPetType.petToy" = "Pet toys";
+
+/*PlusInfos*/
+"privacy-title" = "Privacy Policy";
+"privacy-text" = "Risko does not collect, store, or share any personally identifiable information. \n\nThe app only uses the device's location services to display local geographic risks, without storing this information. \n\nSome features of the app use artificial intelligence provided by the OpenAI Deep Infra API. \n\nRequests sent to this service may include non-personal data to generate contextual responses. \n\nNo personal or sensitive information is intentionally shared with third parties. \n\nWe respect your privacy and do everything we can to ensure the security and confidentiality of your experience. \n\nFor any questions, please contact us.";
+
+/*AboutRisko*/
+"about-title" = "About Risko";
+"about-text" = "Risko was designed to help residents of France stay informed and better prepare for emergencies and disasters. \n\nInitially developed during the NotJustDev hackathon, the app combines reliable public data from the French government's Géorisques API with a touch of Deep Infra AI to provide relevant information in real time. \n\nCreate with lots of coffee, sleepless nights and lots of motivation. \n\n🇧🇷 Developed by Cris and Vini.";
+"about-contact" = "Contact Us \niosappproduct@gmail.com";
+"about-help" = "By us a beer 🍻?";
+
+/*EmergencyNumbers*/
+"emergency-numbers-title" = "Emergency Numbers";
+"emergency-numbers-subtitle" = "To dial in case of emergency";
+"112-text" = "European Emergency Number";
+"114-text" = "Hearing impaired Emergency Number";
+"samu-text" = "SAMU";
+"police-text" = "Police";
+"pompiers-text" = "Fire Department";
+"call-button" = "Call";
+
+/*OficialInfos*/
+"oficialInfos-title" = "Get informed";
+"oficialInfos-subtitle" = "Visit the official websites for more in-depth information.";
+"fr-alert-link" = "FR-Alert \nAllows real-time alerts to anyone with a mobile phone.";
+"vigicrues-link" = "Flood Warnings \nMonitor flood risks on the main waterways in France.";
+"vigilance-meteo-link" = "Météo France Alert \Stay informed of potential weather hazards with Alert.";
+"sirene-alert-link" = "The warning siren \nLearn how warning sirens work in the event of an incident.";
+"consignes-link" = "Instructions to follow \nAttitudes to adopt during and after an emergency situation.";
+
+/*PlusInfos*/
+"oficial-webSites" = "Stay informed";
+"emergency-number" = "Emergency Numbers";
+"about-risko" = "About Risko";
+"privacy" = "Privacy Policy";
+

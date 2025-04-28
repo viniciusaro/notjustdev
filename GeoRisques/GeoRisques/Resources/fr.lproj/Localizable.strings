@@ -1,0 +1,142 @@
+/* Root */
+"risk_tab" = "Risques";
+"kit_tab" = "Kit d'Urgence";
+"plus_tab" = "Plus";
+"instruction_tab" = "Comment Agir";
+"splach_screen" = "Connaître les risques de catastrophes près de chez vous.";
+
+/*Onboarding*/
+"tag0_title" = "Bienvenue dans Risko";
+"tag0_subtitle" = "Connaître les risques, c’est déjà s’y préparer.";
+"tag1_title" = "Risques géographiques en temps réel";
+"tag1_subtitle" = "Grâce aux données officielles, découvrez les types de catastrophes qui peuvent toucher votre localisation actuelle ou explorez librement la carte.";
+"tag2_title" = "Agissez avec le bon réflexe";
+"tag2_subtitle" = "Utilisez une openAI pour consulter des conseils selon le type de catastrophe.";
+"onboarding_button" = "C'est parti !";
+
+/* Risques */
+"risk_title" = "Risques";
+"risk_subtitle" = "%d Autour de moi";
+"unauthorized" = "Les services de localisation ne sont pas autorisés.";
+"unavailable" = "Les services de localisation ne sont pas disponibles";
+"not_found" = "Impossible de trouver des risques pour la ville.";
+"location_error" = "Pour utiliser les services de localisation, activez-les dans les paramètres de votre téléphone";
+"search_city_map" = "Rechercher une ville";
+"settings" = "Paramètres";
+"cancel" = "Annuler";
+
+/* Risque Detail*/
+"detail_detail" = "Info détaillées";
+"ai-name" = "Réponse générées par l'IA pouvant contenir des erreurs. Vérifiez les informations importantes.";
+"ai-response-title" = "Définition du risque et que faire?";
+"ai-error-response" = "Erreur lors de la consultation de l'IA";
+"linkExtern" = "Plus d'informations sur le site officiel Géorisque.";
+
+/* Emergency Kit Intro */
+"intro_continue_button" = "Continuer";
+
+"intro_kit_title" = "Mon kit d’urgence 72h";
+"intro_kit_subtitle" = "En cas de crise, les autorités peuvent vous demander de quitter immédiatement votre domicile ou de rester chez vous jusqu'à l'arrivée des secours. Il est recommandé d'avoir préparé un sac contenant de quoi vivre pendant 3 jours en autonomie.";
+
+"prepare_kit_title" = "Les besoins de votre famille";
+"prepare_kit_subtitle" = "Identifiez les besoins de chaque membre de votre famille. Une fois cela fait, vous serez prêt à déterminer exactement ce qui doit être inclus dans votre kit.";
+
+"equip_kit_title" = "Collecter tous les objets essentiels";
+"equip_kit_subtitle" = "En fonction de votre checklist, commencez à collecter tous les objets essentiels pour passer 72h en autonomie.";
+
+"check_kit_title" = "Vérifiez le contenu de votre kit";
+"check_kit_subtitle" = "Tous les 6 mois pour vous assurer que rien n'est périmé et que les besoins de votre famille n'ont pas changé.";
+
+/* Family Member */
+"start_kit_button" = "Préparer le kit d'urgence";
+"members_title" = "Membres de la famille";
+"members_subtitle" = "Créez votre kit d’urgence en fonction du nombre de membres de votre famille";
+
+"Adultes" = "Adultes";
+"Bébés" = "Bébés";
+"Enfants" = "Enfants";
+"Animaux" = "Animaux";
+
+/* Checklist */
+"empty_state" = "Vous n'avez ajouté aucun membre à votre famille.";
+"checklist_title" = "Kit d’urgence 72h";
+"open_family_button" = "Famille";
+"essential_kit_title" = "Les articles essentiels";
+"baby_kit_title" = "Pour les bébés";
+"pet_kit_title" = "Pour les animaux";
+"kit_subtitle" = "Sélectionner les articles que vous avez pour votre kit d’urgence";
+
+
+/* Essential Kit Types */
+"kitEssentialType.water" = "Eau en bouteille (6l personne, 2l animal)";
+"kitEssentialType.food" = "Nourriture non périssable";
+"kitEssentialType.canOpener" = "Ouvre-boîte";
+"kitEssentialType.radio" = "Radio à piles";
+"kitEssentialType.flashlight" = "Lampe de poche à piles";
+"kitEssentialType.batery" = "Piles";
+"kitEssentialType.matches" = "Bougies et allumettes";
+"kitEssentialType.firstAid" = "Trousse de premiers secours";
+"kitEssentialType.warmClothes" = "Vêtements chauds";
+"kitEssentialType.emergencyBlanket" = "Couvertures de survie (1 par membre)";
+"kitEssentialType.whistle" = "Sifflet (1 par personne)";
+"kitEssentialType.mask" = "Masque (1 par personne)";
+"kitEssentialType.toiletPaper" = "Papier toilette";
+"kitEssentialType.chargers" = "Chargeurs de téléphone";
+"kitEssentialType.game" = "Jeux";
+"kitEssentialType.emergencyContacts" = "Contacts d'urgence";
+"kitEssentialType.localMap" = "Carte locale";
+"kitEssentialType.doubleKey" = "Clé double";
+"kitEssentialType.cash" = "Argent liquide";
+"kitEssentialType.importantDocuments" = "Documents importants";
+
+/* Baby Kit Types */
+"kitBabyType.food" = "Nourriture pour les bébés";
+"kitBabyType.diapers" = "Couches";
+"kitBabyType.wipes" = "Lingettes";
+"kitBabyType.babyBottle" = "Biberon";
+"kitBabyType.pacifier" = "Sucette";
+"kitBabyType.babyBlanket" = "Couverture";
+"kitBabyType.babyToy" = "Jouets pour bébés";
+
+/* Pet Kit Types */
+"kitPetType.petBlanket" = "Couverture";
+"kitPetType.petFood" = "Nourriture pour les animaux";
+"kitPetType.bowl" = "Gamelle";
+"kitPetType.leash" = "Laisse";
+"kitPetType.petToy" = "Jouets pour les animaux";
+
+/*PlusInfos*/
+"privacy-title" = "Politique de confidentialité";
+"privacy-text" = "Risko does not collect, store, or share any personally identifiable information. \n\nThe app only uses the device's location services to display local geographic risks, without storing this information. \n\nSome features of the app use artificial intelligence provided by the OpenAI Deep Infra API. \n\nRequests sent to this service may include non-personal data to generate contextual responses. \n\nNo personal or sensitive information is intentionally shared with third parties. \n\nWe respect your privacy and do everything we can to ensure the security and confidentiality of your experience. \n\nFor any questions, please contact us.";
+
+/*AboutRisko*/
+"about-title" = "À propos de Risko";
+"about-text" = "Risko a été créé pour aider les personnes en France à apprendre et à mieux se préparer aux situations d'urgence et aux catastrophes. \n\nInitialement développée lors du hackathon NotJustDev, l'application combine des données publiques fiables provenant de l'API Géorisques du gouvernement français avec une touche d'IA Deep Infra pour fournir des informations pertinentes en temps réel. \n\nCrée avec beaucoup de café, des nuits blanches et beaucoup de motivation. \n\n🇧🇷 Développé par Cris et Vini.";
+"about-contact" = "Contactez-nous \niosappproduct@gmail.com";
+"about-help" = "Offrez-nous une bière 🍻 ?";
+
+/*EmergencyNumbers*/
+"emergency-numbers-title" = "Numéros d'urgence";
+"emergency-numbers-subtitle" = "À composer en cas d'urgence";
+"112-text" = "Numéro \nd'urgence européen";
+"114-text" = "Numéro \nd'urgence des malentendants";
+"samu-text" = "SAMU";
+"police-text" = "Police";
+"pompiers-text" = "Pompiers";
+"call-button" = "Appel";
+
+/*OficialInfos*/
+"oficialInfos-title" = "Se informer";
+"oficialInfos-subtitle" = "Visitez les sites officiels pour des \ninformations plus approfondies.";
+"fr-alert-link" = "FR-Alert \nPermet de prévenir en temps réel toute personne détentrice d’un téléphone portable.";
+"vigicrues-link" = "Vigicrues \nSurveillez les risques de crues des principaux cours d'eau en France.";
+"vigilance-meteo-link" = "Vigilance Météo France \nRestez informé des dangers météorologiques potentiels avec la Vigilance.";
+"sirene-alert-link" = "La sirène d’alerte \nApprenez comment fonctionnent les sirènes d'alerte en cas d'incident.";
+"consignes-link" = "Les consignes à respecter \nLes attitudes à adopter pendant et après une situation d’urgence.";
+
+
+/*PlusInfos*/
+"oficial-webSites" = "Se informer";
+"emergency-number" = "Numéros d'urgence";
+"about-risko" = "À propos de Risko";
+"privacy" = "Politique de confidentialité";
