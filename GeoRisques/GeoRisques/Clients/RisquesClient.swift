@@ -1,28 +1,27 @@
-enum RisquesClientError: Error {
+enum RisksClientError: Error {
     case notFound
 }
 
-protocol RisquesClient {
-    func risques(at location: Location) async throws -> ([Risque], String?)
+protocol RisksClient {
+    func risks(at location: Location) async throws -> ([Risk], String?)
 }
 
-struct FixedRisquesClient: RisquesClient {
-    let risques: [Risque]
+struct FixedRisksClient: RisksClient {
+    let risks: [Risk]
     let community: String?
     
-    init(risques: [Risque], community: String? = nil) {
-        self.risques = risques
+    init(risks: [Risk], community: String? = nil) {
+        self.risks = risks
         self.community = community
     }
     
-    func risques(at location: Location) async throws -> ([Risque], String?) {
-        return (risques, community)
+    func risks(at location: Location) async throws -> ([Risk], String?) {
+        return (risks, community)
     }
 }
 
-
-struct UnimplementedRisquesClient: RisquesClient {
-    func risques(at location: Location) async throws -> ([Risque], String?) {
+struct UnimplementedRisksClient: RisksClient {
+    func risks(at location: Location) async throws -> ([Risk], String?) {
         throw UnimplementedError()
     }
 }

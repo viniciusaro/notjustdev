@@ -17,6 +17,6 @@ struct RiskoLogo: View {
 
 #Preview {
     RiskoLogo(rotationAngle: 0)
-        .environment(GeoRisquesStore())
+        .environment(GeoRisksStore())
         .environment(EmergencyKitStore())
 }

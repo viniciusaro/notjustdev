@@ -85,7 +85,6 @@ struct FamilyMemberSheet: View {
 }
 
 struct TitleBarView: View {
-    @Environment(EmergencyKitStore.self) var store
     let text: LocalizedStringKey
     let label: String
     let onTap: () -> Void
@@ -95,6 +94,7 @@ struct TitleBarView: View {
             Spacer()
             Text(text)
                 .font(.title3)
+                .bold()
             Spacer()
             Button(action: onTap) {
                 Text(label)
@@ -195,5 +195,3 @@ struct PetKit: View {
         }
     }
 }
-
-

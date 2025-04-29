@@ -3,15 +3,15 @@ import SwiftUI
 import Observation
 
 @Observable
-final class GeoRisquesStore {
+final class GeoRisksStore {
     var rootState: RootState
-    var risquesState: RisquesState
+    var risksState: RisksState
     let locationClient: LocationClient
-    let risquesClient: RisquesClient
+    let risksClient: RisksClient
     let openAIClient: OpenAIClient
     
     /// RiquesDetail Data
-    var selectedRisque: Risque? = nil
+    var selectedRisk: Risk? = nil
     var aiResponse: String = ""
     var aiResponseIsLoading = false {
         didSet {
@@ -34,39 +34,39 @@ final class GeoRisquesStore {
     
     init(
         rootState: RootState = RootState(),
-        risquesState: RisquesState = RisquesState(),
+        risksState: RisksState = RisksState(),
         locationClient: LocationClient = FixedLocationClient(location: .grenoble),
-        risquesClient: RisquesClient = FixedRisquesClient(risques: Risque.all, community: "GRENOBLE"),
-        //TODO: Put back OpenAIClientLive()
-        openAIClient: OpenAIClient = OpenAIClientMock()
+        risksClient: RisksClient = FixedRisksClient(risks: Risk.all, community: "GRENOBLE"),
+        openAIClient: OpenAIClient = OpenAIClientLive()
     ) {
         self.rootState = rootState
-        self.risquesState = risquesState
+        self.risksState = risksState
         self.locationClient = locationClient
-        self.risquesClient = risquesClient
+        self.risksClient = risksClient
         self.openAIClient = openAIClient
     }
     
     enum Tab: Int {
-        case risques
+        case risks
         case emergencyKit
+        case plusInfos
     }
     
     struct RootState {
-        var selectedTab: Tab = .risques
+        var selectedTab: Tab = .risks
         
-        init(selectedTab: Tab = .risques) {
+        init(selectedTab: Tab = .risks) {
             self.selectedTab = selectedTab
         }
     }
     
-    struct RisquesState {
-        var risques: [Risque] = []
-        var risquesError: RisquesClientError?
-        var risquesDescription: String = "..."
+    struct RisksState {
+        var risks: [Risk] = []
+        var risksError: RisksClientError?
+        var risksDescription: String = "..."
         var location: Location = .france
         var locationError: LocationClientError?
-        var selectedRisque: RisqueDetailState?
+        var selectedRisks: RisksDetailState?
         var showLocationAlert: Bool = false
         var position: MapCameraPosition {
             get {
@@ -98,75 +98,78 @@ final class GeoRisquesStore {
     }
     
     //TODO: Verify is this struct is being used
-    struct RisqueDetailState: Equatable, Hashable {
-        let risque: Risque
+    struct RisksDetailState: Equatable, Hashable {
+        let risks: Risk
     }
     
-    func onRisquesDidLoad() {
+    func onRisksDidLoad() {
         Task {
             await reloadLocation()
-            await reloadRisques()
+            await reloadRisks()
         }
     }
     
     func onMapCameraCanged(_ context: MapCameraUpdateContext) {
-        guard self.risquesState.location != .zero else {
+        guard self.risksState.location != .zero else {
             return
         }
         
-        self.risquesState.location = Location(
+        self.risksState.location = Location(
             latitude: context.region.center.latitude,
             longitude: context.region.center.longitude,
             latitudeDelta: context.region.span.latitudeDelta,
             longitudeDelta: context.region.span.longitudeDelta,
         )
         Task {
-            await reloadRisques()
+            await reloadRisks()
         }
     }
     
     //TODO: Verify is this struct is being used
-    func onRisqueButtonTapped(_ risque: Risque) {
-        self.risquesState.selectedRisque = .init(risque: risque)
+    func onRisksButtonTapped(_ risk: Risk) {
+        self.risksState.selectedRisks = .init(risks: risk)
     }
     
     func onLocationButtonTapped() {
-        if self.risquesState.locationError == .unauthorized {
-            self.risquesState.showLocationAlert = true
+        let authorizationStatus = CLLocationManager().authorizationStatus
+        
+        if authorizationStatus == .denied || authorizationStatus == .restricted {
+            self.risksState.showLocationAlert = true
+            return
         }
         
         Task {
             await reloadLocation()
-            await reloadRisques()
+            await reloadRisks()
         }
     }
     
     func onLocationAlertDismisButtonTapped() {
-        self.risquesState.showLocationAlert = false
+        self.risksState.showLocationAlert = false
     }
     
     private func reloadLocation() async {
         do {
             let location = try await locationClient.location()
             withAnimation {
-                self.risquesState.location = location
+                self.risksState.location = location
             }
         } catch {
             // exit application if cast fails
-            self.risquesState.locationError = (error as! LocationClientError)
+            self.risksState.locationError = (error as! LocationClientError)
         }
     }
     
-    private func reloadRisques() async {
+    private func reloadRisks() async {
         do {
-            let location = self.risquesState.location
-            self.risquesState.risquesError = nil
-            let (risques, community) = try await risquesClient.risques(at: location)
-            self.risquesState.risques = risques
-            self.risquesState.risquesDescription = community ?? "(\(location.latitude), \(location.longitude))"
+            let location = self.risksState.location
+            self.risksState.risksError = nil
+            let (risks, community) = try await risksClient.risks(at: location)
+            self.risksState.risks = risks
+            self.risksState.risksDescription = community ?? "(\(location.latitude), \(location.longitude))"
         } catch {
             // exit application if cast fails
-            self.risquesState.risquesError = (error as! RisquesClientError)
+            self.risksState.risksError = (error as! RisksClientError)
         }
     }
     
@@ -199,7 +202,7 @@ final class GeoRisquesStore {
                
                mapRegion.center = coordinate
                
-               self.risquesState.location = Location(
+               self.risksState.location = Location(
                    latitude: mapRegion.center.latitude,
                    longitude: mapRegion.center.longitude,
                    latitudeDelta: mapRegion.span.latitudeDelta,
@@ -213,15 +216,15 @@ final class GeoRisquesStore {
     }
     
     func totalOfRisks() -> Int {
-        risquesState.risques.count
+        risksState.risks.count
     }
     
     //MARK: - AI
-    func fetchAdvice(for risque: Risque) {
+    func fetchAdvice(for risk: Risk) {
         let userLanguage = Locale.current
         aiResponseIsLoading = true
         aiResponse = ""
-        let prompt = "Rédigez un résumé d'un paragraphe expliquant ce qu'est le risque de \(risque.name) et décrivez par étapes ce qu'il faut faire en cas de \(risque.name) dans la langue \(userLanguage), s'il vous plaît."
+        let prompt = "Rédigez un résumé d'un paragraphe expliquant ce qu'est le risque de \(risk.name) et décrivez par étapes ce qu'il faut faire en cas de \(risk.name) dans la langue \(userLanguage), s'il vous plaît."
         
         Task {
             do {

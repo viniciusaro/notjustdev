@@ -20,7 +20,7 @@ extension Location {
     )
 }
 
-extension Risque {
+extension Risk {
     static let all = naturalDisasters
     
     static let naturalDisasters = [
@@ -44,128 +44,130 @@ extension Risque {
         risqueIndustriel,
     ]
     
-    static let empty: [Risque] = []
+    static let empty: [Risk] = []
     
-    static let crueTorrentielle = Risque(
+    static let crueTorrentielle = Risk(
         name: "Radon",
         description: lipsumDescription,
         reference: reference,
         kind: .radon
     )
 
-    static let risqueIndustriel = Risque(
+    static let risqueIndustriel = Risk(
         name: "risque Industriel",
         description: lipsumDescription,
         reference: reference,
         kind: .risqueIndustriel
     )
 
-    static let effetDeSurpression = Risque(
+    static let effetDeSurpression = Risk(
         name: "effet De Surpression",
         description: lipsumDescription,
         reference: reference,
         kind: .effetDeSurpression
     )
 
-    static let defaultRisk = Risque(
+    static let defaultRisk = Risk(
         name: "defaultRisk",
         description: lipsumDescription,
         reference: reference,
         kind: .defaultRisk
     )
 
-    static let seisme = Risque(
+    static let seisme = Risk(
+
         name: "effet Toxique",
         description: "short description",
         reference: reference,
         kind: .effetToxique
     )
     
-    static let mouvementDeTerrain = Risque(
+    static let mouvementDeTerrain = Risk(
         name: "effet Thermique",
         description: lipsumDescription,
         reference: reference,
         kind: .effetThermique
     )
-    
-    static let feuDeForet = Risque(
+
+    static let feuDeForet = Risk(
         name: "tassements Differentiels",
         description: lipsumDescription,
         reference: reference,
         kind: .tassementsDifferentiels
     )
     
-    static let submersionMarine = Risque(
+    static let submersionMarine = Risk(
         name: "submersion Marine",
         description: lipsumDescription,
         reference: reference,
         kind: .submersionMarine
     )
-
-    static let tempeteEtGrainsVent = Risque(
+    
+    static let tempeteEtGrainsVent = Risk(
         name: "tempete Et GrainsVent",
         description: lipsumDescription,
         reference: reference,
         kind: .tempeteEtGrainsVent
     )
 
-    static let avanceeDunaire = Risque(
+    static let avanceeDunaire = Risk(
+
         name: "avancee Dunaire",
         description: "short description",
         reference: reference,
         kind: .avanceeDunaire
     )
 
-    static let foudre = Risque(
+    static let foudre = Risk(
         name: "foudre",
         description: lipsumDescription,
         reference: reference,
         kind: .foudre
     )
 
-    static let grele = Risque(
+    static let grele = Risk(
         name: "grele",
         description: lipsumDescription,
         reference: reference,
         kind: .grele
     )
 
-    static let neigeEtPluiesVerglacantes = Risque(
+    static let neigeEtPluiesVerglacantes = Risk(
         name: "neige Et Pluies Verglacantes",
         description: lipsumDescription,
         reference: reference,
         kind: .neigeEtPluiesVerglacantes
     )
 
-    static let effetToxique = Risque(
+    static let effetToxique = Risk(
         name: "effet Toxique",
         description: lipsumDescription,
         reference: reference,
         kind: .effetToxique
     )
 
-    static let effondrementsGeneralises = Risque(
+    static let effondrementsGeneralises = Risk(
         name: "effondrements Generalises",
         description: lipsumDescription,
         reference: reference,
         kind: .effondrementsGeneralises
     )
 
-    static let affaissementMinier = Risque(
+    static let affaissementMinier = Risk(
         name: "affaissement Minier",
         description: lipsumDescription,
         reference: reference,
         kind: .affaissementMinier
     )
 
-    static let enginsDeGuerre = Risque(
+    static let enginsDeGuerre = Risk(
         name: "engins De Guerre",
         description: lipsumDescription,
         reference: reference,
         kind: .enginsDeGuerre
     )
 
-    static let phenomeneLieAlAtmosphere = Risque(
+    static let phenomeneLieAlAtmosphere = Risk(
         name: "phenomene Lie A lAtmosphere",
         description: lipsumDescription,
         reference: reference,
@@ -328,4 +330,34 @@ extension OpenAIResponse {
                    ),
         ]
     )
+}
+
+extension PlusInfoLink {
+    static let infoLinks: [PlusInfoLink] = [
+        PlusInfoLink(
+            image: "france-alert-logo",
+            description: LocalizedStringKey("fr-alert-link"),
+            url: "https://fr-alert.gouv.fr"
+        ),
+        PlusInfoLink(
+            image: "vigicrues-logo",
+            description: LocalizedStringKey("vigicrues-link"),
+            url: "https://www.vigicrues.gouv.fr"
+        ),
+        PlusInfoLink(
+            image: "vigilance-logo",
+            description: LocalizedStringKey("vigilance-meteo-link"),
+            url: "https://vigilance.meteofrance.fr/fr"
+        ),
+        PlusInfoLink(
+            image: "sirene-alert-logo",
+            description: LocalizedStringKey("sirene-alert-link"),
+            url: "https://www.lesbonsreflexes.com/les-moyens-dalerte/"
+        ),
+        PlusInfoLink(
+            image: "FrenchGov",
+            description: LocalizedStringKey("consignes-link"),
+            url: "https://www.lesbonsreflexes.com/les-bons-reflexes-en-cas-dalerte/"
+        )
+    ]
 }

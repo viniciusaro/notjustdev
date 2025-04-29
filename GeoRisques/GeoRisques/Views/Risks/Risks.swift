@@ -1,40 +1,40 @@
 import MapKit
 import SwiftUI
 
-struct RisquesView: View {
-    @Environment(GeoRisquesStore.self) var store
+struct RisksView: View {
+    @Environment(GeoRisksStore.self) var store
     
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                RisquesMapView()
-                RisquesListView()
+                RisksMapView()
+                RisksListView()
             }
             .onViewDidLoad {
-                store.onRisquesDidLoad()
+                store.onRisksDidLoad()
             }
             .toolbar(.hidden)
         }
     }
 }
 
-#Preview("Risques - Unauthorized Location") {
+#Preview("Risks - Unauthorized Location") {
     let locationClient = ErrorLocationClient(error: .unauthorized)
     
-    return RisquesView()
-        .environment(GeoRisquesStore(locationClient: locationClient))
+    return RisksView()
+        .environment(GeoRisksStore(locationClient: locationClient))
         .environment(EmergencyKitStore())
 }
 
-struct RisquesMapView: View {
-    @Environment(GeoRisquesStore.self) var store
+struct RisksMapView: View {
+    @Environment(GeoRisksStore.self) var store
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         @Bindable var store = store
         
         ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
-            Map(position: $store.risquesState.position)
+            Map(position: $store.risksState.position)
                 .onMapCameraChange { context in
                     store.onMapCameraCanged(context)
                 }
@@ -64,7 +64,7 @@ struct RisquesMapView: View {
         }
         .alert(
             LocalizedStringKey("location_error"),
-            isPresented: $store.risquesState.showLocationAlert
+            isPresented: $store.risksState.showLocationAlert
         ) {
             Button(LocalizedStringKey("settings")) {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
@@ -76,8 +76,8 @@ struct RisquesMapView: View {
     }
 }
 
-struct RisquesListView: View {
-    @Environment(GeoRisquesStore.self) var store
+struct RisksListView: View {
+    @Environment(GeoRisksStore.self) var store
     
     var body: some View {
         @Bindable var store = store
@@ -95,7 +95,7 @@ struct RisquesListView: View {
             
             Spacer()
             
-            Text(store.risquesState.risquesDescription)
+            Text(store.risksState.risksDescription)
                 .font(.footnote)
                 .bold()
                 .padding(.horizontal, 24)
@@ -111,14 +111,14 @@ struct RisquesListView: View {
         .padding(.vertical, 6)
         
         VStack() {
-            if store.risquesState.risquesError != nil {
+            if store.risksState.risksError != nil {
                 List {
                     HStack(spacing: 16) {
                         Image("risks_not_found")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 32, height: 32)
-                        Text(LocalizedStringKey("Impossible de trouver des risques pour la ville."))
+                        Text(LocalizedStringKey("not_found"))
                             .multilineTextAlignment(.leading)
                             .font(.subheadline)
                             .foregroundStyle(.accent)
@@ -126,7 +126,7 @@ struct RisquesListView: View {
                     .padding(.vertical, 8)
                 }
             } else {
-                RisqueDetailView()
+                RisksDetailView()
             }
         }
     }
@@ -134,7 +134,7 @@ struct RisquesListView: View {
 
 
 struct SearchBarView: View {
-    @Environment(GeoRisquesStore.self) var store
+    @Environment(GeoRisksStore.self) var store
     @Environment(\.colorScheme) var colorScheme
     @FocusState private var searchFieldIsFocused: Bool
     
