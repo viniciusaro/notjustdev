@@ -88,6 +88,11 @@ final class EmergencyKitStore {
 
 
     /// Checklist logics
+    func allAreZero() -> Bool {
+        memberTypes.map { memberCount[$0] ?? 0 }
+            .allSatisfy { $0 == 0 }
+    }
+
     func createKitEssential() -> [KitEssentialType] {
         guard memberCount[.adult, default: 0] > 0 else { return [] }
         return KitEssentialType.allCases

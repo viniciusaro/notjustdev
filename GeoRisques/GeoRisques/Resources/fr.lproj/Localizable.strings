@@ -15,19 +15,20 @@
 
 /* Risques */
 "risk_title" = "Risques";
-"risk_subtitle" = "Autour de moi";
+"risk_subtitle" = "%d Autour de moi";
 "unauthorized" = "Les services de localisation ne sont pas autorisés.";
 "unavailable" = "Les services de localisation ne sont pas disponibles";
-"not_found" = "Aucun risque trouvé";
+"not_found" = "Impossible de trouver des risques pour la ville.";
 "location_error" = "Pour utiliser les services de localisation, activez-les dans les paramètres de votre téléphone";
 "settings" = "Paramètres";
 "cancel" = "Annuler";
 
 /* Risque Detail*/
 "detail_detail" = "Info détaillées";
-"ai-name" = "Réponse générée par l'intelligence artificielle Deep Infra";
+"ai-name" = "Réponse générées par l'IA pouvant contenir des erreurs. Vérifiez les informations importantes.";
 "ai-response-title" = "Définition du risque et que faire?";
 "ai-error-response" = "Erreur lors de la consultation de l'IA";
+"linkExtern" = "Plus d'informations sur le site officiel Géorisque.";
 
 /* Emergency Kit Intro */
 "intro_continue_button" = "Continuer";
@@ -55,6 +56,7 @@
 "Animaux" = "Animaux";
 
 /* Checklist */
+"empty_state" = "Vous n'avez ajouté aucun membre à votre famille.";
 "checklist_title" = "Kit d’urgence 72h";
 "open_family_button" = "Famille";
 "essential_kit_title" = "Les articles essentiels";

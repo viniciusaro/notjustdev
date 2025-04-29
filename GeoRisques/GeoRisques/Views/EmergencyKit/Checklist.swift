@@ -35,15 +35,24 @@ struct ShowChecklist: View {
 
     var body: some View {
         ScrollView {
-            EssentialKit()
-                .padding(.bottom, 24)
-            if store.memberCount[.baby] ?? 0 != 0 {
-                BabyKit()
+            if store.allAreZero() {
+                    AlertView(
+                        icon: "empty_backpack",
+                        text: LocalizedStringKey("empty_state"),
+                        frameSize: 170,
+                        iconSize: 50,
+                    )
+            } else {
+                EssentialKit()
                     .padding(.bottom, 24)
-            }
-            if store.memberCount[.pet] ?? 0 != 0 {
-                PetKit()
-                    .padding(.bottom, 24)
+                if store.memberCount[.baby] ?? 0 != 0 {
+                    BabyKit()
+                        .padding(.bottom, 24)
+                }
+                if store.memberCount[.pet] ?? 0 != 0 {
+                    PetKit()
+                        .padding(.bottom, 24)
+                }
             }
         }
     }

@@ -33,7 +33,8 @@ final class GeoRisquesStore {
         risquesState: RisquesState = RisquesState(),
         locationClient: LocationClient = FixedLocationClient(location: .grenoble),
         risquesClient: RisquesClient = FixedRisquesClient(risques: Risque.all, community: "GRENOBLE"),
-        openAIClient: OpenAIClient = OpenAIClientLive()
+        //TODO: Put back OpenAIClientLive()
+        openAIClient: OpenAIClient = OpenAIClientMock()
     ) {
         self.rootState = rootState
         self.risquesState = risquesState
@@ -162,6 +163,14 @@ final class GeoRisquesStore {
         }
     }
 
+    func openExternalLink(_ url: URL) {
+        UIApplication.shared.open(url)
+    }
+    
+    func totalOfRisks() -> Int {
+        risquesState.risques.count
+    }
+    
     //MARK: - AI
     func fetchAdvice(for risque: Risque) {
         let userLanguage = Locale.current

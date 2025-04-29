@@ -22,7 +22,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		8A2D3B472DAFD13B002D270C /* Exceptions for "GeoRisques" folder in "GeoRisques" target */ = {
+		8A0103F12DBCE2900033C87D /* Exceptions for "GeoRisques" folder in "GeoRisques" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -35,7 +35,7 @@
 		6E2DD5C32D9FF99500DDA0F7 /* GeoRisques */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				8A2D3B472DAFD13B002D270C /* Exceptions for "GeoRisques" folder in "GeoRisques" target */,
+				8A0103F12DBCE2900033C87D /* Exceptions for "GeoRisques" folder in "GeoRisques" target */,
 			);
 			path = GeoRisques;
 			sourceTree = "<group>";
