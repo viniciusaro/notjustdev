@@ -18,7 +18,7 @@ struct Onboarding: View {
 
                         if info == store.onboardingInformation.last {
                             ButtonView(text: LocalizedStringKey("onboarding_button")) {
-                                store.navigateToRisque = true
+                                store.navigateToRisk = true
                                 hasSeenOnboarding = true
                             }
                             .padding(.horizontal, 16)
@@ -31,14 +31,14 @@ struct Onboarding: View {
             .tabViewStyle(.page)
             .indexViewStyle(.page(backgroundDisplayMode: .interactive))
 
-            if store.navigateToRisque {
-                RisquesView()
+            if store.navigateToRisk {
+                RisksView()
                     .background(Color(.systemBackground))
                     .transition(.opacity)
                     .zIndex(1)
             }
         }
-        .animation(.easeOut, value: store.navigateToRisque)
+        .animation(.easeOut, value: store.navigateToRisk)
         .animation(.easeInOut, value: store.onboardingIndex)
         .onAppear {
             UIPageControl.appearance().currentPageIndicatorTintColor = .accent

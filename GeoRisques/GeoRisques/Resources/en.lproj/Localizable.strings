@@ -1,6 +1,7 @@
 /* Root */
 "risk_tab" = "Risks";
 "kit_tab" = "Emergency Kit";
+"plus_tab" = "More Infos";
 "instruction_tab" = "How to Act";
 "splach_screen" = "Know the risks of disasters near you.";
 
@@ -103,4 +104,38 @@
 "kitPetType.leash" = "Leash";
 "kitPetType.petToy" = "Pet toys";
 
+/*PlusInfos*/
+"privacy-title" = "Privacy Policy";
+"privacy-text" = "Risko does not collect, store, or share any personally identifiable information. \n\nThe app only uses the device's location services to display local geographic risks, without storing this information. \n\nSome features of the app use artificial intelligence provided by the OpenAI Deep Infra API. \n\nRequests sent to this service may include non-personal data to generate contextual responses. \n\nNo personal or sensitive information is intentionally shared with third parties. \n\nWe respect your privacy and do everything we can to ensure the security and confidentiality of your experience. \n\nFor any questions, please contact us.";
+
+/*AboutRisko*/
+"about-title" = "About Risko";
+"about-text" = "Risko was designed to help residents of France stay informed and better prepare for emergencies and disasters. \n\nInitially developed during the NotJustDev hackathon, the app combines reliable public data from the French government's Géorisques API with a touch of Deep Infra AI to provide relevant information in real time. \n\nCreate with lots of coffee, sleepless nights and lots of motivation. \n\n🇧🇷 Developed by Cris and Vini.";
+"about-contact" = "Contact Us \niosappproduct@gmail.com";
+"about-help" = "By us a beer 🍻?";
+
+/*EmergencyNumbers*/
+"emergency-numbers-title" = "Emergency Numbers";
+"emergency-numbers-subtitle" = "To dial in case of emergency";
+"112-text" = "European Emergency Number";
+"114-text" = "Hearing impaired Emergency Number";
+"samu-text" = "SAMU";
+"police-text" = "Police";
+"pompiers-text" = "Fire Department";
+"call-button" = "Call";
+
+/*OficialInfos*/
+"oficialInfos-title" = "Get informed";
+"oficialInfos-subtitle" = "Visit the official websites for more in-depth information.";
+"fr-alert-link" = "FR-Alert \nAllows real-time alerts to anyone with a mobile phone.";
+"vigicrues-link" = "Flood Warnings \nMonitor flood risks on the main waterways in France.";
+"vigilance-meteo-link" = "Météo France Alert \Stay informed of potential weather hazards with Alert.";
+"sirene-alert-link" = "The warning siren \nLearn how warning sirens work in the event of an incident.";
+"consignes-link" = "Instructions to follow \nAttitudes to adopt during and after an emergency situation.";
+
+/*PlusInfos*/
+"oficial-webSites" = "Stay informed";
+"emergency-number" = "Emergency Numbers";
+"about-risko" = "About Risko";
+"privacy" = "Privacy Policy";
 

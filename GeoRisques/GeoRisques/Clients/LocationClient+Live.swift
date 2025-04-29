@@ -24,12 +24,16 @@ final class LiveLocationClient: NSObject, LocationClient, CLLocationManagerDeleg
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        let status = manager.authorizationStatus;
-        if case .authorizedWhenInUse = status {
+        let status = manager.authorizationStatus
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
             self.locationManager.requestLocation()
-        } else if case .notDetermined = status {
+        case .notDetermined:
             self.locationManager.requestWhenInUseAuthorization()
-        } else {
+        case .restricted, .denied:
+            self.continuation?.resume(throwing: LocationClientError.unauthorized)
+            self.continuation = nil
+        @unknown default:
             self.continuation?.resume(throwing: LocationClientError.unauthorized)
             self.continuation = nil
         }

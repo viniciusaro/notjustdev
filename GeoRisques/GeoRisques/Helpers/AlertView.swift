@@ -1,10 +1,3 @@
-//
-//  AlertView.swift
-//  GeoRisques
-//
-//  Created by Cris Messias on 26/04/25.
-//
-
 import SwiftUI
 
 struct AlertView: View {

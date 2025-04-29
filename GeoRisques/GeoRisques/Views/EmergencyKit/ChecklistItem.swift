@@ -12,7 +12,7 @@ struct ChecklistItem: View {
     var body: some View {
         Button(action: onTap) {
             RoundedRectangle(cornerRadius: 20)
-                .fill(isSelected ? (colorScheme == .light ? Color(.accent).opacity(0.6) : Color(.accent)) : (colorScheme == .light ? Color(.systemGray6) : .white))
+                .fill(isSelected ? (colorScheme == .light ? Color(.accent).opacity(0.7) : Color(.accent)) : (colorScheme == .light ? Color(.systemGray6) : .white))
                 .frame(height: 120)
                 .overlay(
                     VStack(alignment:.leading) {

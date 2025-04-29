@@ -1,6 +1,7 @@
 /* Root */
 "risk_tab" = "Risques";
 "kit_tab" = "Kit d'Urgence";
+"plus_tab" = "Plus";
 "instruction_tab" = "Comment Agir";
 "splach_screen" = "Connaître les risques de catastrophes près de chez vous.";
 
@@ -11,7 +12,7 @@
 "tag1_subtitle" = "Grâce aux données officielles, découvrez les types de catastrophes qui peuvent toucher votre localisation actuelle ou explorez librement la carte.";
 "tag2_title" = "Agissez avec le bon réflexe";
 "tag2_subtitle" = "Utilisez une openAI pour consulter des conseils selon le type de catastrophe.";
-"onboarding_button" = "C'est parti";
+"onboarding_button" = "C'est parti !";
 
 /* Risques */
 "risk_title" = "Risques";
@@ -104,3 +105,38 @@
 "kitPetType.leash" = "Laisse";
 "kitPetType.petToy" = "Jouets pour les animaux";
 
+/*PlusInfos*/
+"privacy-title" = "Politique de confidentialité";
+"privacy-text" = "Risko does not collect, store, or share any personally identifiable information. \n\nThe app only uses the device's location services to display local geographic risks, without storing this information. \n\nSome features of the app use artificial intelligence provided by the OpenAI Deep Infra API. \n\nRequests sent to this service may include non-personal data to generate contextual responses. \n\nNo personal or sensitive information is intentionally shared with third parties. \n\nWe respect your privacy and do everything we can to ensure the security and confidentiality of your experience. \n\nFor any questions, please contact us.";
+
+/*AboutRisko*/
+"about-title" = "À propos de Risko";
+"about-text" = "Risko a été créé pour aider les personnes en France à apprendre et à mieux se préparer aux situations d'urgence et aux catastrophes. \n\nInitialement développée lors du hackathon NotJustDev, l'application combine des données publiques fiables provenant de l'API Géorisques du gouvernement français avec une touche d'IA Deep Infra pour fournir des informations pertinentes en temps réel. \n\nCrée avec beaucoup de café, des nuits blanches et beaucoup de motivation. \n\n🇧🇷 Développé par Cris et Vini.";
+"about-contact" = "Contactez-nous \niosappproduct@gmail.com";
+"about-help" = "Offrez-nous une bière 🍻 ?";
+
+/*EmergencyNumbers*/
+"emergency-numbers-title" = "Numéros d'urgence";
+"emergency-numbers-subtitle" = "À composer en cas d'urgence";
+"112-text" = "Numéro \nd'urgence européen";
+"114-text" = "Numéro \nd'urgence des malentendants";
+"samu-text" = "SAMU";
+"police-text" = "Police";
+"pompiers-text" = "Pompiers";
+"call-button" = "Appel";
+
+/*OficialInfos*/
+"oficialInfos-title" = "Se informer";
+"oficialInfos-subtitle" = "Visitez les sites officiels pour des \ninformations plus approfondies.";
+"fr-alert-link" = "FR-Alert \nPermet de prévenir en temps réel toute personne détentrice d’un téléphone portable.";
+"vigicrues-link" = "Vigicrues \nSurveillez les risques de crues des principaux cours d'eau en France.";
+"vigilance-meteo-link" = "Vigilance Météo France \nRestez informé des dangers météorologiques potentiels avec la Vigilance.";
+"sirene-alert-link" = "La sirène d’alerte \nApprenez comment fonctionnent les sirènes d'alerte en cas d'incident.";
+"consignes-link" = "Les consignes à respecter \nLes attitudes à adopter pendant et après une situation d’urgence.";
+
+
+/*PlusInfos*/
+"oficial-webSites" = "Se informer";
+"emergency-number" = "Numéros d'urgence";
+"about-risko" = "À propos de Risko";
+"privacy" = "Politique de confidentialité";

@@ -4,38 +4,38 @@ import Testing
 struct GeoRisquesTests {
     @Test("on view load, moves map to current location and reload risks")
     func viewDidLoad() async throws {
-        let store = GeoRisquesStore(
+        let store = GeoRisksStore(
             locationClient: FixedLocationClient(location: .france),
-            risquesClient: FixedRisquesClient(risques: Risque.naturalDisasters),
+            risksClient: FixedRisksClient(risks: Risk.naturalDisasters),
         )
-        store.onRisquesDidLoad()
+        store.onRisksDidLoad()
         
         await megaYield()
-        #expect(store.risquesState.location == .france)
-        #expect(store.risquesState.risques == Risque.naturalDisasters)
+        #expect(store.risksState.location == .france)
+        #expect(store.risksState.risks == Risk.naturalDisasters)
     }
     
     @Test("on location button tap, moves map to current location and reload risks")
     func locationButtonTap() async throws {
-        let store = GeoRisquesStore(
+        let store = GeoRisksStore(
             locationClient: FixedLocationClient(location: .grenoble),
-            risquesClient: FixedRisquesClient(risques: Risque.all),
+            risksClient: FixedRisksClient(risks: Risk.all),
         )
         store.onLocationButtonTapped()
         
         await megaYield()
-        #expect(store.risquesState.location == .grenoble)
-        #expect(store.risquesState.risques == Risque.all)
+        #expect(store.risksState.location == .grenoble)
+        #expect(store.risksState.risks == Risk.all)
     }
     
     @Test("on risque button tap, shows risk detail")
     func risqueButtonTap() async throws {
-        let store = GeoRisquesStore(
+        let store = GeoRisksStore(
             locationClient: FixedLocationClient(location: .grenoble),
-            risquesClient: FixedRisquesClient(risques: Risque.all),
+            risksClient: FixedRisksClient(risks: Risk.all),
         )
-        store.onRisqueButtonTapped(.affaissementMinier)
-        #expect(store.risquesState.selectedRisque == GeoRisquesStore.RisqueDetailState(risque: .affaissementMinier))
+        store.onRisksButtonTapped(.affaissementMinier)
+        #expect(store.risksState.selectedRisks == GeoRisksStore.RisksDetailState(risque: .affaissementMinier))
     }
     
     private func megaYield() async {
@@ -54,7 +54,7 @@ struct GeoRisquesTests {
     
     @Test("on load risk, show the total of risk")
     func totalOfRisks() async {
-        let mockTotalOfRisks = Risque.all.count
+        let mockTotalOfRisks = Risk.all.count
         
         #expect(mockTotalOfRisks == 18)
     }

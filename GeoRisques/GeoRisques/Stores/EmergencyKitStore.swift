@@ -8,13 +8,12 @@ final class EmergencyKitStore {
     ///Onboarding Data
     var onboardingInformation: [EmergencyKitInformation] = EmergencyKitInformation.onboardingInfos
     var onboardingIndex: Int = 0
-    var navigateToRisque = false
+    var navigateToRisk = false
 
     /// EmergencyKitIntro Data
     let kitInformation: [EmergencyKitInformation] = EmergencyKitInformation.infos
     var infoIndex: Int = 0
     var navigateToFamilyMembers = false
-
 
     /// FamilyMembers Data
     var selectedMember: MemberType? = nil
@@ -25,7 +24,6 @@ final class EmergencyKitStore {
         .child: 0,
         .pet: 0
     ]
-
 
     /// Checklist Data
     private let selectedEssentialItemsKey = "essentialItemsKey"
@@ -52,6 +50,9 @@ final class EmergencyKitStore {
             savePetSelectedItems()
         }
     }
+    
+    ///Plus Data
+    let infoLinks: [PlusInfoLink] = PlusInfoLink.infoLinks
 
     init() {
         loadFamilyMember()
@@ -60,7 +61,13 @@ final class EmergencyKitStore {
         loadPetSelectedItems()
     }
 
-
+    ///Plus logics
+     func callNumber(_ number: String) {
+        if let url = URL(string: "tel://\(number)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     /// FamilyMembers logics
     func isKitButtonActive() -> Bool {
         let isTrue = memberCount.values.contains(where: { $0 > 0 }) && memberCount[.adult] ?? 0 != 0
@@ -85,7 +92,10 @@ final class EmergencyKitStore {
         memberCount = familyMemberClient.loadMember()
     }
 
-
+    func openExternalLinkFromString(_ urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
+    }
 
     /// Checklist logics
     func allAreZero() -> Bool {

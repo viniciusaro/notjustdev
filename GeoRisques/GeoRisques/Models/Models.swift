@@ -20,7 +20,7 @@ struct Location: Equatable {
     }
 }
 
-struct Risque: Hashable, Identifiable {
+struct Risk: Hashable, Identifiable {
     var id: UUID = UUID()
     let name: String
     let description: String
@@ -226,3 +226,43 @@ struct OpenAIResponse: Codable {
     }
 }
 
+//MARK: - Plus
+
+struct PlusInfoLink: Identifiable {
+    let id = UUID()
+    let image: String
+    let description: LocalizedStringKey
+    let url: String
+}
+
+enum PlusInfoShowCase: String, CaseIterable, Identifiable {
+    case oficialWebSites = "Se informer"
+    case emergencyNumber = "Numéros d'urgence"
+    case aboutRisko = "À propos de Risko"
+    case privacy = "Politique de confidentialité"
+    
+    var id: String { self.rawValue }
+    
+    @ViewBuilder
+    var view: some View {
+        switch self {
+        case .oficialWebSites: OficialInfos()
+        case .emergencyNumber: EmergencyNumbers()
+        case .aboutRisko: AboutRisko()
+        case .privacy: RiskoPrivacy()
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .oficialWebSites: "info.circle"
+        case .emergencyNumber: "phone.circle"
+        case .aboutRisko: "globe"
+        case .privacy: "lock.circle"
+        }
+    }
+    
+    var localizedTitle: String {
+            return NSLocalizedString(self.rawValue, comment: "")
+        }
+}

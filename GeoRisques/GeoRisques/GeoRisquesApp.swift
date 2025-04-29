@@ -2,16 +2,16 @@ import SwiftUI
 
 @main
 struct GeoRisquesApp: App {
-    private var geoRisquesStore = GeoRisquesStore(
+    private var georisksStore = GeoRisksStore(
         locationClient: LiveLocationClient(),
-        risquesClient: LiveRisquesClient()
+        risksClient: LiveRisksClient()
     )
     private var emergencyKitStore = EmergencyKitStore()
 
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environment(geoRisquesStore)
+                .environment(georisksStore)
                 .environment(emergencyKitStore)
         }
     }
