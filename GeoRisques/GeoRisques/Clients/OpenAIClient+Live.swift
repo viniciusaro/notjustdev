@@ -15,12 +15,23 @@ struct OpenAIClientLive: OpenAIClient {
         urlRequest.httpBody = try JSONEncoder().encode(request)
 
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
-        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode != 200 {
-            let errorMessage = String(data: data, encoding: .utf8) ?? "unknown error"
-            throw NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
-        }
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "ai-error-response"])
+            }
+        
+        guard httpResponse.statusCode == 200 else {
+                let errorMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
+                throw NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+            }
+        
         let decodedResponse = try JSONDecoder().decode(OpenAIResponse.self, from: data)
-        return decodedResponse.choices.first?.message.content ?? "No response."
+        
+        guard let content = decodedResponse.choices.first?.message.content, !content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+              return NSLocalizedString("ai-error-response", comment: "Fallback response if AI fails")
+          }
+
+          return content
     }
 }
 

@@ -132,7 +132,6 @@ final class GeoRisksStore {
     
     func onLocationButtonTapped() {
         let authorizationStatus = CLLocationManager().authorizationStatus
-        
         if authorizationStatus == .denied || authorizationStatus == .restricted {
             self.risksState.showLocationAlert = true
             return
@@ -140,7 +139,6 @@ final class GeoRisksStore {
         
         Task {
             await reloadLocation()
-            await reloadRisks()
         }
     }
     
@@ -151,15 +149,15 @@ final class GeoRisksStore {
     private func reloadLocation() async {
         do {
             let location = try await locationClient.location()
-            withAnimation {
+            await MainActor.run {
                 self.risksState.location = location
             }
+            await reloadRisks()
         } catch {
-            // exit application if cast fails
             self.risksState.locationError = (error as! LocationClientError)
         }
     }
-    
+
     private func reloadRisks() async {
         do {
             let location = self.risksState.location
@@ -231,7 +229,7 @@ final class GeoRisksStore {
                 let advice = try await openAIClient.askAI(prompt: prompt)
                 aiResponse = advice
             } catch {
-                print("Error detailed: \(error.localizedDescription)")
+                print("AI response error detailed: \(error.localizedDescription)")
                 aiResponse = "\(LocalizedStringKey("ai-error-response"))"
             }
             aiResponseIsLoading = false

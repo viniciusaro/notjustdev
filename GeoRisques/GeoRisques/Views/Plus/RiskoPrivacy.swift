@@ -9,7 +9,7 @@ struct RiskoPrivacy: View {
                     .bold()
                 
                 Text(LocalizedStringKey("privacy-text"))
-                .font(.body)
+                    .font(.system(size: 18))
                 .lineSpacing(5)
                 
                 Link(LocalizedStringKey("about-contact"),destination: URL(string: "mailto:iosappproduct@gmail.com")!)
