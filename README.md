@@ -42,6 +42,6 @@ Risko is an educational and preparedness tool. It uses trustworthy data and offi
 
 If you have questions, suggestions, or want to contribute, feel free to reach us at [iosappproducts@gmail.com](mailto:iosappproducts@gmail.com)
 
-# [Buy us a beer🍻?](buymeacoffee.com/meunomeecris)
+# [Buy us a beer🍻?](https://www.buymeacoffee.com/meunomeecris)
 
 Developped by 🇧🇷 [Cris Messias](https://github.com/meunomeecris) & [Vinícius Rodrigues](https://github.com/viniciusaro)
