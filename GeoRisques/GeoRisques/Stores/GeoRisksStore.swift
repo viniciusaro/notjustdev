@@ -37,7 +37,7 @@ final class GeoRisksStore {
         risksState: RisksState = RisksState(),
         locationClient: LocationClient = FixedLocationClient(location: .grenoble),
         risksClient: RisksClient = FixedRisksClient(risks: Risk.all, community: "GRENOBLE"),
-        openAIClient: OpenAIClient = OpenAIClientLive()
+        openAIClient: OpenAIClient = OpenAIClientMock()
     ) {
         self.rootState = rootState
         self.risksState = risksState
@@ -103,6 +103,7 @@ final class GeoRisksStore {
     }
     
     func onRisksDidLoad() {
+        self.locationClient.start()
         Task {
             await reloadLocation()
             await reloadRisks()
@@ -110,7 +111,7 @@ final class GeoRisksStore {
     }
     
     func onMapCameraCanged(_ context: MapCameraUpdateContext) {
-        guard self.risksState.location != .zero else {
+        guard self.risksState.location != .france || self.risksState.locationError != nil else {
             return
         }
         
@@ -131,8 +132,7 @@ final class GeoRisksStore {
     }
     
     func onLocationButtonTapped() {
-        let authorizationStatus = CLLocationManager().authorizationStatus
-        if authorizationStatus == .denied || authorizationStatus == .restricted {
+        if self.risksState.locationError != nil {
             self.risksState.showLocationAlert = true
             return
         }
@@ -152,7 +152,6 @@ final class GeoRisksStore {
             await MainActor.run {
                 self.risksState.location = location
             }
-            await reloadRisks()
         } catch {
             self.risksState.locationError = (error as! LocationClientError)
         }
@@ -161,8 +160,8 @@ final class GeoRisksStore {
     private func reloadRisks() async {
         do {
             let location = self.risksState.location
-            self.risksState.risksError = nil
             let (risks, community) = try await risksClient.risks(at: location)
+            self.risksState.risksError = nil
             self.risksState.risks = risks
             self.risksState.risksDescription = community ?? "(\(location.latitude), \(location.longitude))"
         } catch {

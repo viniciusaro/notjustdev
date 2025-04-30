@@ -4,10 +4,13 @@ enum LocationClientError: Error {
 }
 
 protocol LocationClient {
+    func start()
     func location() async throws -> Location
 }
 
 final class UnimplementedLocationClient: LocationClient {
+    func start() {}
+    
     func location() async throws -> Location {
         throw UnimplementedError()
     }
@@ -21,6 +24,8 @@ final class FixedLocationClient: LocationClient {
         self.location = location
     }
     
+    func start() {}
+    
     func location() async throws -> Location {
         return location
     }
@@ -32,6 +37,8 @@ final class ErrorLocationClient: LocationClient {
     init(error: LocationClientError) {
         self.error = error
     }
+    
+    func start() {}
     
     func location() async throws -> Location {
         throw error

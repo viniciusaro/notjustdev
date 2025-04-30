@@ -2,11 +2,6 @@ import Foundation
 import SwiftUI
 
 extension Location {
-    static let zero = Location(
-        latitude: 0,
-        longitude: 0
-    )
-    
     static let grenoble = Location(
         latitude: 45.171547,
         longitude: 5.722387
