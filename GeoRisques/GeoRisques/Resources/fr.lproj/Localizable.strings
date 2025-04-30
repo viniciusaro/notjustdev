@@ -29,7 +29,7 @@
 "detail_detail" = "Info détaillées";
 "ai-name" = "Réponse générées par l'IA pouvant contenir des erreurs. Vérifiez les informations importantes.";
 "ai-response-title" = "Définition du risque et que faire?";
-"ai-error-response" = "Erreur lors de la consultation de l'IA";
+"ai-error-response" = "Une erreur est survenue lors de la génération de la réponse. Veuillez réessayer.";
 "linkExtern" = "Plus d'informations sur le site officiel Géorisque.";
 
 /* Emergency Kit Intro */

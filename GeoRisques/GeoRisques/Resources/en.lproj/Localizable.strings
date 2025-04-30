@@ -29,7 +29,7 @@
 "detail_detail" = "Detailed information";
 "ai-name" = "AI-generated response that may make mistakes. Check important information.";
 "ai-response-title" = "Definition of risk and what to do?";
-"ai-error-response" = "Error while consulting AI";
+"ai-error-response" = "An error occurred while generating the response. Please try again.";
 "linkExtern" = "More information on the official Géorisque website.";
 
 /* Emergency Kit Intro */

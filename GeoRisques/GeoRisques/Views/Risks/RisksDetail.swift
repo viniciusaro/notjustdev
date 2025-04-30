@@ -75,7 +75,7 @@ struct DetailView: View {
                         .padding(.bottom, 16)
                     
                     Text(store.aiResponse)
-                        .font(.body)
+                        .font(.system(size: 18))
                         .lineSpacing(3.0)
                 }
             }
