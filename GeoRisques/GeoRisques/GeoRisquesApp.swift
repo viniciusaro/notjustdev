@@ -4,7 +4,8 @@ import SwiftUI
 struct GeoRisquesApp: App {
     private var georisksStore = GeoRisksStore(
         locationClient: LiveLocationClient(),
-        risksClient: LiveRisksClient()
+        risksClient: LiveRisksClient(),
+        openAIClient: OpenAIClientLive()
     )
     private var emergencyKitStore = EmergencyKitStore()
 

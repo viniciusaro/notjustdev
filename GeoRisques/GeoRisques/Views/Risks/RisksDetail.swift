@@ -24,9 +24,6 @@ struct RisksDetailView: View {
         .sheet(item: $store.selectedRisk) { risk in
             DetailView(risk: risk)
         }
-        .onViewDidLoad {
-            store.onRisksDidLoad()
-        }
     }
 }
 

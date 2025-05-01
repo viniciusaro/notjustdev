@@ -1,12 +1,11 @@
 import CoreLocation
 
 final class LiveLocationClient: NSObject, LocationClient, CLLocationManagerDelegate {
-    private let locationManager: CLLocationManager
+    private var locationManager: CLLocationManager!
     private var continuation: UnsafeContinuation<Location, any Error>?
-    
-    override init() {
+
+    func start() {
         self.locationManager = CLLocationManager()
-        super.init()
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
     }
