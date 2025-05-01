@@ -3,6 +3,7 @@ import SwiftUI
 import Observation
 
 @Observable
+@MainActor
 final class GeoRisksStore {
     var rootState: RootState
     var risksState: RisksState
