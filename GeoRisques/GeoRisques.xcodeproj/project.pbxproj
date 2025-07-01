@@ -45,6 +45,11 @@
 			path = GeoRisquesTests;
 			sourceTree = "<group>";
 		};
+		8A5DEDB72E13E8D9001D4779 /* .github */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = .github;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +73,7 @@
 		6E2DD5B82D9FF99500DDA0F7 = {
 			isa = PBXGroup;
 			children = (
+				8A5DEDB72E13E8D9001D4779 /* .github */,
 				6E2DD5C32D9FF99500DDA0F7 /* GeoRisques */,
 				6E2DD5D12D9FF99700DDA0F7 /* GeoRisquesTests */,
 				6E2DD5C22D9FF99500DDA0F7 /* Products */,
@@ -100,6 +106,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				6E2DD5C32D9FF99500DDA0F7 /* GeoRisques */,
+				8A5DEDB72E13E8D9001D4779 /* .github */,
 			);
 			name = GeoRisques;
 			packageProductDependencies = (

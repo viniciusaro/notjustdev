@@ -1,0 +1,35 @@
+name: Build and Test iOS App
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    name: Build and Test GeoRisques
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set Xcode version (optional)
+        run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+      - name: Build GeoRisques
+        run: |
+          xcodebuild clean build \
+            -project GeoRisques.xcodeproj \
+            -scheme GeoRisques \
+            -sdk iphonesimulator \
+            -destination "platform=iOS Simulator,name=iPhone 14,OS=17.2"
+
+      - name: Run unit tests
+        run: |
+          xcodebuild test \
+            -project GeoRisques.xcodeproj \
+            -scheme GeoRisques \
+            -sdk iphonesimulator \
+            -destination "platform=iOS Simulator,name=iPhone 14,OS=17.2"
